@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Savoo Health & Fitness Calculator</title>
+<link href='http://fonts.googleapis.com/css?family=Roboto:100,400|Rancho' rel='stylesheet' type='text/css'>
+<link href="style.css" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="script.js" language="javascript" type="text/javascript"></script>
+</head>
+
+<body>
+<div>
+<h1>Health and Fitness</h1>
+<h3>How much are you spending?</h3>
+</div>
+<section class="aboutyou">
+<h2>About You</h2>
+<div class="line"></div>
+    <div class="question">
+        <h4>What's your name?</h4>
+        <input type="text" id = "yourName" value="Enter Name Here">
+    </div>
+    <div class="question">
+        <h4>How about your age?</h4>       
+        <p><input name="age" type="radio" value="15-19">15-19</p>
+        <p><input name="age" type="radio" value="20-24">20-24</p>
+        <p><input name="age" type="radio" value="25-30">25-30</p>
+        <p><input name="age" type="radio" value="30-35">30-35</p>
+        <p><input name="age" type="radio" value="Old">Old</p>        
+        
+    </div>
+    <div class="question">
+        <h4>Are you a boy or a girl?</h4>
+        <p><input name="gender" type="radio" value="Boy">Boy</p>
+        <p><input name="gender" type="radio" value="Girl">Girl</p>
+        <p><input name="gender" type="radio" value="Unsure">Let me check first</p>
+    </div>
+</section>
+<section class="yourFitness">
+<h2>Your Fitness</h2>
+<div class="line"></div>
+	<div class="question">
+        <h4>Are you a member of a gym?</h4>
+       		<p><input id="gymY" name="gym" type="radio" value="1">Yes</p>
+        	<p><input id="gymN" name="gym" type="radio" value="0" >No</p>
+          	<div class="question hidden" id="Wgym">
+                <h4>Which Gym?</h4>
+                <select>
+                    <option value="VirginActive"><p>Please Select</p></option>
+                    <option value="VirginActive"><p>Virgin Active</p></option>
+                    <option value="GymBox"><p>Gymbox</p></option>
+                </select>
+    		</div>
+    </div>
+    <div class="question">
+        <h4>How often do you exercise?</h4>
+        <p><input name="exercise" class="exerO" id="exerN" type="radio" value="1">Never!</p>
+        <p><input name="exercise" class="exerO" type="radio" value="2">A couple of times a month</p>
+        <p><input name="exercise" class="exerO" type="radio" value="3">Once or twice a week</p>
+        <p><input name="exercise" class="exerO" type="radio" value="4">Every Day</p>
+    </div>
+    <div class="question" id="exerL">
+        <h4>How long for?</h4>
+        <p><input name="exerciseLength" type="radio" value="1">10 - 20 mins</p>
+        <p><input name="exerciseLength" type="radio" value="2">20 - 40 mins</p>
+        <p><input name="exerciseLength" type="radio" value="3">40 - 60 mins</p>
+        <p><input name="exerciseLength" type="radio" value="4">Over an hour</p>
+    </div>
+</section>
+<section class = "yourHealth">
+<h2>Your Health</h2>
+<div class="line"></div>
+	<div class="question">
+        <h4>What's your height?</h4>
+        <input type="text" value="Enter Height">
+        <select>
+            <option value="cm"><p>cm</p></option>
+            <option value="feet"><p>feet</p></option>            
+        </select>
+    </div>
+    <div class="question">
+        <h4>And Weight?</h4>
+        <input type="text" value="Enter Weight">
+        <select>
+            <option value="kg"><p>kg</p></option>
+            <option value="lb"><p>lb</p></option>            
+        </select>
+    </div>
+    <div class="question">
+        <h4>Average heart rate?</h4>
+        <input type="text" value="Enter Heart Rate">
+        <select>
+            <option value="bpm"><p>bpm</p></option>                     
+        </select>
+    </div>
+</section>
+<section class="submit">
+	<button class="getResults">
+    <p>Get Results</p>
+    </button>
+</section>
+</body>
+<footer>
+
+</footer>
+</html>

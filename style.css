@@ -1,0 +1,133 @@
+@charset "UTF-8";
+/* CSS Document */
+h1{
+	font-size: 70px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	text-align: center;
+	margin-bottom: 0;
+	margin-top: 16px;
+}
+h2{
+	color: rgb(77, 77, 77);
+	font-size:40px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	margin-bottom: -3px;
+	margin-top: 10px;
+}
+h3{
+	font-size: 28px;
+	font-family:'Rancho';
+	font-weight:100;
+	text-align: center;
+	margin-top: 0;
+	color: rgba(0, 0, 0, 0.54);
+}
+h4{
+	color:white;
+	font-size:30px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 100;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+body{
+	background: #D0D0D0;
+}
+section {
+    padding: 2%;
+    background: white;
+    margin-bottom:2rem;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+}
+.line{
+	width:100%;
+	height: 2px;
+	background: rgb(77, 77, 77);
+	margin-bottom:15px;
+}
+.question{
+	width: 25%;
+	margin-right: 4%;
+	display: inline-block;
+	height: auto;
+	min-height: 400px;
+	vertical-align: top;
+	padding: 2%;
+	background:grey;
+}
+.question:nth-of-type(4) {
+    margin-right: 0;
+}
+.question p {
+  display: block;
+  color: white;
+  font-family: 'Roboto';
+  font-weight: 100;
+  font-size: 15px;
+}
+input[type="text"] {
+  width: 94%;
+  border: none;
+  display: block;
+  box-shadow: inset 2px 2px 2px rgba(0,0,0,0.5);
+  height: 40px;
+  font-size: 20px;
+  padding-left: 5%;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+select {
+  width: 250px;
+  font-size: 36px;
+  height: 50px;
+  display: block;
+}
+section.yourHealth select{
+  font-size: 16px;
+  font-weight: 100;
+  width: 65px;
+  height: 36px;
+  display: block;
+  float: right;
+  background-color: white;
+  position: relative;
+  top: -39px;
+  right: 5px;
+  border: none;
+  box-sizing: inherit;
+}
+#Wgym{
+	position: relative;
+	opacity:0;
+	width: 105%;
+	min-height: 0;
+	height: 118px;
+	padding: 4%;
+	left:20%;
+	box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+	transition: 0.2s;
+}
+#exerL{
+	opacity:1;
+	left: 0;
+	position: relative;
+}
+.getResults p {
+    font-size: 30px;   
+    color: white;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;   font-weight: 100;
+}
+button.getResults {
+    width: 100%;
+    height: 55px;
+    display: block;
+    border: none;
+    background-color: rgb(162, 125, 190);
+	cursor: pointer;
+}
+button.getResults:active {
+  background-color: rgb(93, 44, 131);
+}
