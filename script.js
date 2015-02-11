@@ -86,48 +86,87 @@ textBoxes.focusout(function(){
 		}
 });
 */
-function phaseOut(element){ 
+function phaseIn(element){ 
 	$(element).animate({
 		left: "0",
 		opacity: "1"		  
 	}, 100);
 }
-// RADIO BOXES
-$('input').change(function() {
+function phaseOut(element){ 
+	$(element).animate({
+		left: "50%",
+		opacity: "0"
+	}, 100);
+}
+function collectAnswers(){
 	 var inputName = this.name;
 	 switch(inputName){
-		 case "yourName":
+		case "yourName":
 		 	User.name = this.value
 			$('.aboutyou h2').text("About " + User.name)
 		 	break;		 
-		 case "age":
+		case "age":
 		 	User.age = this.value
 		 	break;
-		 case "gender":
+		case "gender":
 		 	User.gender = this.value
 		 	break;
-		 case "gym":
+		case "gymMember":
 		 	if(this.value === "1"){
 				User.gymMember = true;
-				phaseIn($('#Wgym'));
+				phaseIn($('#whichGym'));
+				}
+			if(this.value === "0"){
+				User.gymMember = false;
+				phaseOut($('#whichGym'));
 				}
 		 	break;
-		 case "exerciseLevel":
+		case "gym":
+			break;
+		case "exerciseLevel":
 		 	User.exerciseLevel = this.value
 		 	break;
-		 case "exerciseDuration":
+		case "exerciseDuration":
 		 	User.exerciseDuration = this.value
 		 	break;
-		 case "height":
-		 	User.height = this.value
+		case "height":
+		 	if($(this).parent().children('select').val() === "feet"){
+				// Get Entered Weight	
+				var baseHeight = this.value;
+				var splitHeight = baseHeight.split('.');
+				var feet = splitHeight[0];
+				var inches = splitHeight[1] / 12;
+				var heightDecimal = parseInt(feet) + inches;			
+				var convertedHeight = (heightDecimal/0.032808);
+				User.height = Math.floor(convertedHeight);
+			} else{
+				User.height = this.value;
+			}
 		 	break;
-		 case "weight":
-		 	User.weight = this.value
-		 	break;
-		 case "heartrate":
+		case "weight":
+			if($(this).parent().children('select').val() === "lb"){	
+				var baseWeight = this.value;
+				var splitWeight = baseWeight.split('.');
+				var stone = splitWeight[0];
+				var lb = splitWeight[1];
+				//convert all to lb
+				var weightInLb = (stone * 14) + lb;
+				var weightInKg = weightInLb * 0.453592;
+				User.weight = weightInKg;
+			} else{
+				User.weight = this.value;		 	
+			}
+			break;
+		case "heartrate":
 		 	User.heartRate = this.value
 		 	break;
 		 }
+}
+$('input').change(function() {
+	collectAnswers();
+});
+$('option').change(function() {
+	collectAnswers();
 });
 // Calculation Function
 $('.getResults').click(function(){
