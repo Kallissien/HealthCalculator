@@ -98,7 +98,7 @@ section.yourHealth select{
   border: none;
   box-sizing: inherit;
 }
-#Wgym{
+.hidden{
 	position: relative;
 	opacity:0;
 	width: 105%;
