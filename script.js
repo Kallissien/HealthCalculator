@@ -22,39 +22,6 @@ var SetQuestionColour = function(){
 			randomColour = '#'+Math.floor(Math.random()*16777215).toString(16);
 		}
 	}
-// Find Radio and run function
-var radios = $('input[type=radio]');
-/*
-radios.click(function(){
-	if(this.checked === true){
-		var currentRadio = this;
-			// If Member of gym
-			if (this.id === "gymY" && $('#Wgym').css('opacity') === '0'){
-					$('#Wgym').animate({
-						left: "0",
-						opacity: "1"		  
-					}, 100);
-				} else if(this.id === "gymN" && $('#Wgym').css('opacity') != '0'){
-					$('#Wgym').animate({
-					  left: "50%",
-					  opacity: "0"
-					}, 100 );
-				}
-			if (this.id === "exerN" && $('#exerL').css('opacity') != '0'){
-					$('#exerL').animate({
-					  left: "50%",
-					  opacity: "0"
-					}, 100 );
-				} else if(this.className === "exerO" && this.id != "exerN" && $('#exerL').css('opacity') === '0'){
-					$('#exerL').animate({
-					  left: "0",
-					  opacity: "1"
-					}, 100 );
-					}
-			}
-	});
-	*/
-// TEXT BOXES
 // Clear Text Box when focus
 var inputBoxes = $('input');
 var textBoxes = $('input[type=text]');
@@ -63,29 +30,6 @@ textBoxes.focus(function(){
 	this.value = "";
 	}
 });
-/*
-textBoxes.focusout(function(){
-	if (this.value === ""){
-	this.value = "Whoops, try again";
-	}
-	var inputName = this.id;
-	switch(inputName){
-		case "yourName":
-		 	User.name = this.value
-			$('.aboutyou h2').text("About " + User.name)
-		 break;
-		 case "height":
-		 	User.height = this.value
-		 break;
-		 case "weight":
-		 	User.weight = this.value
-		 break;
-		 case "heartrate":
-		 	User.heartRate = this.value
-		 break;
-		}
-});
-*/
 function phaseIn(element){ 
 	$(element).animate({
 		left: "0",
@@ -98,25 +42,25 @@ function phaseOut(element){
 		opacity: "0"
 	}, 100);
 }
-function collectAnswers(){
-	 var inputName = this.name;
+function collectAnswers(element){
+	 var inputName = element.name;
 	 switch(inputName){
 		case "yourName":
-		 	User.name = this.value
+		 	User.name = element.value
 			$('.aboutyou h2').text("About " + User.name)
 		 	break;		 
 		case "age":
-		 	User.age = this.value
+		 	User.age = element.value
 		 	break;
 		case "gender":
-		 	User.gender = this.value
+		 	User.gender = element.value
 		 	break;
 		case "gymMember":
-		 	if(this.value === "1"){
+		 	if(element.value === "1"){
 				User.gymMember = true;
 				phaseIn($('#whichGym'));
 				}
-			if(this.value === "0"){
+			if(element.value === "0"){
 				User.gymMember = false;
 				phaseOut($('#whichGym'));
 				}
@@ -124,15 +68,15 @@ function collectAnswers(){
 		case "gym":
 			break;
 		case "exerciseLevel":
-		 	User.exerciseLevel = this.value
+		 	User.exerciseLevel = element.value
 		 	break;
 		case "exerciseDuration":
-		 	User.exerciseDuration = this.value
+		 	User.exerciseDuration = element.value
 		 	break;
 		case "height":
-		 	if($(this).parent().children('select').val() === "feet"){
+		 	if($(element).parent().children('select').val() === "feet"){
 				// Get Entered Weight	
-				var baseHeight = this.value;
+				var baseHeight = element.value;
 				var splitHeight = baseHeight.split('.');
 				var feet = splitHeight[0];
 				var inches = splitHeight[1] / 12;
@@ -140,33 +84,33 @@ function collectAnswers(){
 				var convertedHeight = (heightDecimal/0.032808);
 				User.height = Math.floor(convertedHeight);
 			} else{
-				User.height = this.value;
+				User.height = element.value;
 			}
 		 	break;
 		case "weight":
-			if($(this).parent().children('select').val() === "lb"){	
-				var baseWeight = this.value;
+			if($(element).parent().children('select').val() === "lb"){	
+				var baseWeight = element.value;
 				var splitWeight = baseWeight.split('.');
 				var stone = splitWeight[0];
 				var lb = splitWeight[1];
 				//convert all to lb
-				var weightInLb = (stone * 14) + lb;
+				var weightInLb = (stone * 14) + parseInt(lb);
 				var weightInKg = weightInLb * 0.453592;
-				User.weight = weightInKg;
+				User.weight = Math.floor(weightInKg);
 			} else{
-				User.weight = this.value;		 	
+				User.weight = element.value;		 	
 			}
 			break;
 		case "heartrate":
-		 	User.heartRate = this.value
+		 	User.heartRate = element.value
 		 	break;
 		 }
 }
 $('input').change(function() {
-	collectAnswers();
+	collectAnswers(this);
 });
 $('option').change(function() {
-	collectAnswers();
+	collectAnswers(this);
 });
 // Calculation Function
 $('.getResults').click(function(){
