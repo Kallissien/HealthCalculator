@@ -68,6 +68,11 @@ function collectAnswers(element){
 		case "gym":
 			break;
 		case "exerciseLevel":
+			if(element.value === "1"){
+				phaseOut($('exerL'));
+			} else {
+				phaseIn($('exerL'));
+			}
 		 	User.exerciseLevel = element.value
 		 	break;
 		case "exerciseDuration":
@@ -101,7 +106,7 @@ function collectAnswers(element){
 				User.weight = element.value;		 	
 			}
 			break;
-		case "heartrate":
+		case "heartRate":
 		 	User.heartRate = element.value
 		 	break;
 		 }
