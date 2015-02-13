@@ -5,6 +5,7 @@ var User = {
 		gender: 0,
 		gymMember: 0,
 		gym: 0,
+		gymPrice: 0,
 		exerciseLevel: 0,
 		exerciseDuration: 0,
 		height: 0,
@@ -30,6 +31,7 @@ textBoxes.focus(function(){
 	this.value = "";
 	}
 });
+// Functions
 function phaseIn(element){ 
 	$(element).animate({
 		left: "0",
@@ -66,14 +68,22 @@ function collectAnswers(element){
 				}
 		 	break;
 		case "gym":
+			if(element.value === "virgin"){
+				User.gymPrice = 70;
+				}
 			break;
 		case "exerciseLevel":
-			if(element.value === "1"){
-				phaseOut($('exerL'));
+			if(element.value === "0"){
+				phaseOut($('#exerD'));
+				$('input:text[name="exerciseLevel"]').val("");
 			} else {
-				phaseIn($('exerL'));
+				phaseIn($('#exerD'));
+				$('input:radio[name="exerciseLevel"]').prop('checked', false);
 			}
-		 	User.exerciseLevel = element.value
+			if($(element).parent().children('select').val() === "week"){
+				User.exerciseLevel = element.value
+			} else{	User.exerciseLevel = (element.value / 4);
+			}
 		 	break;
 		case "exerciseDuration":
 		 	User.exerciseDuration = element.value
@@ -91,6 +101,9 @@ function collectAnswers(element){
 			} else{
 				User.height = element.value;
 			}
+		 	break;
+		case "heightUnits":
+		 	console.log("feet");
 		 	break;
 		case "weight":
 			if($(element).parent().children('select').val() === "lb"){	
@@ -111,10 +124,32 @@ function collectAnswers(element){
 		 	break;
 		 }
 }
+function createCookie(name,value,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+value+expires+"; path=/";
+}
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+function eraseCookie(name) {
+	createCookie(name,"",-1);
+}
 $('input').change(function() {
 	collectAnswers(this);
 });
-$('option').change(function() {
+$('select').change(function() {
 	collectAnswers(this);
 });
 // Calculation Function
@@ -122,12 +157,18 @@ $('.getResults').click(function(){
 	//Collect all values
 	var Answers = [];	
 	console.log(User);
-	// Calculate Calories
-	// Men - Calories Burned = [(Age x 0.2017) — (Weight x 0.09036) + (Heart Rate x 0.6309) — 55.0969] x Time / 4.184.
-	// Women - Calories Burned = [(Age x 0.074) — (Weight x 0.05741) + (Heart Rate x 0.4472) — 20.4022] x Time / 4.184.
-	$('.question input:checked').each(function(){
-		this.value;
-	});
+	if(User.gender === "Boy"){
+		var caloriesBurned = Math.round((((parseInt(User.age) * 0.2017) + (parseInt(User.weight) * 0.1988) + (User.heartRate * 0.6309) - 55.0969) * parseInt(User.exerciseDuration) / 4.184));
+		console.log(caloriesBurned);
+	}
+	else if(User.gender === "Girl"){
+		var caloriesBurned = Math.round((((parseInt(User.age) * 0.074) + (parseInt(User.weight) * 0.1263) + (User.heartRate * 0.4472) - 20.4022) * parseInt(User.exerciseDuration) / 4.184));
+	}
+	var caloriesPerWeek = caloriesBurned * parseInt(User.exerciseLevel);
+	var caloriesPerMonth = caloriesPerWeek * 4;
+	var pricePerCalorie = parseInt(User.gymPrice) / caloriesPerMonth;
+	console.log(caloriesBurned);
+	console.log(Math.round(pricePerCalorie));
 });
 //Run Functions	
 SetQuestionColour();

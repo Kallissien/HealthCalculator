@@ -84,7 +84,7 @@ select {
   height: 50px;
   display: block;
 }
-section.yourHealth select{
+section.yourHealth select, #exerL select{
   font-size: 16px;
   font-weight: 100;
   width: 65px;
@@ -98,6 +98,9 @@ section.yourHealth select{
   border: none;
   box-sizing: inherit;
 }
+#exerL select{
+	width:auto;
+}
 .hidden{
 	position: relative;
 	opacity:0;
@@ -109,7 +112,7 @@ section.yourHealth select{
 	box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
 	transition: 0.2s;
 }
-#exerL{
+#exerD{
 	opacity:1;
 	left: 0;
 	position: relative;
