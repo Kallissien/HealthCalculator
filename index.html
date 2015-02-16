@@ -9,13 +9,19 @@
 <script src="script.js" language="javascript" type="text/javascript"></script>
 </head>
 <body>
-<div>
+<div class="healthTitle">
 <h1>Health and Fitness</h1>
 <h3>How much are you spending?</h3>
 </div>
-<section class="aboutyou">
+<div class="container">
+<div class="circlePulse"></div>
+<div class="circlePulseSmall"></div>
+<div class="blockage"></div>
+<div class="blockageSmall"></div>
+	<section class="aboutyou deg1">
 <h2>About You</h2>
 <div class="line"></div>
+<div class="icon"><img src="images/youM.png"></div>
     <div class="question">
         <h4>What's your name?</h4>
         <input type="text" name="yourName" value="Enter Name Here">
@@ -31,9 +37,10 @@
         <p><input name="gender" type="radio" value="Unsure">Let me check first</p>
     </div>
 </section>
-<section class="yourFitness">
+	<section class="yourFitness deg2">
 <h2>Your Fitness</h2>
 <div class="line"></div>
+<div class="icon"><img src="images/fitness.png"></div>
 	<div class="question">
         <h4>Are you a member of a gym?</h4>
        		<p><input id="gymY" name="gymMember" type="radio" value="1">Yes</p>
@@ -64,38 +71,43 @@
         <p><input name="exerciseDuration" type="radio" value="70">Over an hour</p>
     </div>
 </section>
-<section class = "yourHealth">
-<h2>Your Health</h2>
-<div class="line"></div>
-	<div class="question">
-        <h4>What's your height?</h4>
-        <input name="height" type="text" value="Enter Height">
-        <select>
-            <option name="heightUnits" value="cm"><p>cm</p></option>
-            <option name="heightUnits" value="feet"><p>feet</p></option>            
-        </select>
+	<section class = "yourHealth deg3">
+        <h2>Your Health</h2>
+        <div class="line"></div>
+        <div class="icon"><img src="images/health.png"></div>
+            <div class="question">
+                <h4>What's your height?</h4>
+                <input name="height" type="text" value="Enter Height">
+                <select>
+                    <option name="heightUnits" value="cm"><p>cm</p></option>
+                    <option name="heightUnits" value="feet"><p>feet</p></option>            
+                </select>
+            </div>
+            <div class="question">
+                <h4>And Weight?</h4>
+                <input name="weight" type="text" value="Enter Weight">
+                <select>
+                    <option value="kg"><p>kg</p></option>
+                    <option value="lb"><p>lb</p></option>            
+                </select>
+            </div>
+            <div class="question">
+                <h4>Average heart rate?</h4>
+                <input name="heartRate" type="text" value="Enter Heart Rate">
+                <select>
+                    <option value="bpm"><p>bpm</p></option>                     
+                </select>
+            </div>
+    </section>
+    <div class="questionBox">
+    
     </div>
-    <div class="question">
-        <h4>And Weight?</h4>
-        <input name="weight" type="text" value="Enter Weight">
-        <select>
-            <option value="kg"><p>kg</p></option>
-            <option value="lb"><p>lb</p></option>            
-        </select>
-    </div>
-    <div class="question">
-        <h4>Average heart rate?</h4>
-        <input name="heartRate" type="text" value="Enter Heart Rate">
-        <select>
-            <option value="bpm"><p>bpm</p></option>                     
-        </select>
-    </div>
-</section>
-<section class="submit">
+    <div class="submit">
 	<button class="getResults">
     <p>Get Results</p>
     </button>
-</section>
+</div>
+</div>
 </body>
 <footer>
 

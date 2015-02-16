@@ -155,6 +155,32 @@ $('input').change(function() {
 $('select').change(function() {
 	collectAnswers(this);
 });
+function rotateRight(){
+	var sections = $("section");
+	for(var i=0 ; i<sections.length ; i++){
+		var thisSection = sections[i];
+		if(thisSection.className.indexOf("deg1") != -1){
+			$(thisSection).removeClass("deg1");
+			$(thisSection).addClass("deg3");
+		} else if(thisSection.className.indexOf("deg2") != -1){
+			$(thisSection).removeClass("deg2");
+			$(thisSection).addClass("deg1");
+		} else if(thisSection.className.indexOf("deg3") != -1){
+			$(thisSection).removeClass("deg3");
+			$(thisSection).addClass("deg2");
+		}		
+	}
+}
+// Input Functions
+$("section").click(function(){
+	var thisSection = this.className;
+	if(thisSection != -1){
+		while(thisSection.indexOf("deg1") === -1){
+			rotateRight();
+			thisSection = this.className;
+		}
+	}
+});
 // Calculation Function
 $('.getResults').click(function(){
 	//Collect all values

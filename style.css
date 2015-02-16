@@ -1,5 +1,8 @@
 @charset "UTF-8";
 /* CSS Document */
+.healthTitle{
+	margin-bottom:5em;
+	}
 h1{
 	font-size: 70px;
 	font-family: 'Roboto', sans-serif;
@@ -10,11 +13,13 @@ h1{
 }
 h2{
 	color: rgb(77, 77, 77);
-	font-size:40px;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 400;
-	margin-bottom: -3px;
-	margin-top: 10px;
+font-size: 1em;
+font-family: 'Roboto', sans-serif;
+font-weight: 400;
+margin-bottom: -3px;
+
+	margin-top: 1em;
+text-align: center;
 }
 h3{
 	font-size: 28px;
@@ -39,16 +44,81 @@ section {
     padding: 2%;
     background: white;
     margin-bottom:2rem;
-    box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
 }
+/* New Circle Style */
+.container {
+	position:relative;
+    width: 14em;
+    height: 14em;
+	padding: 2.8em; /*= 2em * 1.4 (2em = half the width of an img, 1.4 = sqrt(2))*/
+	margin: 1.75em auto 0;    
+	background-color: rgb(208, 186, 255);
+    border-radius: 50%;	
+    margin: auto;
+	margin-top:1.75em;    
+	border: solid rgb(83, 82, 84) 2px;
+}
+section {
+	display:block;
+	width: 7em;
+	height: 7em;
+	border-radius: 50%;
+	overflow: hidden;
+	transition: 0.2s ease-out;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	cursor: pointer;
+	margin: -3.5em; /* 2em = 4em/2 */ /* half the width */
+	z-index: 3;
+}
+section:hover {
+    box-shadow: 4px 4px 4px rgba(0,0,0,0.5);	
+    top: 49%;
+}
+section:active {
+    box-shadow: 0px 0px 0px rgba(0,0,0,0.5);
+	top: 50%;
+}
+.deg1 {
+transform: rotate(-90deg) translate(9.5em) rotate(90deg) scale(1);
+}
+.deg2 {
+transform: rotate(32deg) translate(9em) rotate(-32deg) scale(0.7);
+}
+.deg3 {
+transform: rotate(150deg) translate(10em) rotate(-150deg) scale(0.7);
+}
+.submit {
+    z-index: 2;
+    position: relative;
+    width: 70%;
+    top: -17%;
+    margin: auto;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    opacity: 0;
+}
+.icon img {
+    width: 100%;
+}
+.icon {
+    width: 40%;
+    margin: auto;
+    margin-bottom: 50px;
+}
+/* End New Style */
 .line{
-	width:100%;
-	height: 2px;
-	background: rgb(77, 77, 77);
-	margin-bottom:15px;
+	width: 120%;
+position: relative;
+left: -7%;
+height: 1px;
+background: rgb(77, 77, 77);
+margin-top: 5px;
+margin-bottom: 15px;
 }
 .question{
-	width: 25%;
+	width: 100%;
 	margin-right: 4%;
 	display: inline-block;
 	height: auto;
@@ -98,6 +168,82 @@ section.yourHealth select, #exerL select{
   border: none;
   box-sizing: inherit;
 }
+.blockage {
+height: 136%;
+width: 2em;
+position: relative;
+margin: auto;
+margin-top: -131%;
+background-color: rgb(208, 186, 255);
+
+-webkit-animation-name: rotate; 
+    
+-webkit-animation-duration: 40s; 
+    -webkit-animation-iteration-count: infinite;
+    
+-webkit-animation-timing-function: linear;
+
+    -moz-animation-name: rotate; 
+    -moz-animation-duration: 80s; 
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+}
+@-webkit-keyframes rotate {
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(360deg);}
+}
+
+@-moz-keyframes rotate {
+    from {-moz-transform: rotate(0deg);}
+    to {-moz-transform: rotate(360deg);}
+}
+.blockageSmall{
+	background-color: rgb(208, 186, 255);
+	width: 125%;
+	height: 2em;
+	margin-left: -12%;
+	margin-top: -76%;
+	transform:rotate(25deg);
+	-webkit-animation-name: rotate; 
+    
+	-webkit-animation-duration: 80s; 
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: rotateSmall; 
+    -moz-animation-duration: 40s; 
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+}
+@-webkit-keyframes rotateSmall {
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(360deg);}
+}
+
+@-moz-keyframes rotateSmall {
+    from {-moz-transform: rotate(0deg);}
+    to {-moz-transform: rotate(360deg);}
+}
+.circlePulse{
+width: 130%;
+height: 130%;
+position: relative;
+margin-left: -16%;
+margin-top: -15%;
+margin-bottom: -101%;
+border-radius: 50%;
+border: solid rgb(255, 255, 255) 2px;
+display: inline-block;
+}
+.circlePulseSmall{
+width: 120%;
+height: 120%;
+position: relative;
+margin-left: -11%;
+margin-top: -28%;
+border-radius: 50%;
+border: solid rgb(60, 133, 244) 3px;
+display: inline-block;
+}
 #exerL select{
 	width:auto;
 }
@@ -118,14 +264,14 @@ section.yourHealth select, #exerL select{
 	position: relative;
 }
 .getResults p {
-    font-size: 30px;   
+    font-size: 2em;   
     color: white;
     margin: 0;
     font-family: 'Roboto', sans-serif;   font-weight: 100;
 }
 button.getResults {
     width: 100%;
-    height: 55px;
+    height: 45px;
     display: block;
     border: none;
     background-color: rgb(162, 125, 190);
@@ -133,4 +279,16 @@ button.getResults {
 }
 button.getResults:active {
   background-color: rgb(93, 44, 131);
+}
+.infoBox {
+    /* background-color: rgba(255, 255, 255, 0.72); */
+    height: 7em;
+    width: 90%;
+    margin: auto;
+    top: -46%;
+    position: relative;
+}
+.infoBox p {    
+    display: block; color: white; font-family: 'Roboto'; font-weight: 100; 
+    font-size: 17px;
 }
