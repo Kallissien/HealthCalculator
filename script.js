@@ -68,8 +68,11 @@ function collectAnswers(element){
 				}
 		 	break;
 		case "gym":
-			if(element.value === "virgin"){
-				User.gymPrice = 70;
+			if(element.value === "1"){
+				User.gymPrice = 84;
+				}
+				if(element.value === "2"){
+				User.gymPrice = 73;
 				}
 			break;
 		case "exerciseLevel":
@@ -164,7 +167,7 @@ $('.getResults').click(function(){
 	else if(User.gender === "Girl"){
 		var caloriesBurned = Math.round((((parseInt(User.age) * 0.074) + (parseInt(User.weight) * 0.1263) + (User.heartRate * 0.4472) - 20.4022) * parseInt(User.exerciseDuration) / 4.184));
 	}
-	var caloriesPerWeek = caloriesBurned * parseInt(User.exerciseLevel);
+	var caloriesPerWeek = caloriesBurned * User.exerciseLevel;
 	var caloriesPerMonth = caloriesPerWeek * 4;
 	var pricePerCalorie = parseInt(User.gymPrice) / caloriesPerMonth;
 	console.log(caloriesBurned);
