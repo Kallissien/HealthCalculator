@@ -57,9 +57,9 @@
                 <div class="question hidden" id="whichGym" name="gym">
                     <h4>Which Gym?</h4>
                     <select>
-                        <option value="0"><p>Please Select</p></option>
-                        <option value="1"><p>Virgin Active</p></option>
-                        <option value="2"><p>Gymbox</p></option>
+                        <option name="gym" value="0"><p>Please Select</p></option>
+                        <option name="gym" value="1"><p>Virgin Active</p></option>
+                        <option name="gym" value="2"><p>Gymbox</p></option>
                     </select>
                 </div>
         </div>
@@ -74,10 +74,15 @@
         </div>
         <div class="question" id="exerD">
             <h4>How long for?</h4>
-            <p><input name="exerciseDuration" type="radio" value="15">10 - 20 mins</p>
-            <p><input name="exerciseDuration" type="radio" value="25">20 - 40 mins</p>
-            <p><input name="exerciseDuration" type="radio" value="50">40 - 60 mins</p>
-            <p><input name="exerciseDuration" type="radio" value="70">Over an hour</p>
+            <select>
+            	<option name="exerciseDuration" value="0"><p>Please Select</p></option>
+                <option name="exerciseDuration" value="15"><p>10 - 20 mins</p></option>
+                <option name="exerciseDuration" value="25"><p>20 - 30 mins</p></option>
+                <option name="exerciseDuration" value="35"><p>30 - 40 mins</p></option>
+                <option name="exerciseDuration" value="45"><p>40 - 50 mins</option>
+                <option name="exerciseDuration" value="55"><p>50 mins - 1 hour</option>
+                <option name="exerciseDuration" value="65"><p>Over an hour</option>
+             </select>
     	</div>
     </div>
     <div class="questionContainer" id="question3">
@@ -107,7 +112,7 @@
      </div>
      </div> 
      <div class="infoBox">
-    	<p id="infoText">Info text goes here</p>
+    	<p id="infoText"></p>
     </div>
      <div class="buttonContainer">
          <button id="previous">Previous</button>

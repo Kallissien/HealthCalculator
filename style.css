@@ -152,13 +152,15 @@ input[type="text"] {
   font-weight: 300;
 }
 select {
-  width: 250px;
-  font-size: 36px;
-  height: 50px;
-  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 0.9em;
+  height: 31px;
+  display: inline-block;
+  font-family: 'Roboto', sans-serif;
 }
 #question3 select, #exerL select{
-  font-size: 16px;
+  font-size: 0.9em;
   font-weight: 100;
   width: 65px;
   height: 36px;
@@ -253,12 +255,13 @@ display: inline-block;
 .hidden{
 	position: relative;
 	opacity:0;
-	width: 105%;
-	min-height: 0;
-	height: 118px;
+	width: 88%;
+	margin: auto;
+	height: auto;
 	padding: 4%;
-	left:20%;
-	box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+	padding-top: 0;
+	left: 0%;
+	top: 0.4em;
 	transition: 0.2s;
 }
 #exerD{
@@ -286,10 +289,11 @@ button.getResults:active {
 .infoBox {
     /* background-color: rgba(255, 255, 255, 0.72); */
     max-height: 2em;
-    width: 90%;
+    min-height: 4em;
+    width: 72%;
     margin: auto;
-    top: -46%;
-    position: relative;
+    top: 50%;
+    position: absolute;
 }
 .infoBox p {    
     display: block; color: white; font-family: 'Roboto'; font-weight: 100; 
@@ -299,7 +303,7 @@ button.getResults:active {
 .questionBox {
     width: 110%;
     margin-left: -2%;
-    height: 6em;
+    height: 11em;
     top: -46%;
     overflow: hidden;
     position: relative;
@@ -317,12 +321,13 @@ button.getResults:active {
 	opacity:1;
 	z-index:1;
 }
-#question2 h4 {
+#question2 h4, .hidden h4 {
 font-size: 95%;
+margin-bottom: 5px;
 }
 input[type="radio"] {
     display: block;
-    left: 26%;
+    left: 15%;
     position: relative;
 }
 
@@ -336,14 +341,15 @@ input[type="radio"] {
 .radio p {
     display: block;
     margin: 0;
-    font-weight: 400;
+    font-weight: 100;
     font-size: 1.3em;
 }
 .buttonContainer {
-    width: 60%;
-    position: relative;
+    width: 53%;
+    position: absolute;
+    top: 76%;
+    left: 23%;
     margin: auto;
-    top: -40%;
 }
 .buttonContainer button {
     width: 47%;
@@ -364,8 +370,9 @@ input[type="radio"] {
 .breadcrumbContainer {
     width: 28%;
     height: 1em;
-    position: relative;
-    top: -36%;
+    position: absolute;
+    top: 83%;
+    left: 38%;
     margin: auto;
 }
 .breadcrumb {

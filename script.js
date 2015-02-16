@@ -36,14 +36,14 @@ function phaseOut(element){
 	}, 100);
 }
 function collectAnswers(element){
-	 var inputName = element.name;
+	 var inputName = $(element).attr("name");
 	 switch(inputName){
 		case "yourName":
 		 	User.name = element.value
 			$('.aboutyou h2').text("About " + User.name)
 		 	break;		 
 		case "age":
-		 	User.age = element.value
+		 	User.age = parseInt(element.value);
 		 	break;
 		case "gender":
 		 	User.gender = element.value
@@ -64,10 +64,10 @@ function collectAnswers(element){
 				}
 		 	break;
 		case "gym":
-			if(element.value === "1"){
+			if($(element).attr("value") === "1"){
 				User.gymPrice = 84;
 				}
-				if(element.value === "2"){
+				if($(element).attr("value") === "2"){
 				User.gymPrice = 73;
 				}
 			break;
@@ -85,7 +85,7 @@ function collectAnswers(element){
 			}
 		 	break;
 		case "exerciseDuration":
-		 	User.exerciseDuration = element.value
+		 	User.exerciseDuration = parseInt($(element).val());
 		 	break;
 		case "height":
 		 	if($(element).parent().children('select').val() === "feet"){
@@ -111,7 +111,10 @@ function collectAnswers(element){
 				var stone = splitWeight[0];
 				var lb = splitWeight[1];
 				//convert all to lb
-				var weightInLb = (stone * 14) + parseInt(lb);
+				if(lb != null){
+					var weightInLb = (stone * 14) + parseInt(lb);
+				} else {var weightInLb = (stone * 14);}
+				
 				var weightInKg = weightInLb * 0.453592;
 				User.weight = Math.floor(weightInKg);
 			} else{
@@ -119,7 +122,7 @@ function collectAnswers(element){
 			}
 			break;
 		case "heartRate":
-		 	User.heartRate = element.value
+		 	User.heartRate = parseInt(element.value);
 		 	break;
 		 }
 }
@@ -149,7 +152,7 @@ $('input').change(function() {
 	collectAnswers(this);
 });
 $('select').change(function() {
-	collectAnswers(this);
+	collectAnswers($(this).find(":selected"));
 });
 function rotateRight(){
 	var sections = $("section");
@@ -257,12 +260,12 @@ $('.getResults').click(function(){
 	//Collect all values
 	var Answers = [];	
 	console.log(User);
-	if(User.gender === "Boy"){
-		var caloriesBurned = Math.round((((parseInt(User.age) * 0.2017) + (parseInt(User.weight) * 0.1988) + (User.heartRate * 0.6309) - 55.0969) * parseInt(User.exerciseDuration) / 4.184));
+	if(User.gender === "boy"){
+		var caloriesBurned = Math.round((((User.age * 0.2017) + (User.weight * 0.1988) + (User.heartRate * 0.6309) - 55.0969) * User.exerciseDuration / 4.184));
 		console.log(caloriesBurned);
 	}
-	else if(User.gender === "Girl"){
-		var caloriesBurned = Math.round((((parseInt(User.age) * 0.074) + (parseInt(User.weight) * 0.1263) + (User.heartRate * 0.4472) - 20.4022) * parseInt(User.exerciseDuration) / 4.184));
+	else if(User.gender === "girl"){
+		var caloriesBurned = Math.round((((User.age * 0.074) + (User.weight * 0.1263) + (User.heartRate * 0.4472) - 20.4022) * User.exerciseDuration / 4.184));
 	}
 	var caloriesPerWeek = caloriesBurned * User.exerciseLevel;
 	var caloriesPerMonth = caloriesPerWeek * 4;
