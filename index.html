@@ -18,64 +18,70 @@
 <div class="circlePulseSmall"></div>
 <div class="blockage"></div>
 <div class="blockageSmall"></div>
-	<section class="aboutyou deg1">
-<h2>About You</h2>
-<div class="line"></div>
-<div class="icon"><img src="images/youM.png"></div>
-    <div class="question">
-        <h4>What's your name?</h4>
-        <input type="text" name="yourName" value="Enter Name Here">
-    </div>
-    <div class="question">
-        <h4>How about your age?</h4>   
-         <input type="text" name="age" value="Enter Age">
-    </div>
-    <div class="question">
-        <h4>Are you a boy or a girl?</h4>
-        <p><input name="gender" type="radio" value="Boy">Boy</p>
-        <p><input name="gender" type="radio" value="Girl">Girl</p>
-        <p><input name="gender" type="radio" value="Unsure">Let me check first</p>
-    </div>
-</section>
-	<section class="yourFitness deg2">
-<h2>Your Fitness</h2>
-<div class="line"></div>
-<div class="icon"><img src="images/fitness.png"></div>
-	<div class="question">
-        <h4>Are you a member of a gym?</h4>
-       		<p><input id="gymY" name="gymMember" type="radio" value="1">Yes</p>
-        	<p><input id="gymN" name="gymMember" type="radio" value="0" >No</p>
-          	<div class="question hidden" id="whichGym" name="gym">
-                <h4>Which Gym?</h4>
-                <select>
-                    <option value="0"><p>Please Select</p></option>
-                    <option value="1"><p>Virgin Active</p></option>
-                    <option value="2"><p>Gymbox</p></option>
-                </select>
-    		</div>
-    </div>
-    <div class="question" id="exerL">
-        <h4>How often do you exercise?</h4>
-        <input name="exerciseLevel" type="text" value="Enter Here">
-        <select>
-            <option value="week"><p>times per week</p></option>
-            <option value="month"><p>times per month</p></option>            
-        </select>
-        <p><input name="exerciseLevel" type="radio" value="0">Never!</p>        
-    </div>
-    <div class="question" id="exerD">
-        <h4>How long for?</h4>
-        <p><input name="exerciseDuration" type="radio" value="15">10 - 20 mins</p>
-        <p><input name="exerciseDuration" type="radio" value="25">20 - 40 mins</p>
-        <p><input name="exerciseDuration" type="radio" value="50">40 - 60 mins</p>
-        <p><input name="exerciseDuration" type="radio" value="70">Over an hour</p>
-    </div>
-</section>
-	<section class = "yourHealth deg3">
+	<section class="aboutyou deg1" value="2">
+        <h2>About You</h2>
+        <div class="line"></div>
+        <div class="icon"><img src="images/youM.png"></div>    
+	</section>
+	<section value="2" class="yourFitness deg2">
+        <h2>Your Fitness</h2>
+        <div class="line"></div>
+        <div class="icon"><img src="images/fitness.png"></div>
+	</section>
+	<section class = "yourHealth deg3" value="3">
         <h2>Your Health</h2>
         <div class="line"></div>
-        <div class="icon"><img src="images/health.png"></div>
+        <div class="icon"><img src="images/health.png"></div>            
+    </section>
+    <div class="questionBox">
+        <div class="questionContainer" id="question1">
+        	<div class="question">
+                <h4>What's your name?</h4>
+                <input type="text" name="yourName" value="Enter Name Here">
+  			</div>
             <div class="question">
+                <h4>How about your age?</h4>   
+                 <input type="text" name="age" value="Enter Age">
+    		</div>
+            <div class="question">
+                <h4>Are you a boy or a girl?</h4>
+                <div class="radio"><p>Boy</p><input name="gender" type="radio" value="boy"></div>
+                <div class="radio"><p>Girl</p><input name="gender" type="radio" value="girl"></div>
+        	</div>
+          </div>
+    <div class="questionContainer" id="question2">
+        <div class="question">
+            <h4>Are you a member of a gym?</h4>
+                 <div class="radio"><p>Yes</p><input id="gymY" name="gymMember" type="radio" value="1"></div>
+                <div class="radio"><p>No</p><input id="gymN" name="gymMember" type="radio" value="0" ></div>
+                <div class="question hidden" id="whichGym" name="gym">
+                    <h4>Which Gym?</h4>
+                    <select>
+                        <option value="0"><p>Please Select</p></option>
+                        <option value="1"><p>Virgin Active</p></option>
+                        <option value="2"><p>Gymbox</p></option>
+                    </select>
+                </div>
+        </div>
+        <div class="question" id="exerL">
+            <h4>How often do you exercise?</h4>
+            <input name="exerciseLevel" type="text" value="Enter Here">
+            <select>
+                <option value="week"><p>times per week</p></option>
+                <option value="month"><p>times per month</p></option>            
+            </select>
+            <p><input name="exerciseLevel" type="radio" value="0">Never!</p>        
+        </div>
+        <div class="question" id="exerD">
+            <h4>How long for?</h4>
+            <p><input name="exerciseDuration" type="radio" value="15">10 - 20 mins</p>
+            <p><input name="exerciseDuration" type="radio" value="25">20 - 40 mins</p>
+            <p><input name="exerciseDuration" type="radio" value="50">40 - 60 mins</p>
+            <p><input name="exerciseDuration" type="radio" value="70">Over an hour</p>
+    	</div>
+    </div>
+    <div class="questionContainer" id="question3">
+    		<div class="question">
                 <h4>What's your height?</h4>
                 <input name="height" type="text" value="Enter Height">
                 <select>
@@ -98,10 +104,21 @@
                     <option value="bpm"><p>bpm</p></option>                     
                 </select>
             </div>
-    </section>
-    <div class="questionBox">
-    
+     </div>
+     </div> 
+     <div class="infoBox">
+    	<p id="infoText">Info text goes here</p>
     </div>
+     <div class="buttonContainer">
+         <button id="previous">Previous</button>
+         <button id="next">Next</button> 
+     </div> 
+     <div class="breadcrumbContainer">
+     	<div class="breadcrumb" id="breadcrumb1"></div>
+        <div class="breadcrumb" id="breadcrumb2"></div> 
+        <div class="breadcrumb" id="breadcrumb3"></div> 
+     </div> 
+    
     <div class="submit">
 	<button class="getResults">
     <p>Get Results</p>

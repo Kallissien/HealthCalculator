@@ -31,11 +31,12 @@ h3{
 }
 h4{
 	color:white;
-	font-size:30px;
+	font-size: 1.4em;
 	font-family: 'Roboto', sans-serif;
 	font-weight: 100;
 	margin-bottom: 10px;
 	margin-top: 10px;
+	text-align: center;
 }
 body{
 	background: #D0D0D0;
@@ -53,11 +54,11 @@ section {
     height: 14em;
 	padding: 2.8em; /*= 2em * 1.4 (2em = half the width of an img, 1.4 = sqrt(2))*/
 	margin: 1.75em auto 0;    
-	background-color: rgb(208, 186, 255);
+	background-color: rgb(58, 58, 58);
     border-radius: 50%;	
     margin: auto;
 	margin-top:1.75em;    
-	border: solid rgb(83, 82, 84) 2px;
+	/* border: solid rgb(244, 85, 85) 2px; */
 }
 section {
 	display:block;
@@ -118,27 +119,29 @@ margin-top: 5px;
 margin-bottom: 15px;
 }
 .question{
-	width: 100%;
+	width: 28%;
 	margin-right: 4%;
 	display: inline-block;
-	height: auto;
-	min-height: 400px;
+	/* height: auto; */
+	/* min-height: 400px; */
 	vertical-align: top;
-	padding: 2%;
-	background:grey;
+	/* padding: 1%; */
+	/* background:grey; */
 }
 .question:nth-of-type(4) {
     margin-right: 0;
 }
 .question p {
-  display: block;
+  display: inline-block;
+  text-align: center;
   color: white;
   font-family: 'Roboto';
   font-weight: 100;
   font-size: 15px;
 }
 input[type="text"] {
-  width: 94%;
+  width: 92%;
+  margin-left: 2%;
   border: none;
   display: block;
   box-shadow: inset 2px 2px 2px rgba(0,0,0,0.5);
@@ -154,7 +157,7 @@ select {
   height: 50px;
   display: block;
 }
-section.yourHealth select, #exerL select{
+#question3 select, #exerL select{
   font-size: 16px;
   font-weight: 100;
   width: 65px;
@@ -174,7 +177,7 @@ width: 2em;
 position: relative;
 margin: auto;
 margin-top: -131%;
-background-color: rgb(208, 186, 255);
+background-color: rgb(58, 58, 58);
 
 -webkit-animation-name: rotate; 
     
@@ -198,7 +201,7 @@ background-color: rgb(208, 186, 255);
     to {-moz-transform: rotate(360deg);}
 }
 .blockageSmall{
-	background-color: rgb(208, 186, 255);
+	background-color: rgb(58, 58, 58);
 	width: 125%;
 	height: 2em;
 	margin-left: -12%;
@@ -282,7 +285,7 @@ button.getResults:active {
 }
 .infoBox {
     /* background-color: rgba(255, 255, 255, 0.72); */
-    height: 7em;
+    max-height: 2em;
     width: 90%;
     margin: auto;
     top: -46%;
@@ -291,4 +294,89 @@ button.getResults:active {
 .infoBox p {    
     display: block; color: white; font-family: 'Roboto'; font-weight: 100; 
     font-size: 17px;
+    text-align: center;
+}
+.questionBox {
+    width: 110%;
+    margin-left: -2%;
+    height: 6em;
+    top: -46%;
+    overflow: hidden;
+    position: relative;
+}
+.questionContainer {
+    width: 53em;
+    height: 9em;
+    /*transform: translateX(-65%);*/
+    transition: 0.4s ease-out;
+    position: absolute;
+	opacity: 0;
+	z-index:0;
+}
+#question1{
+	opacity:1;
+	z-index:1;
+}
+#question2 h4 {
+font-size: 95%;
+}
+input[type="radio"] {
+    display: block;
+    left: 26%;
+    position: relative;
+}
+
+.radio {
+    display: inline-block;
+    float: left;
+    margin: auto;
+    margin-left: 22%;
+}
+
+.radio p {
+    display: block;
+    margin: 0;
+    font-weight: 400;
+    font-size: 1.3em;
+}
+.buttonContainer {
+    width: 60%;
+    position: relative;
+    margin: auto;
+    top: -40%;
+}
+.buttonContainer button {
+    width: 47%;
+    display: inline-block;
+    background: rgb(34, 34, 34);
+    border: none;
+    color: white;
+	cursor:pointer;
+	transition:0.3s;
+}
+.buttonContainer button:focus {
+    outline: none;
+}
+.buttonContainer button:hover {
+   box-shadow:1px 1px 1px rgba(0,0,0,0.5);
+   top:-5px;
+}
+.breadcrumbContainer {
+    width: 28%;
+    height: 1em;
+    position: relative;
+    top: -36%;
+    margin: auto;
+}
+.breadcrumb {
+    background: white;
+    border-radius: 50%;
+    width: 0.5em;
+    height: 0.5em;
+    display: inline-block;
+    margin-right: 19%;
+	cursor:pointer;
+}
+#breadcrumb3 {
+    margin-right: 0;
 }

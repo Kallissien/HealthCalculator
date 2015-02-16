@@ -12,8 +12,11 @@ var User = {
 		weight: 0,
 		heartRate: 0
 	};
+var currentQuestion = 1;
+var currentStep = 1;
+
 $(document).ready(function(){
-	
+/*
 var randomColour = '#'+Math.floor(Math.random()*16777215).toString(16);
 var questions = document.getElementsByClassName('question');
 
@@ -23,10 +26,9 @@ var SetQuestionColour = function(){
 			randomColour = '#'+Math.floor(Math.random()*16777215).toString(16);
 		}
 	}
+	*/
 // Clear Text Box when focus
-var inputBoxes = $('input');
-var textBoxes = $('input[type=text]');
-textBoxes.focus(function(){
+$('input[type=text]').focus(function(){
 	if (this.value.indexOf('Enter') != -1 || this.value.indexOf('Whoops') != -1){
 	this.value = "";
 	}
@@ -56,6 +58,11 @@ function collectAnswers(element){
 		 	break;
 		case "gender":
 		 	User.gender = element.value
+			if (User.gender === "girl"){
+				$(".aboutyou img").attr("src", "images/youF.png")
+			} else if (User.gender === "boy"){
+				$(".aboutyou img").attr("src", "images/youM.png")
+			}
 		 	break;
 		case "gymMember":
 		 	if(element.value === "1"){
@@ -157,6 +164,8 @@ $('select').change(function() {
 });
 function rotateRight(){
 	var sections = $("section");
+	var questions = $(".questionContainer");
+	var currentQuestion = questions
 	for(var i=0 ; i<sections.length ; i++){
 		var thisSection = sections[i];
 		if(thisSection.className.indexOf("deg1") != -1){
@@ -171,16 +180,87 @@ function rotateRight(){
 		}		
 	}
 }
+function fadeOutQuestions(){
+	$(".questionContainer").each(function(){
+			$(this).css("opacity", 0);
+			$(this).css("z-index", 0);
+		});
+	}
+function changeQuestion(nextQuestion, nextStep){
+	if (currentQuestion === nextQuestion){}
+		else{
+			$("#question" + nextQuestion).css("opacity", 1);
+			$("#question" + nextQuestion).css("z-index", 1);
+			currentQuestion = nextQuestion;
+			if(currentStep === nextStep){}
+			else{changeStep(nextStep);}
+		}
+	}
+function changeStep(nextStep){
+	if(currentStep === nextStep){		
+		}
+	else{ 
+			$(".breadcrumb").each(function(){
+				$(this).css("transform", "scale(1)");
+				$(this).css("background", "white");
+			});
+		var questionContainer = 	$("#question" + currentQuestion);
+		if(nextStep === 1){
+			$(questionContainer).css("transform", "translateX(0%)");
+		} else if(nextStep === 2){
+			$(questionContainer).css("transform", "translateX(-33%)");
+		} else if(nextStep === 3){
+			$(questionContainer).css("transform", "translateX(-65%)");
+		}
+		currentStep = nextStep;		
+		}
+	$("#breadcrumb" + currentStep).css("transform", "scale(1.2)");
+	$("#breadcrumb" + currentStep).css("background", "rgb(60, 133, 244)");
+}
 // Input Functions
 $("section").click(function(){
-	var thisSection = this.className;
-	if(thisSection != -1){
+	var thisSection = this.className;	
+	if(thisSection.indexOf("deg1") != -1){
+	} else if(thisSection != -1){
+		fadeOutQuestions();
 		while(thisSection.indexOf("deg1") === -1){
 			rotateRight();
 			thisSection = this.className;
 		}
+		if (thisSection.indexOf("aboutyou") != -1){
+			var nextQuestion = 1;
+				changeQuestion(nextQuestion, 1);
+		}else if (thisSection.indexOf("Fitness") != -1){
+			var	nextQuestion = 2;
+			changeQuestion(nextQuestion, 1);
+		} else if (thisSection.indexOf("Health") != -1){
+			var nextQuestion = 3;
+				changeQuestion(nextQuestion, 1);
+		}
 	}
 });
+$("button").click(function(){
+	if (this.id === "next"){
+		var nextStep = currentStep + 1;
+		if (nextStep === 4){
+			nextQuestion = currentQuestion + 1;
+			changeQuestion(nextQuestion, 1);
+			} else{
+		changeStep(nextStep)	;
+					}
+	} else if (this.id === "previous"){
+		var nextStep = currentStep - 1;
+		if (nextStep < 1){
+			nextStep = 1;
+			} else{
+		changeStep(nextStep)	;
+					}
+	}
+});
+$(".breadcrumb").click(function(){
+	var nextStep = parseInt(this.id.substring(this.id.length - 1, this.id.length));
+	changeStep(nextStep);
+	});
 // Calculation Function
 $('.getResults').click(function(){
 	//Collect all values
@@ -199,6 +279,6 @@ $('.getResults').click(function(){
 	console.log(caloriesBurned);
 	console.log(Math.round(pricePerCalorie));
 });
-//Run Functions	
-SetQuestionColour();
+changeQuestion(1);
+changeStep(1);
 });
