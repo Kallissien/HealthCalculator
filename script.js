@@ -16,17 +16,6 @@ var currentQuestion = 1;
 var currentStep = 1;
 
 $(document).ready(function(){
-/*
-var randomColour = '#'+Math.floor(Math.random()*16777215).toString(16);
-var questions = document.getElementsByClassName('question');
-
-var SetQuestionColour = function(){
-		for (var i = 0 ; i < questions.length ; i++){
-			questions[i].style.background = randomColour;
-			randomColour = '#'+Math.floor(Math.random()*16777215).toString(16);
-		}
-	}
-	*/
 // Clear Text Box when focus
 $('input[type=text]').focus(function(){
 	if (this.value.indexOf('Enter') != -1 || this.value.indexOf('Whoops') != -1){
@@ -189,22 +178,22 @@ function fadeOutQuestions(){
 function changeQuestion(nextQuestion, nextStep){
 	if (currentQuestion === nextQuestion){}
 		else{
+			fadeOutQuestions();
 			$("#question" + nextQuestion).css("opacity", 1);
 			$("#question" + nextQuestion).css("z-index", 1);
-			currentQuestion = nextQuestion;
-			if(currentStep === nextStep){}
-			else{changeStep(nextStep);}
+			changeStep(nextStep);
+			currentQuestion = nextQuestion;			
 		}
 	}
 function changeStep(nextStep){
-	if(currentStep === nextStep){		
-		}
+	if(nextQuestion === null){var nextQuestion=0;}
+	if(currentStep === nextStep && currentQuestion === nextQuestion){}
 	else{ 
 			$(".breadcrumb").each(function(){
 				$(this).css("transform", "scale(1)");
 				$(this).css("background", "white");
 			});
-		var questionContainer = 	$("#question" + currentQuestion);
+		var questionContainer = $("#question" + currentQuestion);
 		if(nextStep === 1){
 			$(questionContainer).css("transform", "translateX(0%)");
 		} else if(nextStep === 2){
@@ -222,7 +211,6 @@ $("section").click(function(){
 	var thisSection = this.className;	
 	if(thisSection.indexOf("deg1") != -1){
 	} else if(thisSection != -1){
-		fadeOutQuestions();
 		while(thisSection.indexOf("deg1") === -1){
 			rotateRight();
 			thisSection = this.className;
@@ -242,11 +230,14 @@ $("section").click(function(){
 $("button").click(function(){
 	if (this.id === "next"){
 		var nextStep = currentStep + 1;
-		if (nextStep === 4){
-			nextQuestion = currentQuestion + 1;
+		if (nextStep === 4 && currentQuestion != 3){
+			var nextQuestion = currentQuestion + 1;
+			rotateRight();
 			changeQuestion(nextQuestion, 1);
-			} else{
-		changeStep(nextStep)	;
+			}
+			else if(nextStep === 4 && currentQuestion === 3){}
+			else{
+				changeStep(nextStep);
 					}
 	} else if (this.id === "previous"){
 		var nextStep = currentStep - 1;
