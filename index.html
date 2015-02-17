@@ -14,24 +14,41 @@
 <h3>How much are you spending?</h3>
 </div>
 <div class="container">
-<div class="circlePulse"></div>
-<div class="circlePulseSmall"></div>
-<div class="blockage"></div>
-<div class="blockageSmall"></div>
+    <div class="circlePulseContainer">
+        <div class="circlePulse"></div>
+        <div class="circlePulseSmall"></div>
+        <div class="blockage"></div>
+        <div class="blockageSmall"></div>
+    </div>
 	<section class="aboutyou deg1" value="2">
         <h2>About You</h2>
         <div class="line"></div>
-        <div class="icon"><img src="images/youM.png"></div>    
+        <div class="icon"><img src="images/youM.png"></div>
+            <div class="progressContainer">
+                <div class="progressDot" id="progressDot11"></div>
+                <div class="progressDot" id="progressDot12"></div> 
+                <div class="progressDot" id="progressDot13"></div> 
+            </div>     
 	</section>
 	<section value="2" class="yourFitness deg2">
         <h2>Your Fitness</h2>
         <div class="line"></div>
         <div class="icon"><img src="images/fitness.png"></div>
+        <div class="progressContainer">
+                <div class="progressDot" id="progressDot21"></div>
+                <div class="progressDot" id="progressDot22"></div> 
+                <div class="progressDot" id="progressDot23"></div> 
+            </div>   
 	</section>
 	<section class = "yourHealth deg3" value="3">
         <h2>Your Health</h2>
         <div class="line"></div>
-        <div class="icon"><img src="images/health.png"></div>            
+        <div class="icon"><img src="images/health.png"></div>
+        <div class="progressContainer">
+                <div class="progressDot" id="progressDot31"></div>
+                <div class="progressDot" id="progressDot32"></div> 
+                <div class="progressDot" id="progressDot33"></div> 
+            </div>               
     </section>
     <div class="questionBox">
         <div class="questionContainer" id="question1">
@@ -44,9 +61,9 @@
                  <input type="text" name="age" value="Enter Age">
     		</div>
             <div class="question">
-                <h4>Are you a boy or a girl?</h4>
-                <div class="radio"><p>Boy</p><input name="gender" type="radio" value="boy"></div>
-                <div class="radio"><p>Girl</p><input name="gender" type="radio" value="girl"></div>
+                <h4>Male or Female?</h4>
+                <div class="radio"><p>Male</p><input name="gender" type="radio" value="boy"></div>
+                <div class="radio"><p>Female</p><input name="gender" type="radio" value="girl"></div>
         	</div>
           </div>
     <div class="questionContainer" id="question2">
@@ -65,12 +82,12 @@
         </div>
         <div class="question" id="exerL">
             <h4>How often do you exercise?</h4>
-            <input name="exerciseLevel" type="text" value="Enter Here">
+            <input name="exerciseLevel" type="text" value="">
             <select>
                 <option value="week"><p>times per week</p></option>
                 <option value="month"><p>times per month</p></option>            
             </select>
-            <p><input name="exerciseLevel" type="radio" value="0">Never!</p>        
+            <!-- <p><input name="exerciseLevel" type="radio" value="0">Never!</p>  -->      
         </div>
         <div class="question" id="exerD">
             <h4>How long for?</h4>
@@ -108,6 +125,9 @@
                 <select>
                     <option value="bpm"><p>bpm</p></option>                     
                 </select>
+                <div class="infoBox">
+                    <p id="infoText">Heart rate during exercise. Your target heart rate should be between <span id="heartRate">110 - 140</span>bpm</p>
+                </div>
             </div>
      </div>
      </div> 

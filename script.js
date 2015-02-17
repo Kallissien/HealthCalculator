@@ -39,11 +39,20 @@ function collectAnswers(element){
 	 var inputName = $(element).attr("name");
 	 switch(inputName){
 		case "yourName":
-		 	User.name = element.value
-			$('.aboutyou h2').text("About " + User.name)
+		 	User.name = element.value;
+			$('.aboutyou h2').text("About " + User.name);
+			if(User.name != 0){
+				$("#progressDot11").css("background-color", "rgb(5, 163, 5)");
+			}
 		 	break;		 
 		case "age":
 		 	User.age = parseInt(element.value);
+			var MinHR = Math.round((70/100) * (225 - User.age));
+			var MaxHR =  Math.round((75/100) * (225 - User.age));
+			$("#heartRate").text(MinHR + "-" + MaxHR);
+			if(User.age != 0){
+				$("#progressDot12").css("background-color", "rgb(5, 163, 5)");
+			}
 		 	break;
 		case "gender":
 		 	User.gender = element.value
@@ -51,6 +60,9 @@ function collectAnswers(element){
 				$(".aboutyou img").attr("src", "images/youF.png")
 			} else if (User.gender === "boy"){
 				$(".aboutyou img").attr("src", "images/youM.png")
+			}
+			if(User.gender != 0){
+				$("#progressDot13").css("background-color", "rgb(5, 163, 5)");
 			}
 		 	break;
 		case "gymMember":
@@ -62,14 +74,24 @@ function collectAnswers(element){
 				User.gymMember = false;
 				phaseOut($('#whichGym'));
 				}
+			if (User.gymMember != 0 || User.gymMember === false){
+				if(User.gymMember === true && User.gym === 0){				
+				} else {
+					$("#progressDot21").css("background-color", "rgb(5, 163, 5)");
+				}
+			}
 		 	break;
 		case "gym":
 			if($(element).attr("value") === "1"){
+				User.gym = "Virgin"
 				User.gymPrice = 84;
-				}
-				if($(element).attr("value") === "2"){
+				} else if($(element).attr("value") === "2"){
+					User.gym = "GymBox"
 				User.gymPrice = 73;
-				}
+				} else {User.gym = 0;}
+				if(User.gymMember === true && User.gym != 0){
+					$("#progressDot21").css("background-color", "rgb(5, 163, 5)");	
+				} else { $("#progressDot21").css("background-color", "rgb(226, 226, 226)");	}
 			break;
 		case "exerciseLevel":
 			if(element.value === "0"){
@@ -83,9 +105,15 @@ function collectAnswers(element){
 				User.exerciseLevel = element.value
 			} else{	User.exerciseLevel = (element.value / 4);
 			}
+			if(User.exerciseLevel != 0){
+				$("#progressDot22").css("background-color", "rgb(5, 163, 5)");
+			}
 		 	break;
 		case "exerciseDuration":
 		 	User.exerciseDuration = parseInt($(element).val());
+			if(User.exerciseDuration != 0){
+				$("#progressDot23").css("background-color", "rgb(5, 163, 5)");
+			}
 		 	break;
 		case "height":
 		 	if($(element).parent().children('select').val() === "feet"){
@@ -98,11 +126,26 @@ function collectAnswers(element){
 				var convertedHeight = (heightDecimal/0.032808);
 				User.height = Math.floor(convertedHeight);
 			} else{
-				User.height = element.value;
+				User.height = parseInt(element.value);
+			}
+			if(User.height != 0){
+				$("#progressDot31").css("background-color", "rgb(5, 163, 5)");
 			}
 		 	break;
 		case "heightUnits":
-		 	console.log("feet");
+		 	if(element.val() === "cm"){
+			User.height = parseInt(element.parent().parent().children("input[type='text']").val());
+			} else if(element.val() === "feet"){
+				var baseHeight = parseFloat(element.parent().parent().children("input[type='text']").val());
+				if(baseHeight.indexOf(".") != -1){
+				var splitHeight = baseHeight.split('.');
+				var feet = splitHeight[0];
+				var inches = splitHeight[1] / 12;				
+				var heightDecimal = parseInt(feet) + inches;			
+				var convertedHeight = (heightDecimal/0.032808);
+				} else { var convertedHeight = baseHeight/0.032808}
+				User.height = Math.floor(convertedHeight);
+			}
 		 	break;
 		case "weight":
 			if($(element).parent().children('select').val() === "lb"){	
@@ -120,11 +163,28 @@ function collectAnswers(element){
 			} else{
 				User.weight = element.value;		 	
 			}
+			if(User.weight != 0){
+				$("#progressDot32").css("background-color", "rgb(5, 163, 5)");
+			}
 			break;
 		case "heartRate":
 		 	User.heartRate = parseInt(element.value);
+			if(User.heartRate != 0){
+				$("#progressDot33").css("background-color", "rgb(5, 163, 5)");
+			} else { $("#progressDot33").css("background-color", "rgb(226, 226, 226) "); }
 		 	break;
 		 }
+		 // Check if all questions answered
+		 var questionsAnswered = 0;
+		 for( var i = 0 ; i< $(".progressDot").length ; i++){
+			 var thisDot = $(".progressDot")[i];
+			 if($(thisDot).css("background-color") === "rgb(5, 163, 5)"){
+				 questionsAnswered ++;
+				 }
+			 }
+			 if (questionsAnswered === 9){
+				 $(".submit").css("transform", "scale(1)");
+				 }
 }
 function createCookie(name,value,days) {
 	if (days) {
@@ -255,14 +315,29 @@ $(".breadcrumb").click(function(){
 	var nextStep = parseInt(this.id.substring(this.id.length - 1, this.id.length));
 	changeStep(nextStep);
 	});
+	// Set Up function
+function setUpCalc(){
+	changeQuestion(1);
+	changeStep(1);
+	setTimeout(function() {
+    $(".container").css("transform","scale(1)");
+	$(".circlePulseContainer").css("transform","scale(1)");
+}, 100);
+setTimeout(function() {
+    $(".circlePulseSmall").css("transform","scale(1)");
+}, 300);	
+	setTimeout(function() {
+     $(".circlePulse").css("transform","scale(1)");	
+}, 500);
+	
+}
 // Calculation Function
 $('.getResults').click(function(){
 	//Collect all values
 	var Answers = [];	
 	console.log(User);
 	if(User.gender === "boy"){
-		var caloriesBurned = Math.round((((User.age * 0.2017) + (User.weight * 0.1988) + (User.heartRate * 0.6309) - 55.0969) * User.exerciseDuration / 4.184));
-		console.log(caloriesBurned);
+		var caloriesBurned = Math.round((((User.age * 0.2017) + (User.weight * 0.1988) + (User.heartRate * 0.6309) - 55.0969) * User.exerciseDuration / 4.184));		
 	}
 	else if(User.gender === "girl"){
 		var caloriesBurned = Math.round((((User.age * 0.074) + (User.weight * 0.1263) + (User.heartRate * 0.4472) - 20.4022) * User.exerciseDuration / 4.184));
@@ -273,6 +348,5 @@ $('.getResults').click(function(){
 	console.log(caloriesBurned);
 	console.log(Math.round(pricePerCalorie));
 });
-changeQuestion(1);
-changeStep(1);
+setUpCalc();
 });

@@ -52,13 +52,13 @@ section {
 	position:relative;
     width: 14em;
     height: 14em;
-	padding: 2.8em; /*= 2em * 1.4 (2em = half the width of an img, 1.4 = sqrt(2))*/
-	margin: 1.75em auto 0;    
+	padding: 2.8em; /*= 2em * 1.4 (2em = half the width of an img, 1.4 = sqrt(2))*/    
 	background-color: rgb(58, 58, 58);
     border-radius: 50%;	
     margin: auto;
 	margin-top:1.75em;    
-	/* border: solid rgb(244, 85, 85) 2px; */
+	transition: 0.2s ease-out;
+	transform: scale(0);
 }
 section {
 	display:block;
@@ -95,10 +95,20 @@ transform: rotate(150deg) translate(10em) rotate(-150deg) scale(0.7);
     z-index: 2;
     position: relative;
     width: 70%;
-    top: -17%;
+    top: -0.1em;
     margin: auto;
     box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-    opacity: 0;
+    transition: 0.3s ease-out;
+	transform:scale(0);
+}
+.submit:hover {
+    box-shadow: 4px 4px 4px rgba(0,0,0,0.5);   
+    top: -0.2em;
+}
+.submit:active {
+    box-shadow: 0px 0px 0px rgba(0,0,0,0.5);
+    top: -0.1em;
+    background-color: rgb(219, 54, 66);
 }
 .icon img {
     width: 100%;
@@ -116,7 +126,8 @@ left: -7%;
 height: 1px;
 background: rgb(77, 77, 77);
 margin-top: 5px;
-margin-bottom: 15px;
+
+	margin-bottom: 6px;
 }
 .question{
 	width: 28%;
@@ -204,10 +215,11 @@ background-color: rgb(58, 58, 58);
 }
 .blockageSmall{
 	background-color: rgb(58, 58, 58);
-	width: 125%;
+	width: 126%;
 	height: 2em;
-	margin-left: -12%;
+	margin-left: -13%;
 	margin-top: -76%;
+	position: relative;
 	transform:rotate(25deg);
 	-webkit-animation-name: rotate; 
     
@@ -238,6 +250,8 @@ margin-bottom: -101%;
 border-radius: 50%;
 border: solid rgb(255, 255, 255) 2px;
 display: inline-block;
+transform: scale(0);
+transition: 0.4s ease-out;
 }
 .circlePulseSmall{
 width: 120%;
@@ -248,6 +262,8 @@ margin-top: -28%;
 border-radius: 50%;
 border: solid rgb(60, 133, 244) 3px;
 display: inline-block;
+transition: 0.3s ease-out;
+transform: scale(0);
 }
 #exerL select{
 	width:auto;
@@ -280,31 +296,36 @@ button.getResults {
     height: 45px;
     display: block;
     border: none;
-    background-color: rgb(162, 125, 190);
+    background-color: rgb(245, 89, 100);
 	cursor: pointer;
 }
 button.getResults:active {
-  background-color: rgb(93, 44, 131);
+    background-color: rgb(219, 54, 66);
 }
 .infoBox {
-    /* background-color: rgba(255, 255, 255, 0.72); */
     max-height: 2em;
     min-height: 4em;
-    width: 72%;
+    width: 92%;
     margin: auto;
-    top: 50%;
-    position: absolute;
+    position: relative;
+    top: 0.5em;
 }
 .infoBox p {    
-    display: block; color: white; font-family: 'Roboto'; font-weight: 100; 
-    font-size: 17px;
-    text-align: center;
+    display: inline-block; color: white; font-family: 'Roboto'; font-weight: 100; 
+    font-size: 0.8em;
+    text-align: left;
+    font-style: italic;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    top: -3em;
 }
 .questionBox {
     width: 110%;
     margin-left: -2%;
     height: 11em;
-    top: -46%;
+    top: 1.2em;
     overflow: hidden;
     position: relative;
 }
@@ -386,4 +407,27 @@ input[type="radio"] {
 }
 #breadcrumb3 {
     margin-right: 0;
+}
+.progressContainer {
+    position: absolute;
+    top: 6em;
+    left: 40%;
+    height: 1em;
+    width: 2em;
+}
+
+.progressDot {
+    background-color: rgb(226, 226, 226);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.circlePulseContainer {
+    display: block;
+    position: absolute;
+    width: 71%;
+    height: 71%;
+    transition: 0.2s ease-out;
+    transform: scale(1);
 }
