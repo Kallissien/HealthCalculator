@@ -55,15 +55,24 @@
         	<div class="question">
                 <h4>What's your name?</h4>
                 <input type="text" name="yourName" value="Enter Name Here">
+                 <div class="infoBox">
+                    <p class="infoText" id="infoText11"></p>
+                </div>
   			</div>
             <div class="question">
                 <h4>How about your age?</h4>   
-                 <input type="text" name="age" value="Enter Age">
+                 <input type="number" name="age" value="Enter Age">
+                 <div class="infoBox">
+                    <p class="infoText" id="infoText12"></p>
+                </div>
     		</div>
             <div class="question">
                 <h4>Male or Female?</h4>
                 <div class="radio"><p>Male</p><input name="gender" type="radio" value="boy"></div>
                 <div class="radio"><p>Female</p><input name="gender" type="radio" value="girl"></div>
+                 <div class="infoBox">
+                    <p class="infoText" id="infoText13"></p>
+                </div>
         	</div>
           </div>
     <div class="questionContainer" id="question2">
@@ -79,15 +88,20 @@
                         <option name="gym" value="2"><p>Gymbox</p></option>
                     </select>
                 </div>
+                 <div class="infoBox">
+                    <p class="infoText" id="infoText21"></p>
+                </div>
         </div>
         <div class="question" id="exerL">
             <h4>How often do you exercise?</h4>
-            <input name="exerciseLevel" type="text" value="">
+            <input name="exerciseLevel" type="number" value="">
             <select>
                 <option value="week"><p>times per week</p></option>
                 <option value="month"><p>times per month</p></option>            
             </select>
-            <!-- <p><input name="exerciseLevel" type="radio" value="0">Never!</p>  -->      
+             <div class="infoBox">
+                    <p class="infoText" id="infoText22"></p>
+                </div>   
         </div>
         <div class="question" id="exerD">
             <h4>How long for?</h4>
@@ -100,24 +114,33 @@
                 <option name="exerciseDuration" value="55"><p>50 mins - 1 hour</option>
                 <option name="exerciseDuration" value="65"><p>Over an hour</option>
              </select>
+              <div class="infoBox">
+                    <p class="infoText" id="infoText23"></p>
+                </div>
     	</div>
     </div>
     <div class="questionContainer" id="question3">
     		<div class="question">
                 <h4>What's your height?</h4>
-                <input name="height" type="text" value="Enter Height">
+                <input name="height" type="number" value="Enter Height">
                 <select>
                     <option name="heightUnits" value="cm"><p>cm</p></option>
                     <option name="heightUnits" value="feet"><p>feet</p></option>            
                 </select>
+                 <div class="infoBox">
+                    <p class="infoText" id="infoText31"></p>
+                </div>
             </div>
             <div class="question">
                 <h4>And Weight?</h4>
-                <input name="weight" type="text" value="Enter Weight">
+                <input name="weight" type="number" value="Enter Weight">
                 <select>
                     <option value="kg"><p>kg</p></option>
                     <option value="lb"><p>lb</p></option>            
                 </select>
+                 <div class="infoBox">
+                    <p class="infoText" id="infoText32"></p>
+                </div>
             </div>
             <div class="question">
                 <h4>Average heart rate?</h4>
@@ -126,7 +149,7 @@
                     <option value="bpm"><p>bpm</p></option>                     
                 </select>
                 <div class="infoBox">
-                    <p id="infoText">Heart rate during exercise. Your target heart rate should be between <span id="heartRate">110 - 140</span>bpm</p>
+                    <p class="infoText" id="infoText33">Heart rate during exercise. Your target heart rate should be between <span id="heartRate">110 - 140</span>bpm</p>
                 </div>
             </div>
      </div>

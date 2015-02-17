@@ -150,7 +150,7 @@ margin-top: 5px;
   font-weight: 100;
   font-size: 15px;
 }
-input[type="text"] {
+input {
   width: 92%;
   margin-left: 2%;
   border: none;
@@ -277,7 +277,7 @@ transform: scale(0);
 	padding: 4%;
 	padding-top: 0;
 	left: 0%;
-	top: 0.4em;
+	top: -0.4em;
 	transition: 0.2s;
 }
 #exerD{
@@ -314,12 +314,11 @@ button.getResults:active {
     display: inline-block; color: white; font-family: 'Roboto'; font-weight: 100; 
     font-size: 0.8em;
     text-align: left;
-    font-style: italic;
     width: 100%;
     padding: 0;
     margin: 0;
     position: relative;
-    top: -3em;
+    top: 0em;
 }
 .questionBox {
     width: 110%;
@@ -346,17 +345,20 @@ button.getResults:active {
 font-size: 95%;
 margin-bottom: 5px;
 }
+.hidden h4 {
+margin-top:0;
+}
 input[type="radio"] {
     display: block;
     left: 15%;
     position: relative;
+    box-shadow: none;
 }
 
 .radio {
     display: inline-block;
-    float: left;
     margin: auto;
-    margin-left: 22%;
+    margin-left: 17%;
 }
 
 .radio p {
@@ -430,4 +432,7 @@ input[type="radio"] {
     height: 71%;
     transition: 0.2s ease-out;
     transform: scale(1);
+}
+#infoText33 {
+    top: -3em;
 }

@@ -35,23 +35,61 @@ function phaseOut(element){
 		opacity: "0"
 	}, 100);
 }
+function infoText(text){
+	$("#infoText" + currentQuestion + currentStep).text(text);
+}
+function infoTextColour(colourChoice){
+	var colour = 0;
+	if (colourChoice === "good"){colour = "rgb(5, 163, 5)";}
+	else if (colourChoice === "bad"){colour = "rgb(249, 68, 68)";}
+	if (colourChoice === "maybe"){colour = "rgb(207, 207, 207)";}	
+	$("#infoText" + currentQuestion + currentStep).css("color", colour);
+}
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
 function collectAnswers(element){
 	 var inputName = $(element).attr("name");
 	 switch(inputName){
 		case "yourName":
-		 	User.name = element.value;
-			$('.aboutyou h2').text("About " + User.name);
-			if(User.name != 0){
-				$("#progressDot11").css("background-color", "rgb(5, 163, 5)");
+		// Catch bad entries
+		if (isNumeric(element.value)){
+			infoText("There's no way " + "'" + element.value + "'" + " is your real name!");
+			infoTextColour("bad");
+			} else {
+				User.name = element.value;
+				$('.aboutyou h2').text("About " + User.name);
+				if(User.name != 0){
+					$("#progressDot11").css("background-color", "rgb(5, 163, 5)");
+					infoText("Hi " + User.name + ", click 'Next' to move on:");
+					infoTextColour("good");
+				}
 			}
 		 	break;		 
 		case "age":
-		 	User.age = parseInt(element.value);
-			var MinHR = Math.round((70/100) * (225 - User.age));
-			var MaxHR =  Math.round((75/100) * (225 - User.age));
-			$("#heartRate").text(MinHR + "-" + MaxHR);
-			if(User.age != 0){
-				$("#progressDot12").css("background-color", "rgb(5, 163, 5)");
+		//Catch Bad Entries
+			if (!isNumeric(element.value)){
+				$(element).css("outline", "rgb(247, 62, 62) 2px solid;");
+				element.value = "";
+				infoText("Please enter a valid number");
+				infoTextColour("bad");
+			} else{
+				User.age = parseInt(element.value);
+				var MinHR = Math.round((70/100) * (225 - User.age));
+				var MaxHR =  Math.round((75/100) * (225 - User.age));
+				$("#heartRate").text(MinHR + "-" + MaxHR);
+				if(User.age > 10 && User.age < 100){
+					$("#progressDot12").css("background-color", "rgb(5, 163, 5)");
+					infoText("Thanks! Now click Next to move on:");
+					infoTextColour("good");
+				} else if(User.age >= 100){
+					infoText("Wow, you're doing pretty well getting this far!");
+					infoTextColour("maybe");
+					}
+					else if(User.age <= 10){
+					infoText("You should get your parent's permission before going any further. The internet is a dark and scary place!");
+					infoTextColour("maybe");
+					}
 			}
 		 	break;
 		case "gender":
