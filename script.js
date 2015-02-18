@@ -43,7 +43,6 @@ function readCookie(name) {
 function eraseCookie(name) {
 	createCookie(name,"",-1);
 }
-
 $(document).ready(function(){
 // Clear Text Box when focus
 $('input[type=text]').focus(function(){
@@ -69,7 +68,7 @@ function infoText(text){
 }
 function infoTextColour(colourChoice){
 	var colour = 0;
-	if (colourChoice === "good"){colour = "rgb(5, 163, 5)";}
+	if (colourChoice === "good"){colour = "rgb(15, 163, 67)";}
 	else if (colourChoice === "bad"){colour = "rgb(249, 68, 68)";}
 	if (colourChoice === "maybe"){colour = "rgb(207, 207, 207)";}	
 	$("#infoText" + currentQuestion + currentStep).css("color", colour);
@@ -102,6 +101,7 @@ function collectAnswers(element){
 				element.value = "";
 				infoText("Please enter a valid number");
 				infoTextColour("bad");
+				$("#progressDot12").css("background-color", "rgb(226, 226, 226)");
 			} else{
 				User.age = parseInt(element.value);
 				var MinHR = Math.round((70/100) * (225 - User.age));
@@ -116,7 +116,7 @@ function collectAnswers(element){
 					infoTextColour("maybe");
 					}
 					else if(User.age <= 10){
-					infoText("You should get your parent's permission before going any further. The internet is a dark and scary place!");
+					infoText("You're a bit young for this. The internet is a dark and scary place!");
 					infoTextColour("maybe");
 					}
 			}
@@ -209,7 +209,7 @@ function collectAnswers(element){
 		 	if(element.val() === "cm"){
 			User.height = parseInt(element.parent().parent().children("input[type='text']").val());
 			} else if(element.val() === "feet"){
-				var baseHeight = parseFloat(element.parent().parent().children("input[type='text']").val());
+				var baseHeight = parseFloat(element.parent().parent().children("input[type='number']").val());
 				if (!isNumeric(baseHeight)){
 					infoText("Please enter a valid Number");
 					infoTextColour("bad");
@@ -277,6 +277,9 @@ $('input').change(function() {
 $('select').change(function() {
 	collectAnswers($(this).find(":selected"));
 });
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 function rotateRight(){
 	var sections = $("section");
 	var questions = $(".questionContainer");
@@ -379,42 +382,42 @@ $(".breadcrumb").click(function(){
 	changeStep(nextStep);
 	});
 // Get Random Food Item
-function getFoodItem(number){
+function getFoodItem(){
 	var foodStuffs = [
-	"Big Mac",
-	"A Brilliant Byron Burger",
-	"A slice of Dominos pepperoni pizza",
-	"A good Sunday roast",
-	"A cheeky chicken tikka masalla",
-	"A Subway '6inch' Italian B.M.T",
-	"A Plain old chicken breast",
-	"Some nice, home made fries. Yum",
-	"A glorious Baked Potato",
-	"A satisfying pint of beer",
-	"A small glass of Baileys Irish Cream",
-	"A glass of red",
-	"A glass of white",
-	"A refreshing dose of Irn Bru",
-	"A revitalizing spray of powerade",
-	"A boring glass of almond milk",
-	"A bannannnnanaa",
-	"A bagel, just the bagel, ouch",
-	"A slice of chedder cheese (the best cheese)",
-	"An apple (just one won't keep the doctor away)",
-	"A warming cup of Coffee",
-	"A very british chocolate hobnob",
-	"A jam doughnut",
-	"A pack of Walkers cheese & onion crisps",
-	"A can of tuna (without the can)",
-	"Just one slice of chocolate cake",
-	"A bowl of Museli fruit & nut",
-	"A bowl of Frosties (theyrrrreee not that good for you)"	
+	"a Big Mac",
+	"a Brilliant Byron Burger",
+	"a slice of Dominos pepperoni pizza",
+	"a good Sunday roast",
+	"a cheeky chicken tikka masalla",
+	"a Subway '6inch' Italian B.M.T",
+	"a plain old chicken breast",
+	"some nice, home made fries. Yum",
+	"a glorious Baked Potato",
+	"a satisfying pint of beer",
+	"a small glass of Baileys Irish Cream",
+	"a glass of red",
+	"a glass of white",
+	"a refreshing dose of Irn Bru",
+	"a revitalizing spray of powerade",
+	"a boring glass of almond milk",
+	"a bannannnnanaa",
+	"a bagel, just the bagel...",
+	"a slice of cheddar cheese (the best cheese)",
+	"a delicious apple",
+	"a warming cup of Coffee",
+	"a very British chocolate hobnob",
+	"a jam doughnut",
+	"a pack of Walkers cheese & onion crisps",
+	"a can of tuna (without the can)",
+	"just one slice of chocolate cake",
+	"a bowl of Museli fruit & nut",
+	"a bowl of Frosties (theyrrrreee not that good for you)"	
 	];
 	var foodCalories = [
 	234,700,300,430,1338,410,193,267,128,182,129,77,76,43,16,60,105,289,113,72,15,79,289,106,102,506,289,143
 	];
-	return foodStuffs[number];
-	return foodCalories[number];
+	var number = getRandomInt(0, foodStuffs.length); 
+	return [foodStuffs[number] , foodCalories[number]];
 }
 	// Set Up function
 function setUpCalc(){
@@ -465,17 +468,27 @@ $('.getResults').click(function(){
 	var caloriesPerMonth = User.cpw * 4;
 	// Calculate price per calorie
 	var pricePerCalorieLong = parseInt(User.gymPrice) / caloriesPerMonth;
-	User.ppc = pricePerCalorieLong.toFixed(2);
+	User.ppc = parseFloat(pricePerCalorieLong.toFixed(2));
 	// Calculate BMR
 	User.bmr = BMR;
 	
 	// Populate Results
 	if(isNumeric(User.ppc)){
-		$("#pricepercalorie").text("£" + User.ppc);
-		var timeTaken = Math.round(234 / User.cpd);
-		$("#timepercalorie").text(timeTaken + "days");
-		$(".targetFoodCal").text("234kcal");
-		$(".targetFood").text("Big Mac");
+		var food = getFoodItem();
+		if (User.gymPrice === 0){
+			$("#pricepercalorie").text("£" + User.ppc);
+			$("#ifgym").text("");
+			}
+			else{
+				$("#pricepercalorie").text("£" + User.ppc);
+				var timeTaken = Math.round(food[1] / User.cpd);
+				$("#timepercalorie").text(timeTaken + " days");		
+				var pricePerFood = User.ppc * food[1];
+				pricePerFood = pricePerFood.toFixed(2);
+			}
+		$("#priceperfood").text("£" + pricePerFood);
+		$(".targetFoodCal").text(food[1] + "kcal");
+		$(".targetFood").text(food[0]);
 		$(".foodPic img").attr("src", "images/food/" + 1 + ".png");		
 	}
 	/*

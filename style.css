@@ -169,7 +169,9 @@ select {
   height: 31px;
   display: inline-block;
   font-family: 'Roboto', sans-serif;
-  width: 92%;   margin-left: 2%;   border: none;   display: block;      height: 40px;   font-size: 20px;   padding-left: 5%;   font-family: 'Roboto', sans-serif;   font-weight: 300;
+  width: 92%;   
+  margin-left: 2.5%;   border: none;   display: block;      
+  height: 31px;   font-size: 20px;   padding-left: 5%;   font-family: 'Roboto', sans-serif;   font-weight: 300;
 }
 #question3 select, #exerL select{
   font-size: 0.9em;
@@ -313,8 +315,9 @@ button.getResults:active {
     top: 0.5em;
 }
 .infoBox p {    
-    display: inline-block; color: white; font-family: 'Roboto'; font-weight: 100; 
-    font-size: 0.8em;
+    display: inline-block; color: white; font-family: 'Roboto'; 
+    font-weight: 400; 
+    font-size: 0.9em;
     text-align: left;
     width: 100%;
     padding: 0;
@@ -362,7 +365,10 @@ input[type="radio"] {
     margin: auto;
     margin-left: 17%;
 }
-
+#question2 .radio {
+    position: relative;
+    left: 10%;
+}
 .radio p {
     display: block;
     margin: 0;
@@ -370,20 +376,22 @@ input[type="radio"] {
     font-size: 1.3em;
 }
 .buttonContainer {
-    width: 53%;
+    width: 61%;
     position: absolute;
-    top: 76%;
-    left: 23%;
+    top: 73%;
+    left: 24%;
     margin: auto;
 }
 .buttonContainer button {
-    width: 47%;
+    width: 39%;
     display: inline-block;
-    background: rgb(34, 34, 34);
+    background: rgb(253, 70, 70);
     border: none;
     color: white;
 	cursor:pointer;
 	transition:0.3s;
+    font-size: 1.1em;
+    border-radius: 5px;
 }
 .buttonContainer button:focus {
     outline: none;
@@ -463,20 +471,25 @@ text-align: center;
 .resultIntro {
     text-align: center;
     font-size: 1.4em;   font-family: 'Roboto', sans-serif;   font-weight: 100;   margin-bottom: 7px;      
+    margin-top: 0;
 }
 .resultText {
     text-align: left;
-    font-size: 1.2em;   font-family: 'Roboto', sans-serif;   font-weight: 100;   margin-bottom: 7px;      
-    margin-top: 0;
+    font-size: 1.1em;   font-family: 'Roboto', sans-serif;   font-weight: 100;         
+    margin: 0;
+    margin-top: 0.7em;
+    margin-left: -1em;
+    display: inline-block;
+    width: 112%;
 }
 .result {
-    font-size: 140%;
+    font-size: 131%;
     color: rgb(240, 106, 106);
 }
 .foodPic {
     display: block;
+    margin-top: -1em;
 }
-
 .foodPic img {
     width: 50%;
     margin: auto;
