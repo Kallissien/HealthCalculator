@@ -169,6 +169,7 @@ select {
   height: 31px;
   display: inline-block;
   font-family: 'Roboto', sans-serif;
+  width: 92%;   margin-left: 2%;   border: none;   display: block;      height: 40px;   font-size: 20px;   padding-left: 5%;   font-family: 'Roboto', sans-serif;   font-weight: 300;
 }
 #question3 select, #exerL select{
   font-size: 0.9em;
@@ -183,6 +184,7 @@ select {
   right: 5px;
   border: none;
   box-sizing: inherit;
+  margin-bottom: -20em;
 }
 .blockage {
 height: 136%;
@@ -318,7 +320,7 @@ button.getResults:active {
     padding: 0;
     margin: 0;
     position: relative;
-    top: 0em;
+    /* top: -3em; */
 }
 .questionBox {
     width: 110%;
@@ -433,6 +435,52 @@ input[type="radio"] {
     transition: 0.2s ease-out;
     transform: scale(1);
 }
-#infoText33 {
-    top: -3em;
+.resultsContainer {
+    position: relative;   
+    width: 20em;   
+    height: 20em;   
+    top: -25em;
+    padding: 2.8em;   
+    background-color: rgb(244, 244, 244);   
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+    border-radius: 50%;   margin: auto;   margin-top: 1.75em;   
+    transition: 0.3s ease-out;   
+	transform: scale(0);
+    overflow: hidden;
+}
+h5 {
+font-size: 2.4em;  
+font-family: 'Roboto', sans-serif;
+font-weight: 100;
+margin-bottom: 7px;
+margin-top: -0.4em;
+text-align: center;
+}
+.results {
+    width: 100%;
+    height: 10em;
+}
+.resultIntro {
+    text-align: center;
+    font-size: 1.4em;   font-family: 'Roboto', sans-serif;   font-weight: 100;   margin-bottom: 7px;      
+}
+.resultText {
+    text-align: left;
+    font-size: 1.2em;   font-family: 'Roboto', sans-serif;   font-weight: 100;   margin-bottom: 7px;      
+    margin-top: 0;
+}
+.result {
+    font-size: 140%;
+    color: rgb(240, 106, 106);
+}
+.foodPic {
+    display: block;
+}
+
+.foodPic img {
+    width: 50%;
+    margin: auto;
+    display: block;
+    transition: 0.4s ease-out;
+	  transform: translateX(15em);
 }

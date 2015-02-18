@@ -10,10 +10,39 @@ var User = {
 		exerciseDuration: 0,
 		height: 0,
 		weight: 0,
-		heartRate: 0
+		heartRate: 0,
+		bmr: 0,
+		cpw: 0,
+		cpd: 0,
+		ppc:0
+		
 	};
 var currentQuestion = 1;
 var currentStep = 1;
+var allAnswers = false;
+
+function createCookie(name,value,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+value+expires+"; path=/";
+}
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+function eraseCookie(name) {
+	createCookie(name,"",-1);
+}
 
 $(document).ready(function(){
 // Clear Text Box when focus
@@ -154,35 +183,47 @@ function collectAnswers(element){
 			}
 		 	break;
 		case "height":
-		 	if($(element).parent().children('select').val() === "feet"){
-				// Get Entered Weight	
-				var baseHeight = element.value;
-				var splitHeight = baseHeight.split('.');
-				var feet = splitHeight[0];
-				var inches = splitHeight[1] / 12;
-				var heightDecimal = parseInt(feet) + inches;			
-				var convertedHeight = (heightDecimal/0.032808);
-				User.height = Math.floor(convertedHeight);
-			} else{
-				User.height = parseInt(element.value);
+		var baseHeight = element.value;
+			if (!isNumeric(baseHeight)){
+					infoText("Please enter a valid Number");
+					infoTextColour("bad");
 			}
+			else{	
+				if($(element).parent().children('select').val() === "feet"){			
+					var splitHeight = baseHeight.split('.');
+					var feet = splitHeight[0];
+					var inches = splitHeight[1] / 12;
+					var heightDecimal = parseInt(feet) + inches;			
+					var convertedHeight = (heightDecimal/0.032808);
+					User.height = Math.floor(convertedHeight);
+					}
+			else{
+				User.height = parseInt(element.value);
+				}
 			if(User.height != 0){
 				$("#progressDot31").css("background-color", "rgb(5, 163, 5)");
-			}
+				}
+	 		}
 		 	break;
 		case "heightUnits":
 		 	if(element.val() === "cm"){
 			User.height = parseInt(element.parent().parent().children("input[type='text']").val());
 			} else if(element.val() === "feet"){
 				var baseHeight = parseFloat(element.parent().parent().children("input[type='text']").val());
-				if(baseHeight.indexOf(".") != -1){
-				var splitHeight = baseHeight.split('.');
-				var feet = splitHeight[0];
-				var inches = splitHeight[1] / 12;				
-				var heightDecimal = parseInt(feet) + inches;			
-				var convertedHeight = (heightDecimal/0.032808);
-				} else { var convertedHeight = baseHeight/0.032808}
-				User.height = Math.floor(convertedHeight);
+				if (!isNumeric(baseHeight)){
+					infoText("Please enter a valid Number");
+					infoTextColour("bad");
+					}					
+				else{
+					if(baseHeight.indexOf(".") != -1){
+					var splitHeight = baseHeight.split('.');
+					var feet = splitHeight[0];
+					var inches = splitHeight[1] / 12;				
+					var heightDecimal = parseInt(feet) + inches;			
+					var convertedHeight = (heightDecimal/0.032808);
+					} else { var convertedHeight = baseHeight/0.032808}
+					User.height = Math.floor(convertedHeight);
+				}
 			}
 		 	break;
 		case "weight":
@@ -222,29 +263,13 @@ function collectAnswers(element){
 			 }
 			 if (questionsAnswered === 9){
 				 $(".submit").css("transform", "scale(1)");
+				 if(allAnswers != null){
+				 	allAnswers = true;
 				 }
-}
-function createCookie(name,value,days) {
-	if (days) {
-		var date = new Date();
-		date.setTime(date.getTime()+(days*24*60*60*1000));
-		var expires = "; expires="+date.toGMTString();
-	}
-	else var expires = "";
-	document.cookie = name+"="+value+expires+"; path=/";
-}
-function readCookie(name) {
-	var nameEQ = name + "=";
-	var ca = document.cookie.split(';');
-	for(var i=0;i < ca.length;i++) {
-		var c = ca[i];
-		while (c.charAt(0)==' ') c = c.substring(1,c.length);
-		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-	}
-	return null;
-}
-function eraseCookie(name) {
-	createCookie(name,"",-1);
+				 }
+		// erase previous cookie & create updated one
+		eraseCookie('healthCookie');
+		createCookie('healthCookie', JSON.stringify(User), 2);
 }
 $('input').change(function() {
 	collectAnswers(this);
@@ -353,38 +378,120 @@ $(".breadcrumb").click(function(){
 	var nextStep = parseInt(this.id.substring(this.id.length - 1, this.id.length));
 	changeStep(nextStep);
 	});
+// Get Random Food Item
+function getFoodItem(number){
+	var foodStuffs = [
+	"Big Mac",
+	"A Brilliant Byron Burger",
+	"A slice of Dominos pepperoni pizza",
+	"A good Sunday roast",
+	"A cheeky chicken tikka masalla",
+	"A Subway '6inch' Italian B.M.T",
+	"A Plain old chicken breast",
+	"Some nice, home made fries. Yum",
+	"A glorious Baked Potato",
+	"A satisfying pint of beer",
+	"A small glass of Baileys Irish Cream",
+	"A glass of red",
+	"A glass of white",
+	"A refreshing dose of Irn Bru",
+	"A revitalizing spray of powerade",
+	"A boring glass of almond milk",
+	"A bannannnnanaa",
+	"A bagel, just the bagel, ouch",
+	"A slice of chedder cheese (the best cheese)",
+	"An apple (just one won't keep the doctor away)",
+	"A warming cup of Coffee",
+	"A very british chocolate hobnob",
+	"A jam doughnut",
+	"A pack of Walkers cheese & onion crisps",
+	"A can of tuna (without the can)",
+	"Just one slice of chocolate cake",
+	"A bowl of Museli fruit & nut",
+	"A bowl of Frosties (theyrrrreee not that good for you)"	
+	];
+	var foodCalories = [
+	234,700,300,430,1338,410,193,267,128,182,129,77,76,43,16,60,105,289,113,72,15,79,289,106,102,506,289,143
+	];
+	return foodStuffs[number];
+	return foodCalories[number];
+}
 	// Set Up function
 function setUpCalc(){
 	changeQuestion(1);
 	changeStep(1);
+	// TODO Check for cookie and populate data
 	setTimeout(function() {
     $(".container").css("transform","scale(1)");
 	$(".circlePulseContainer").css("transform","scale(1)");
-}, 100);
-setTimeout(function() {
-    $(".circlePulseSmall").css("transform","scale(1)");
-}, 300);	
+	}, 100);
 	setTimeout(function() {
-     $(".circlePulse").css("transform","scale(1)");	
-}, 500);
-	
+		$(".circlePulseSmall").css("transform","scale(1)");
+	}, 300);	
+		setTimeout(function() {
+		 $(".circlePulse").css("transform","scale(1)");	
+	}, 500);	
+}
+function setUpResults(){
+	setTimeout(function() {
+		$(".circlePulseSmall").css("transform","scale(0)");
+	}, 100);	
+		setTimeout(function() {
+		 $(".circlePulse").css("transform","scale(0)");	
+	}, 220);	
+	setTimeout(function() {
+    $(".container").css("transform","scale(0)");
+	$(".circlePulseContainer").css("transform","scale(0)");
+	}, 450);	
+	setTimeout(function() {
+    $(".resultsContainer").css("transform","scale(1)");
+	}, 800);	
 }
 // Calculation Function
 $('.getResults').click(function(){
+	allAnswers = false;
 	//Collect all values
-	var Answers = [];	
-	console.log(User);
 	if(User.gender === "boy"){
-		var caloriesBurned = Math.round((((User.age * 0.2017) + (User.weight * 0.1988) + (User.heartRate * 0.6309) - 55.0969) * User.exerciseDuration / 4.184));		
+		var caloriesBurned = Math.round((((User.age * 0.2017) + (User.weight * 0.1988) + (User.heartRate * 0.6309) - 55.0969) * User.exerciseDuration / 4.184));	
+		var BMR =  Math.round(66 + (6.23 * (User.weight * 2.20462)) + (12.7 * (User.height * 0.393700787)) - (6.8 * User.age));
 	}
 	else if(User.gender === "girl"){
 		var caloriesBurned = Math.round((((User.age * 0.074) + (User.weight * 0.1263) + (User.heartRate * 0.4472) - 20.4022) * User.exerciseDuration / 4.184));
+		var BMR = Math.round(655 + (4.35 * (User.weight * 2.20462)) + (4.7 * (User.height * 0.393700787)) - (4.7 * User.age));
 	}
-	var caloriesPerWeek = caloriesBurned * User.exerciseLevel;
-	var caloriesPerMonth = caloriesPerWeek * 4;
-	var pricePerCalorie = parseInt(User.gymPrice) / caloriesPerMonth;
-	console.log(caloriesBurned);
-	console.log(Math.round(pricePerCalorie));
+	// Calculate Calories Per week
+	User.cpw = caloriesBurned * User.exerciseLevel;
+	User.cpd = User.cpw / 7;
+	var caloriesPerMonth = User.cpw * 4;
+	// Calculate price per calorie
+	var pricePerCalorieLong = parseInt(User.gymPrice) / caloriesPerMonth;
+	User.ppc = pricePerCalorieLong.toFixed(2);
+	// Calculate BMR
+	User.bmr = BMR;
+	
+	// Populate Results
+	if(isNumeric(User.ppc)){
+		$("#pricepercalorie").text("£" + User.ppc);
+		var timeTaken = Math.round(234 / User.cpd);
+		$("#timepercalorie").text(timeTaken + "days");
+		$(".targetFoodCal").text("234kcal");
+		$(".targetFood").text("Big Mac");
+		$(".foodPic img").attr("src", "images/food/" + 1 + ".png");		
+	}
+	/*
+	For women: 655 + (4.35 × weight) + (4.7 × height) – (4.7 × age) = BMR For men: 66 + (6.23 × weight) + (12.7 × height) – (6.8 × age) = BMR Although this can be a helpful guideline, other variables can make your BMR higher or lower.
+	*/
+	
+	collectAnswers();	
+	if(allAnswers){
+		setUpResults();
+		setTimeout(function() {
+    $(".foodPic img").css("transform", "translateX(0em)");
+	}, 1200);	
+	}
+	
+	
 });
 setUpCalc();
+createCookie('healthCookie', '', 2);
 });
