@@ -391,9 +391,9 @@ function getFoodItem(){
 	"a cheeky chicken tikka masalla",
 	"a Subway '6inch' Italian B.M.T",
 	"a plain old chicken breast",
-	"some nice, home made fries. Yum",
+	"some nice, home made chips. Yum",
 	"a glorious Baked Potato",
-	"a satisfying pint of beer",
+	"a satisfying pint after a hard days work",
 	"a small glass of Baileys Irish Cream",
 	"a glass of red",
 	"a glass of white",
@@ -417,7 +417,7 @@ function getFoodItem(){
 	234,700,300,430,1338,410,193,267,128,182,129,77,76,43,16,60,105,289,113,72,15,79,289,106,102,506,289,143
 	];
 	var number = getRandomInt(0, foodStuffs.length); 
-	return [foodStuffs[number] , foodCalories[number]];
+	return [foodStuffs[number] , foodCalories[number], number + 1];
 }
 	// Set Up function
 function setUpCalc(){
@@ -489,7 +489,7 @@ $('.getResults').click(function(){
 		$("#priceperfood").text("£" + pricePerFood);
 		$(".targetFoodCal").text(food[1] + "kcal");
 		$(".targetFood").text(food[0]);
-		$(".foodPic img").attr("src", "images/food/" + 1 + ".png");		
+		$(".foodPic img").attr("src", "images/food/" + food[2] + ".png");		
 	}
 	/*
 	For women: 655 + (4.35 × weight) + (4.7 × height) – (4.7 × age) = BMR For men: 66 + (6.23 × weight) + (12.7 × height) – (6.8 × age) = BMR Although this can be a helpful guideline, other variables can make your BMR higher or lower.
