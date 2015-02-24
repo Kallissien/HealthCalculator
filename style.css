@@ -1,45 +1,45 @@
 @charset "UTF-8";
 /* CSS Document */
 .healthTitle{
-	margin-bottom:5em;
-	}
+    margin-bottom:5em;
+    }
 h1{
-	font-size: 70px;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 300;
-	text-align: center;
-	margin-bottom: 0;
-	margin-top: 16px;
+    font-size: 70px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 0;
+    margin-top: 16px;
 }
 h2{
-	color: rgb(77, 77, 77);
+    color: rgb(77, 77, 77);
 font-size: 1em;
 font-family: 'Roboto', sans-serif;
 font-weight: 400;
 margin-bottom: -3px;
 
-	margin-top: 1em;
+    margin-top: 1em;
 text-align: center;
 }
 h3{
-	font-size: 28px;
-	font-family:'Rancho';
-	font-weight:100;
-	text-align: center;
-	margin-top: 0;
-	color: rgba(0, 0, 0, 0.54);
+    font-size: 28px;
+    font-family:'Rancho';
+    font-weight:100;
+    text-align: center;
+    margin-top: 0;
+    color: rgba(0, 0, 0, 0.54);
 }
 h4{
-	color:white;
-	font-size: 1.4em;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 100;
-	margin-bottom: 10px;
-	margin-top: 10px;
-	text-align: center;
+    color:white;
+    font-size: 1.4em;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    text-align: center;
 }
 body{
-	background: #D0D0D0;
+    background: #D0D0D0;
 }
 section {
     padding: 2%;
@@ -49,38 +49,38 @@ section {
 }
 /* New Circle Style */
 .container {
-	position:relative;
+    position:relative;
     width: 14em;
     height: 14em;
-	padding: 2.8em; /*= 2em * 1.4 (2em = half the width of an img, 1.4 = sqrt(2))*/    
-	background-color: rgb(58, 58, 58);
-    border-radius: 50%;	
+    padding: 2.8em; /*= 2em * 1.4 (2em = half the width of an img, 1.4 = sqrt(2))*/    
+    background-color: rgb(58, 58, 58);
+    border-radius: 50%; 
     margin: auto;
-	margin-top:1.75em;    
-	transition: 0.2s ease-out;
-	transform: scale(0);
+    margin-top:1.75em;    
+    transition: 0.2s ease-out;
+    transform: scale(0);
 }
 section {
-	display:block;
-	width: 7em;
-	height: 7em;
-	border-radius: 50%;
-	overflow: hidden;
-	transition: 0.2s ease-out;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	cursor: pointer;
-	margin: -3.5em; /* 2em = 4em/2 */ /* half the width */
-	z-index: 3;
+    display:block;
+    width: 7em;
+    height: 7em;
+    border-radius: 50%;
+    overflow: hidden;
+    transition: 0.2s ease-out;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    cursor: pointer;
+    margin: -3.5em; /* 2em = 4em/2 */ /* half the width */
+    z-index: 3;
 }
 section:hover {
-    box-shadow: 4px 4px 4px rgba(0,0,0,0.5);	
+    box-shadow: 4px 4px 4px rgba(0,0,0,0.5);    
     top: 49%;
 }
 section:active {
     box-shadow: 0px 0px 0px rgba(0,0,0,0.5);
-	top: 50%;
+    top: 50%;
 }
 .deg1 {
 transform: rotate(-90deg) translate(9.5em) rotate(90deg) scale(1);
@@ -99,7 +99,7 @@ transform: rotate(150deg) translate(10em) rotate(-150deg) scale(0.7);
     margin: auto;
     box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
     transition: 0.3s ease-out;
-	transform:scale(0);
+    transform:scale(0);
 }
 .submit:hover {
     box-shadow: 4px 4px 4px rgba(0,0,0,0.5);   
@@ -120,24 +120,24 @@ transform: rotate(150deg) translate(10em) rotate(-150deg) scale(0.7);
 }
 /* End New Style */
 .line{
-	width: 120%;
+    width: 120%;
 position: relative;
 left: -7%;
 height: 1px;
 background: rgb(77, 77, 77);
 margin-top: 5px;
 
-	margin-bottom: 6px;
+    margin-bottom: 6px;
 }
 .question{
-	width: 28%;
-	margin-right: 4%;
-	display: inline-block;
-	/* height: auto; */
-	/* min-height: 400px; */
-	vertical-align: top;
-	/* padding: 1%; */
-	/* background:grey; */
+    width: 28%;
+    margin-right: 4%;
+    display: inline-block;
+    /* height: auto; */
+    /* min-height: 400px; */
+    vertical-align: top;
+    /* padding: 1%; */
+    /* background:grey; */
 }
 .question:nth-of-type(4) {
     margin-right: 0;
@@ -218,16 +218,16 @@ background-color: rgb(58, 58, 58);
     to {-moz-transform: rotate(360deg);}
 }
 .blockageSmall{
-	background-color: rgb(58, 58, 58);
-	width: 126%;
-	height: 2em;
-	margin-left: -13%;
-	margin-top: -76%;
-	position: relative;
-	transform:rotate(25deg);
-	-webkit-animation-name: rotate; 
+    background-color: rgb(58, 58, 58);
+    width: 126%;
+    height: 2em;
+    margin-left: -13%;
+    margin-top: -76%;
+    position: relative;
+    transform:rotate(25deg);
+    -webkit-animation-name: rotate; 
     
-	-webkit-animation-duration: 80s; 
+    -webkit-animation-duration: 80s; 
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
     -moz-animation-name: rotateSmall; 
@@ -270,24 +270,24 @@ transition: 0.3s ease-out;
 transform: scale(0);
 }
 #exerL select{
-	width:auto;
+    width:auto;
 }
 .hidden{
-	position: relative;
-	opacity:0;
-	width: 88%;
-	margin: auto;
-	height: auto;
-	padding: 4%;
-	padding-top: 0;
-	left: 0%;
-	top: -0.4em;
-	transition: 0.2s;
+    position: relative;
+    opacity:0;
+    width: 88%;
+    margin: auto;
+    height: auto;
+    padding: 4%;
+    padding-top: 0;
+    left: 0%;
+    top: -0.4em;
+    transition: 0.2s;
 }
 #exerD{
-	opacity:1;
-	left: 0;
-	position: relative;
+    opacity:1;
+    left: 0;
+    position: relative;
 }
 .getResults p {
     font-size: 2em;   
@@ -301,7 +301,7 @@ button.getResults {
     display: block;
     border: none;
     background-color: rgb(245, 89, 100);
-	cursor: pointer;
+    cursor: pointer;
 }
 button.getResults:active {
     background-color: rgb(219, 54, 66);
@@ -339,12 +339,12 @@ button.getResults:active {
     /*transform: translateX(-65%);*/
     transition: 0.4s ease-out;
     position: absolute;
-	opacity: 0;
-	z-index:0;
+    opacity: 0;
+    z-index:0;
 }
 #question1{
-	opacity:1;
-	z-index:1;
+    opacity:1;
+    z-index:1;
 }
 #question2 h4, .hidden h4 {
 font-size: 95%;
@@ -388,8 +388,8 @@ input[type="radio"] {
     background: rgb(253, 70, 70);
     border: none;
     color: white;
-	cursor:pointer;
-	transition:0.3s;
+    cursor:pointer;
+    transition:0.3s;
     font-size: 1.1em;
     border-radius: 5px;
 }
@@ -398,8 +398,13 @@ input[type="radio"] {
 }
 .buttonContainer button:hover {
    box-shadow:1px 1px 1px rgba(0,0,0,0.5);
-
-   top:-5px;
+   top: 0px;
+   position: relative;
+}
+.buttonContainer button:active {
+    box-shadow: none; 
+    top: 0;
+    background: rgb(207, 27, 27);
 }
 .breadcrumbContainer {
     width: 28%;
@@ -416,7 +421,7 @@ input[type="radio"] {
     height: 0.5em;
     display: inline-block;
     margin-right: 19%;
-	cursor:pointer;
+    cursor:pointer;
 }
 #breadcrumb3 {
     margin-right: 0;
@@ -454,7 +459,7 @@ input[type="radio"] {
     box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
     border-radius: 50%;   margin: auto;   margin-top: 1.75em;   
     transition: 0.3s ease-out;   
-	transform: scale(0);
+    transform: scale(0);
     overflow: hidden;
 }
 h5 {
@@ -496,5 +501,5 @@ text-align: center;
     margin: auto;
     display: block;
     transition: 0.4s ease-out;
-	  transform: translateX(20em);
+      transform: translateX(20em);
 }
