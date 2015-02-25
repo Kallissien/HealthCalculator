@@ -190,9 +190,26 @@ function questionComplete(value){
 function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
+function generateUid(separator) {
+    /// <summary>
+    ///    Creates a unique id for identification purposes.
+    /// </summary>
+    /// <param name="separator" type="String" optional="true">
+    /// The optional separator for grouping the generated segmants: default "-".    
+    /// </param>
+
+    var delim = separator || "-";
+
+    function S4() {
+        return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+    }
+
+    return (S4() + S4() + delim + S4() + delim + S4() + delim + S4() + delim + S4() + S4() + S4());
+}
 function populateAnswers(){
 	var jsoncookie = readCookie("healthCalc");
-	var healthCookie = JSON.parse(readCookie("healthCalc"));	
+	var healthCookie = JSON.parse(readCookie("healthCalc"));
+		User.id = healthCookie.id;	
 		User.name = healthCookie.name;
 		User.age = healthCookie.age;
 		User.gender = healthCookie.gender;
@@ -209,25 +226,51 @@ function populateAnswers(){
 		User.cpd = healthCookie.cpd;
 		User.ppc = healthCookie.ppc;
 		User.questionsAnswered = healthCookie.questionsAnswered;		
-		var inputBox = $('input')[0];
-		var ageInput = $('input')[1];
-		var genderSelected = $('input[name="gender"]');
-		var gymMemberInput = $('input[name="gymMember"]');
-		var gymInput = $('#gymName');
-		var exerciseLevelInput = $('input')[6];
-		var exerciseDurationInput = $('#exerD select'); 
-		var heightInput = $('input')[7];
-		var weightInput = $('input')[8];
-		var heartRateInput = $('input')[9];
-		var UserValue = [];
-		for (var i = 0; i < UserValue.length; i++) {
-		    UserValue.push(UserValue[i].name);
+		var inputBox = [
+		$('input')[0],
+		$('input')[1],
+		$('input[name="gender"]'),
+		$('input[name="gymMember"]'),
+		$('#gymName'),
+		$('input')[6],
+		$('#exerD select'), 
+		$('input')[7],
+		$('input')[8],
+		$('input')[9]
+		]
+		var UserValue = []
+		for (var i in User) {
+		    UserValue.push(User[i]);
 		}
 		for(var i = 0 ; i < inputBox.length ; i++){
-			if(UserValue[i] != 0){
-				$(inputBox[i]).focus();
-				$(nameInput[i]).val(UserValue[i]);
-				$(inputBox[i]).focusout();
+			if(UserValue[i+1] != 0){
+				// radio buttons
+				if(i < 5 && i > 1){
+					switch(i){
+						case 2:
+							if (UserValue[i + 1] === "boy"){
+								$('input[value="boy"]').prop('checked',true);
+							}
+							else {
+								$('input[value="girl"]').prop('checked',true);
+							}
+						break;
+						case 3:
+							if (UserValue[i + 1] === "1"){
+								$('#gymY').prop('checked',true);
+							}
+							else if (UserValue[i + 1] === "0") {
+								$('#gymY').prop('checked',true);
+							}
+						break;
+						case 4:
+						console.log(UserValue[i + 1]);
+						break;
+					}
+				}
+				else{
+					$(inputBox[i]).val(UserValue[i+1]);
+				}
 			}
 		}
 }
@@ -386,7 +429,10 @@ function collectAnswers(element){
 			} else { $("#progressDot33").css("background-color", "rgb(226, 226, 226) "); }
 		 	break;
 		 }
-		 // Check if all questions answered
+		 checkAnswers();	 
+}
+function checkAnswers(){
+	// Check if all questions answered
 		 var questionsAnswered = 0;
 		 for( var i = 0 ; i< $(".progressDot").length ; i++){
 			 var thisDot = $(".progressDot")[i];
@@ -398,9 +444,8 @@ function collectAnswers(element){
 				 $(".submit").css("transform", "scale(1)");
 				 	allAnswers = true;
 				 }
-		// erase previous cookie & create updated one
-		eraseCookie('healthCookie');
-		createCookie('healthCookie', JSON.stringify(User), 2);
+	eraseCookie('healthCalc');
+	createCookie('healthCalc', JSON.stringify(User), 2);
 }
 $('input').change(function() {
 	collectAnswers(this);
@@ -576,6 +621,12 @@ function setUpCalc(){
 		setTimeout(function() {
 		 $(".circlePulse").css("transform","scale(1)");	
 	}, 750);	
+	// Give User unique Id
+	User.id = generateUid();
+	if(readCookie("healthCalc") !== null){
+		console.log("You have a cookie!");
+		populateAnswers();
+	}
 }
 function setUpResults(){
 	setTimeout(function() {
@@ -669,13 +720,4 @@ $('.getAnswers').click(function(){
 	setUpCalc();
 });
 setUpCalc();
-if(readCookie("healthCalc") !== null){
-		alert("You have a cookie!");
-		populateAnswers();
-}
-setInterval(function(){
-	eraseCookie('healthCalc');
-	createCookie('healthCalc', JSON.stringify(User), 2);
-	console.log("cookieSaved")
-    },5000);
 });
