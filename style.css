@@ -66,7 +66,7 @@ section {
     height: 7em;
     border-radius: 50%;
     overflow: hidden;
-    transition: 0.2s ease-out;
+    transition: 0.1s ease-out;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -108,7 +108,7 @@ transform: rotate(150deg) translate(10em) rotate(-150deg) scale(0.7);
     top: -0.1em;
     margin: auto;
     box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-    transition: 0.3s ease-out;
+    transition: 0.1s ease-out;
     transform:scale(0);
 }
 .resultsContainer .submit{
@@ -271,7 +271,7 @@ border-radius: 50%;
 border: solid rgb(255, 255, 255) 2px;
 display: inline-block;
 transform: scale(0);
-transition: 0.4s ease-out;
+transition: 0.3s ease-out;
 }
 .circlePulseSmall{
 width: 120%;
@@ -355,7 +355,7 @@ button.getResults:active {
     width: 53em;
     height: 9em;
     /*transform: translateX(-65%);*/
-    transition: 0.4s ease-out;
+    transition: 0.2s ease-out;
     position: absolute;
     opacity: 0;
     z-index:0;
@@ -408,7 +408,7 @@ input[type="radio"] {
     border: none;
     color: white;
     cursor:pointer;
-    transition:0.3s;
+    transition:0.2s;
     font-size: 1.1em;
     border-radius: 5px;
 }
