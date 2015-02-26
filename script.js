@@ -4,23 +4,23 @@ var User = {
 		age : 0,
 		gender: 0,
 		gymMember: 0,
-		gym: 0,
-		gymPrice: 0,
+		gym: 0,		
 		exerciseLevel: 0,
 		exerciseDuration: 0,
 		height: 0,
 		weight: 0,
 		heartRate: 0,
+		gymPrice: 0,
 		bmr: 0,
 		cpw: 0,
 		cpd: 0,
 		ppc:0,
 		questionsAnswered: 0		
 	};
-var Questions = [[1,2,3],[1,2,3],[1,2,3]];
 var currentQuestion = 1;
 var currentStep = 1;
 var allAnswers = false;
+var UserValue = [];
 // Cookie Functions
 function createCookie(name,value,days) {
   var expires = 0;
@@ -109,7 +109,7 @@ function getHeight(element){
 	}
 }
 function getWeight(element){
-	var weightBoxVal = parseFloat($('#heightBox').val());
+	var weightBoxVal = parseFloat($('#weightBox').val());
 	if($('#weightUnitBox').val() === "kg"){
 			User.weight = parseInt(weightBoxVal);
 		}
@@ -237,34 +237,41 @@ function populateAnswers(){
 		$('input')[7],
 		$('input')[8],
 		$('input')[9]
-		]
-		var UserValue = []
+		]		
 		for (var i in User) {
 		    UserValue.push(User[i]);
 		}
+		// 
 		for(var i = 0 ; i < inputBox.length ; i++){
 			if(UserValue[i+1] != 0){
 				// radio buttons
 				if(i < 5 && i > 1){
 					switch(i){
+						// Gender
 						case 2:
 							if (UserValue[i + 1] === "boy"){
-								$('input[value="boy"]').prop('checked',true);
+								$(inputBox[2][0]).prop('checked',true);
 							}
 							else {
-								$('input[value="girl"]').prop('checked',true);
+								$(inputBox[2][1]).prop('checked',true);
 							}
 						break;
+						// Gym Member
 						case 3:
-							if (UserValue[i + 1] === "1"){
-								$('#gymY').prop('checked',true);
+							if (UserValue[i + 1] === true){
+								$(inputBox[3][0]).prop('checked',true);
 							}
-							else if (UserValue[i + 1] === "0") {
-								$('#gymY').prop('checked',true);
+							else if (UserValue[i + 1] === false) {
+								$(inputBox[3][1]).prop('checked',true);
 							}
 						break;
-						case 4:
-						console.log(UserValue[i + 1]);
+						// Gym
+						case 4:						
+							for(var n = 0 ; n < $('option[name="gym"]').length ; n++){
+								if (UserValue[i + 1] === $($('option[name="gym"]')[n]).text()){
+									$('option[name="gym"]')[n].selected = true;
+								}
+							}
 						break;
 					}
 				}
@@ -273,6 +280,7 @@ function populateAnswers(){
 				}
 			}
 		}
+		checkAnswers();
 }
 function collectAnswers(element){
 	 var inputName = $(element).attr("name");
@@ -433,6 +441,10 @@ function collectAnswers(element){
 }
 function checkAnswers(){
 	// Check if all questions answered
+	// Loop through questions and check if there's anything in the inputs
+	for (var i = 0 ; i < UserValue.length ; i++) {
+		UserValue[i]
+	};
 		 var questionsAnswered = 0;
 		 for( var i = 0 ; i< $(".progressDot").length ; i++){
 			 var thisDot = $(".progressDot")[i];
@@ -623,10 +635,13 @@ function setUpCalc(){
 	}, 750);	
 	// Give User unique Id
 	User.id = generateUid();
-	if(readCookie("healthCalc") !== null){
+	setTimeout(function() {
+		if(readCookie("healthCalc") !== null){
 		console.log("You have a cookie!");
 		populateAnswers();
 	}
+	}, 1000);
+	
 }
 function setUpResults(){
 	setTimeout(function() {

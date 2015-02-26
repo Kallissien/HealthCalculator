@@ -180,7 +180,7 @@ input {
 }
 select {
   width: 100%;
-  text-align: center;
+  text-align: left;
   font-size: 0.9em;
   height: 31px;
   display: inline-block;
@@ -372,6 +372,7 @@ margin-bottom: 5px;
 margin-top:0;
 }
 input[type="radio"] {
+    width:50%;
     display: block;
     left: 15%;
     position: relative;
