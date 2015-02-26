@@ -66,6 +66,48 @@ function phaseOut(element){
 		opacity: "0"
 	}, 100);
 }
+
+function getName(){
+}
+function getAge(){
+}
+function getGender(){
+}
+function getGym(){
+}
+function getExerciseLevel(element){
+	var exerciseLevelVal = parseFloat($('#exerL input').val());
+	if($('#exerciseUnits').val() === "week"){
+				User.exerciseLevel = exerciseLevelVal;
+			}
+			else{
+				User.exerciseLevel = (exerciseLevelVal / 4);
+			}
+			if(User.exerciseLevel !== 0 && isNumeric(User.exerciseLevel)){
+				questionComplete(true)
+				if(User.exerciseLevel < 1 && User.exerciseLevel > 0){
+					infoTextColour("maybe");
+					infoText("Take it easy. All this clicking must be tiring you out!");					
+				}
+				if(User.exerciseLevel > 5){
+					infoTextColour("maybe");
+					infoText("Wow, I'm surprised you could find the time to do this!");					
+				}
+				else{
+					infoTextColour("good");
+					infoText("Thanks, now click next to continue, you know the drill!");		
+				}				
+			}
+			if(element != "units"){
+				if(User.exerciseLevel <= 0 || $('#exerL input').val() === ""){
+						infoTextColour("bad");
+						infoText("I can tell you now this thing won't work unless you do exercise.");
+						questionComplete(false);				
+				}
+			}
+}
+function getExerciseDuration(element){
+}
 function getHeight(element){
 	var heightBoxVal = parseFloat($('#heightBox').val());		
 		if($('#heightUnitBox').val() === "cm"){
@@ -99,13 +141,13 @@ function getHeight(element){
 			if(User.height <= 60 || User.height >= 250){
 				infoText("Call up the Guinness World Book of Records! Don't waste your time here, you could be famous!");
 				infoTextColour("bad");
-				questionComplete(false);
+				questionComplete(false, 3, 1);
 			}
 	}
 	if(User.height <= 0){
 		infoText("I can't see you!");
 		infoTextColour("bad");
-		questionComplete(false);
+		questionComplete(false, 3, 1);
 	}
 }
 function getWeight(element){
@@ -130,45 +172,15 @@ function getWeight(element){
 	if (!isNumeric(User.weight) && element !== "units"){
 			infoText("Please enter a valid Number");
 			infoTextColour("bad");
-			questionComplete(false);
+			questionComplete(false, 3, 2);
 	}
 	else if(User.weight !== 0){
 			infoText("Thanks");
 			infoTextColour("good");
-			questionComplete(true);
+			questionComplete(true, 3, 2);
 	}
 }
-function getExerciseLevel(element){
-	var exerciseLevelVal = parseFloat($('#exerL input').val());
-	if($('#exerciseUnits').val() === "week"){
-				User.exerciseLevel = exerciseLevelVal;
-			}
-			else{
-				User.exerciseLevel = (exerciseLevelVal / 4);
-			}
-			if(User.exerciseLevel !== 0 && isNumeric(User.exerciseLevel)){
-				questionComplete(true)
-				if(User.exerciseLevel < 1 && User.exerciseLevel > 0){
-					infoTextColour("maybe");
-					infoText("Take it easy. All this clicking must be tiring you out!");					
-				}
-				if(User.exerciseLevel > 5){
-					infoTextColour("maybe");
-					infoText("Wow, I'm surprised you could find the time to do this!");					
-				}
-				else{
-					infoTextColour("good");
-					infoText("Thanks, now click next to continue, you know the drill!");		
-				}				
-			}
-			if(element != "units"){
-				if(User.exerciseLevel <= 0 || $('#exerL input').val() === ""){
-						infoTextColour("bad");
-						infoText("I can tell you now this thing won't work unless you do exercise.");
-						questionComplete(false);				
-				}
-			}
-}
+
 function infoText(text){
 	$("#infoText" + currentQuestion + currentStep).text(text);
 }
@@ -179,12 +191,12 @@ function infoTextColour(colourChoice){
 	if (colourChoice === "maybe"){colour = "rgb(207, 207, 207)";}	
 	$("#infoText" + currentQuestion + currentStep).css("color", colour);
 }
-function questionComplete(value){
+function questionComplete(value, question, step){
 	if(value){
-		$("#progressDot" + currentQuestion + currentStep).css("background-color", "rgb(5, 163, 5)");
+		$("#progressDot" + question + step).css("background-color", "rgb(5, 163, 5)");
 	}
 	else if(!value){
-		$("#progressDot" + currentQuestion + currentStep).css("background-color", "rgb(226, 226, 226)");
+		$("#progressDot" + question + step).css("background-color", "rgb(226, 226, 226)");
 	}
 }
 function isNumeric(n) {
@@ -440,12 +452,16 @@ function collectAnswers(element){
 		 checkAnswers();	 
 }
 function checkAnswers(){
-	// Check if all questions answered
-	// Loop through questions and check if there's anything in the inputs
-	for (var i = 0 ; i < UserValue.length ; i++) {
-		UserValue[i]
-	};
-		 var questionsAnswered = 0;
+	//getName();
+	//getAge();
+	//getGender();
+	//getGym();
+	getExerciseLevel();
+	//getExerciseDuration();
+	getWeight();
+	getHeight();
+	//getHeartRate();
+	var questionsAnswered = 0;
 		 for( var i = 0 ; i< $(".progressDot").length ; i++){
 			 var thisDot = $(".progressDot")[i];
 			 if($(thisDot).css("background-color") === "rgb(5, 163, 5)"){
