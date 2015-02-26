@@ -372,9 +372,9 @@ margin-bottom: 5px;
 margin-top:0;
 }
 input[type="radio"] {
-    width:50%;
+    width: auto;
     display: block;
-    left: 15%;
+    left: 30%;
     position: relative;
     box-shadow: none;
 }

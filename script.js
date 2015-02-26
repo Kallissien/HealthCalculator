@@ -47,12 +47,7 @@ function eraseCookie(name) {
 }
 
 $(document).ready(function(){
-// Clear Text Box when focus
-$('input[type=text]').focus(function(){
-	if (this.value.indexOf('Enter') != -1 || this.value.indexOf('Whoops') != -1){
-	this.value = "";
-	}
-});
+
 // Stand alone Functions
 function phaseIn(element){ 
 	$(element).animate({
@@ -66,14 +61,221 @@ function phaseOut(element){
 		opacity: "0"
 	}, 100);
 }
+function infoText(text, question, step){
+	if(question != null && step != null){
+		$("#infoText" + question + step).text(text);
+	} else{
+		$("#infoText" + currentQuestion + currentStep).text(text);
+	}
+}
+function infoTextColour(colourChoice, question, step){
+	var colour = 0;
+	if (colourChoice === "good"){colour = "rgb(15, 163, 67)";}
+	else if (colourChoice === "bad"){colour = "rgb(249, 68, 68)";}
+	if (colourChoice === "maybe"){colour = "rgb(207, 207, 207)";}
+	if(question != null && step != null){	
+		$("#infoText" + question + step).css("color", colour);
+	} else{ $("#infoText" + currentQuestion + currentStep).css("color", colour); }
+}
+function questionComplete(value, question, step){
+	if(value){
+		$("#progressDot" + question + step).css("background-color", "rgb(5, 163, 5)");
+	}
+	else if(!value){
+		$("#progressDot" + question + step).css("background-color", "rgb(226, 226, 226)");
+	}
+}
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+function generateUid(separator) {
+    /// <summary>
+    ///    Creates a unique id for identification purposes.
+    /// </summary>
+    /// <param name="separator" type="String" optional="true">
+    /// The optional separator for grouping the generated segmants: default "-".    
+    /// </param>
 
+    var delim = separator || "-";
+
+    function S4() {
+        return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+    }
+
+    return (S4() + S4() + delim + S4() + delim + S4() + delim + S4() + delim + S4() + S4() + S4());
+}
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+function rotateRight(){
+	var sections = $("section");
+	var questions = $(".questionContainer");
+	var currentQuestion = questions;
+	for(var i=0 ; i<sections.length ; i++){
+		var thisSection = sections[i];
+		if(thisSection.className.indexOf("deg1") != -1){
+			$(thisSection).removeClass("deg1");
+			$(thisSection).addClass("deg3");
+		} else if(thisSection.className.indexOf("deg2") != -1){
+			$(thisSection).removeClass("deg2");
+			$(thisSection).addClass("deg1");
+		} else if(thisSection.className.indexOf("deg3") != -1){
+			$(thisSection).removeClass("deg3");
+			$(thisSection).addClass("deg2");
+		}		
+	}
+}
+function fadeOutQuestions(){
+	$(".questionContainer").each(function(){
+			$(this).css("opacity", 0);
+			$(this).css("z-index", 0);
+		});
+}
+function changeQuestion(nextQuestion, nextStep){
+	if (currentQuestion === nextQuestion){}
+	else{
+		fadeOutQuestions();
+		$("#question" + nextQuestion).css("opacity", 1);
+		$("#question" + nextQuestion).css("z-index", 1);
+		changeStep(nextStep);
+		currentQuestion = nextQuestion;			
+	}
+}
+function changeStep(nextStep){
+	if(nextQuestion === null){var nextQuestion=0;}
+	if(currentStep === nextStep && currentQuestion === nextQuestion){}
+	else{ 
+			$(".breadcrumb").each(function(){
+				$(this).css("transform", "scale(1)");
+				$(this).css("background", "white");
+			});
+		var questionContainer = $("#question" + currentQuestion);
+		if(nextStep === 1){
+			$(questionContainer).css("transform", "translateX(0%)");
+		} else if(nextStep === 2){
+			$(questionContainer).css("transform", "translateX(-33%)");
+		} else if(nextStep === 3){
+			$(questionContainer).css("transform", "translateX(-65%)");
+		}
+		currentStep = nextStep;		
+		}
+	$("#breadcrumb" + currentStep).css("transform", "scale(1.2)");
+	$("#breadcrumb" + currentStep).css("background", "rgb(60, 133, 244)");
+}
+
+// Question Functions
 function getName(){
+	var nameVal = $('input[name="yourName"]').val();
+	if (isNumeric(nameVal)){
+		infoText("There's no way " + "'" + nameVal + "'" + " is your real name!",1,1);
+		infoTextColour("bad",1,1);
+		} else {
+			User.name = nameVal;
+			$('.aboutyou h2').text("About " + User.name);
+			if(User.name !== 0){
+				questionComplete(true,1,1);
+				infoText("Hi " + nameVal + ", click 'Next' to move on:",1,1);
+				infoTextColour("good",1,1);
+			}
+	}
 }
 function getAge(){
+	var ageVal = $('input[name="age"]').val();
+	if (!isNumeric(ageVal)){			
+			$('input[name="age"]').val("");
+			infoText("Please enter a valid number", 1, 2);
+			infoTextColour("bad",1,2);
+			questionComplete(false,1,2);
+			} else{
+			User.age = parseInt(ageVal);
+			var MinHR = Math.round((70/100) * (225 - User.age));
+			var MaxHR =  Math.round((75/100) * (225 - User.age));
+			$("#heartRate").text(MinHR + "-" + MaxHR);
+			if(User.age > 10 && User.age < 100){
+				questionComplete(true,1,2);
+				infoText("Thanks! Now click Next to move on:",1,2);
+				infoTextColour("good",1,2);
+			}
+			else if(User.age >= 100){
+				infoText("Wow, you're doing pretty well getting this far!",1,2);
+				infoTextColour("maybe",1,2);
+			}
+			else if(User.age <= 10 && User.age >= 0){
+				infoText("You're a bit young for this. The internet is a dark and scary place!",1,2);
+				infoTextColour("maybe",1,2);
+			}
+			else if(User.age < 0){
+				infoText("Are you from the future?",1,2);
+				infoTextColour("maybe",1,2);
+				questionComplete(false,1,2);
+			}
+		}
 }
 function getGender(){
+	var genderVal = $('input[name="gender"]:checked').val();
+	User.gender = genderVal;
+			if (User.gender === "girl"){
+				$(".aboutyou img").attr("src", "images/youF.png");
+			} else if (User.gender === "boy"){
+				$(".aboutyou img").attr("src", "images/youM.png");
+			}
+			if(User.gender !== 0){
+				questionComplete(true, 1, 3);
+			}
 }
-function getGym(){
+function getGym(element){
+	if(element === "gymMember"){
+			var gymInputVal = $('input[name="gymMember"]:checked').val();	
+			if(gymInputVal === "1"){
+				User.gymMember = true;
+				phaseIn($('#whichGym'));
+			}
+			if(gymInputVal === "0"){
+				User.gymMember = false;
+				phaseOut($('#whichGym'));
+			}
+	}
+	if(element === "gym"){
+		var gymVal = $('#gymName').val();
+			switch(gymVal){
+				case "0":
+				User.gymPrice = 0;
+				break;
+				case "1":
+				User.gymPrice = 84;
+				break;
+				case "2":
+				User.gymPrice = 73;
+				break;
+				case "3":
+				User.gymPrice = 55;
+				break;
+				case "4":
+				User.gymPrice = 27;
+				break;
+				case "5":
+				User.gymPrice = 56;
+				break;
+				case "6":
+				User.gymPrice = 85;
+				break;
+				case "7":
+				User.gymPrice = 0;
+				break;
+			}
+			if(gymVal != 0){
+				User.gym = $('#gymName').find(":selected").text();
+			} else{User.gym = 0;}
+		}
+		if (User.gymMember === false){
+				questionComplete(true,2,1);
+			}
+			else if(User.gymMember === true && User.gym !== 0){	
+				questionComplete(true,2,1);			
+			}
+			else{	
+				questionComplete(false,2,1);			
+			}	
 }
 function getExerciseLevel(element){
 	var exerciseLevelVal = parseFloat($('#exerL input').val());
@@ -84,29 +286,38 @@ function getExerciseLevel(element){
 				User.exerciseLevel = (exerciseLevelVal / 4);
 			}
 			if(User.exerciseLevel !== 0 && isNumeric(User.exerciseLevel)){
-				questionComplete(true)
+				questionComplete(true,2,2);
+
 				if(User.exerciseLevel < 1 && User.exerciseLevel > 0){
-					infoTextColour("maybe");
-					infoText("Take it easy. All this clicking must be tiring you out!");					
+					infoTextColour("maybe",2,2);
+					infoText("Take it easy. All this clicking must be tiring you out!",2,2);					
 				}
 				if(User.exerciseLevel > 5){
-					infoTextColour("maybe");
-					infoText("Wow, I'm surprised you could find the time to do this!");					
+					infoTextColour("maybe",2,2);
+					infoText("Wow, I'm surprised you could find the time to do this!",2,2);					
 				}
 				else{
-					infoTextColour("good");
-					infoText("Thanks, now click next to continue, you know the drill!");		
+					infoTextColour("good",2,2);
+					infoText("Thanks, now click next to continue, you know the drill!",2,2);		
 				}				
 			}
 			if(element != "units"){
 				if(User.exerciseLevel <= 0 || $('#exerL input').val() === ""){
-						infoTextColour("bad");
-						infoText("I can tell you now this thing won't work unless you do exercise.");
-						questionComplete(false);				
+						infoTextColour("bad",2,2);
+						infoText("I can tell you now this thing won't work unless you do exercise.",2,2);
+						questionComplete(false,2,2);				
 				}
 			}
 }
 function getExerciseDuration(element){
+	User.exerciseDuration = parseInt($('#exerD select').find(":selected").val());
+	if(User.exerciseDuration !== 0){
+				questionComplete(true,2,3);
+			} else{
+				questionComplete(false,2,3);
+				infoTextColour("bad");
+				infoText("Oops, please select again");
+			}
 }
 function getHeight(element){
 	var heightBoxVal = parseFloat($('#heightBox').val());		
@@ -130,17 +341,17 @@ function getHeight(element){
 		
 	}
 	if (!isNumeric(User.height) && element !== "units"){
-			infoText("Please enter a valid Number");
-			infoTextColour("bad");
+			infoText("Please enter a valid Number", 3, 1);
+			infoTextColour("bad", 3, 1);
 			questionComplete(false);
 	}
 	else if(User.height !== 0 && isNumeric(User.height)){
-			infoText("Thanks, only two questions left!");
-			infoTextColour("good");
-			questionComplete(true);
+			infoText("Thanks, only two questions left!", 3, 1);
+			infoTextColour("good", 3, 1);
+			questionComplete(true, 3, 1);
 			if(User.height <= 60 || User.height >= 250){
-				infoText("Call up the Guinness World Book of Records! Don't waste your time here, you could be famous!");
-				infoTextColour("bad");
+				infoText("Call up the Guinness World Book of Records! Don't waste your time here, you could be famous!", 3, 1);
+				infoTextColour("bad", 3, 1);
 				questionComplete(false, 3, 1);
 			}
 	}
@@ -170,54 +381,35 @@ function getWeight(element){
 		User.weight = Math.floor(weightInKg);
 	}
 	if (!isNumeric(User.weight) && element !== "units"){
-			infoText("Please enter a valid Number");
-			infoTextColour("bad");
+			infoText("Please enter a valid Number", 3, 2);
+			infoTextColour("bad", 3, 2);
 			questionComplete(false, 3, 2);
 	}
 	else if(User.weight !== 0){
-			infoText("Thanks");
-			infoTextColour("good");
+			infoText("Thanks", 3, 2);
+			infoTextColour("good", 3, 2);
 			questionComplete(true, 3, 2);
 	}
 }
-
-function infoText(text){
-	$("#infoText" + currentQuestion + currentStep).text(text);
-}
-function infoTextColour(colourChoice){
-	var colour = 0;
-	if (colourChoice === "good"){colour = "rgb(15, 163, 67)";}
-	else if (colourChoice === "bad"){colour = "rgb(249, 68, 68)";}
-	if (colourChoice === "maybe"){colour = "rgb(207, 207, 207)";}	
-	$("#infoText" + currentQuestion + currentStep).css("color", colour);
-}
-function questionComplete(value, question, step){
-	if(value){
-		$("#progressDot" + question + step).css("background-color", "rgb(5, 163, 5)");
+function getHeartRate(){
+	var heartRateVal = parseInt($('input[name="heartRate"]').val());
+	if (!isNumeric(heartRateVal)){			
+			$('input[name="heartRate"]').val("");
+			infoText("Please enter a valid number", 3, 3);
+			infoTextColour("bad",3,3);
+			questionComplete(false,3,3);
+			}
+	else{
+		User.heartRate = heartRateVal;
 	}
-	else if(!value){
-		$("#progressDot" + question + step).css("background-color", "rgb(226, 226, 226)");
+	if(User.heartRate !== 0){
+		questionComplete(true,3,3);
+	} 
+	else { 
+		questionComplete(false,3,3); 
 	}
 }
-function isNumeric(n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
-}
-function generateUid(separator) {
-    /// <summary>
-    ///    Creates a unique id for identification purposes.
-    /// </summary>
-    /// <param name="separator" type="String" optional="true">
-    /// The optional separator for grouping the generated segmants: default "-".    
-    /// </param>
-
-    var delim = separator || "-";
-
-    function S4() {
-        return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-    }
-
-    return (S4() + S4() + delim + S4() + delim + S4() + delim + S4() + delim + S4() + S4() + S4());
-}
+// Answer Functions
 function populateAnswers(){
 	var jsoncookie = readCookie("healthCalc");
 	var healthCookie = JSON.parse(readCookie("healthCalc"));
@@ -292,144 +484,35 @@ function populateAnswers(){
 				}
 			}
 		}
-		checkAnswers();
+		checkAnswers("cookie");
 }
 function collectAnswers(element){
 	 var inputName = $(element).attr("name");
 	 switch(inputName){
-		case "yourName":		
-			if (isNumeric(element.value)){
-				infoText("There's no way " + "'" + element.value + "'" + " is your real name!");
-				infoTextColour("bad");
-				} else {
-					User.name = element.value;
-					$('.aboutyou h2').text("About " + User.name);
-					if(User.name !== 0){
-						$("#progressDot11").css("background-color", "rgb(5, 163, 5)");
-						infoText("Hi " + User.name + ", click 'Next' to move on:");
-						infoTextColour("good");
-					}
-			}
+		case "yourName":
+			getName();
 		break;		 
 		case "age":
-			if (!isNumeric(element.value)){
-				$(element).css("outline", "rgb(247, 62, 62) 2px solid;");
-				element.value = "";
-				infoText("Please enter a valid number");
-				infoTextColour("bad");
-				questionComplete(false);
-			} else{
-				User.age = parseInt(element.value);
-				var MinHR = Math.round((70/100) * (225 - User.age));
-				var MaxHR =  Math.round((75/100) * (225 - User.age));
-				$("#heartRate").text(MinHR + "-" + MaxHR);
-				if(User.age > 10 && User.age < 100){
-					questionComplete(true);
-					infoText("Thanks! Now click Next to move on:");
-					infoTextColour("good");
-				}
-				else if(User.age >= 100){
-					infoText("Wow, you're doing pretty well getting this far!");
-					infoTextColour("maybe");
-				}
-				else if(User.age <= 10 && User.age >= 0){
-					infoText("You're a bit young for this. The internet is a dark and scary place!");
-					infoTextColour("maybe");
-				}
-				else if(User.age < 0){
-					infoText("Are you from the future?");
-					infoTextColour("maybe");
-					questionComplete(false);
-				}
-			}
-		 	break;
-		case "gender":
-		 	User.gender = element.value;
-			if (User.gender === "girl"){
-				$(".aboutyou img").attr("src", "images/youF.png");
-			} else if (User.gender === "boy"){
-				$(".aboutyou img").attr("src", "images/youM.png");
-			}
-			if(User.gender !== 0){
-				questionComplete(true);
-			}
-		 	break;
+			getAge();			
+		 break;
+		case "gender":	
+		getGender();	 	
+		 break;
 		case "gymMember":
-		 	if(element.value === "1"){
-				User.gymMember = true;
-				phaseIn($('#whichGym'));
-				}
-			if(element.value === "0"){
-				User.gymMember = false;
-				phaseOut($('#whichGym'));
-				}
-			if (User.gymMember === false){
-				questionComplete(true);
-			}
-			else if(User.gymMember === true && User.gym !== 0){	
-				questionComplete(true);			
-			}
-			else{	
-				questionComplete(false);			
-			}
-		 	break;
+			getGym("gymMember");
+		 break;
 		case "gym":
-			var gymInputVal = $(element).attr("value");	
-			switch(gymInputVal){
-				case "0":
-				User.gymPrice = 0;
-				break;
-				case "1":
-				User.gymPrice = 84;
-				break;
-				case "2":
-				User.gymPrice = 73;
-				break;
-				case "3":
-				User.gymPrice = 55;
-				break;
-				case "4":
-				User.gymPrice = 27;
-				break;
-				case "5":
-				User.gymPrice = 56;
-				break;
-				case "6":
-				User.gymPrice = 85;
-				break;
-				case "7":
-				User.gymPrice = 0;
-				break;
-			}
-			if(User.gymPrice !== 0){	
-				User.gym = element.text();
-			}				
-			else {
-				User.gym = 0;
-			}
-			if(User.gymMember === true && User.gym !== 0){
-				questionComplete(true);
-			}
-			else {
-				questionComplete(false);
-			}
+			getGym("gym");
 		break;
 		case "exerciseLevel":			
 			getExerciseLevel();
 		break;
 		case "exerciseUnits":
-		getExerciseLevel("units");
+			getExerciseLevel("units");
 		break;
 		case "exerciseDuration":
-		 	User.exerciseDuration = parseInt($(element).val());
-			if(User.exerciseDuration !== 0){
-				questionComplete(true);
-			} else{
-				questionComplete(false);
-				infoTextColour("bad");
-				infoText("Oops, please select again");
-			}
-		 	break;
+		 	getExerciseDuration();			
+		 break;
 		case "height":
 			getHeight();
 		break;
@@ -443,24 +526,26 @@ function collectAnswers(element){
       		getWeight("units");
 		 	break;
 		case "heartRate":
-		 	User.heartRate = parseInt(element.value);
-			if(User.heartRate !== 0){
-				$("#progressDot33").css("background-color", "rgb(5, 163, 5)");
-			} else { $("#progressDot33").css("background-color", "rgb(226, 226, 226) "); }
-		 	break;
+		 	getHeartRate();
+		 break;
 		 }
-		 checkAnswers();	 
+		 checkAnswers(element);	 
 }
-function checkAnswers(){
-	//getName();
-	//getAge();
-	//getGender();
-	//getGym();
-	getExerciseLevel();
-	//getExerciseDuration();
-	getWeight();
-	getHeight();
-	//getHeartRate();
+function checkAnswers(element){
+	if(element === "cookie"){
+		getName();
+		getAge();
+		getGender();
+		getGym();
+		getExerciseLevel();
+		getExerciseDuration();
+		getWeight();
+		getHeight();
+		getHeartRate();
+	}
+	else{
+
+	}
 	var questionsAnswered = 0;
 		 for( var i = 0 ; i< $(".progressDot").length ; i++){
 			 var thisDot = $(".progressDot")[i];
@@ -475,125 +560,7 @@ function checkAnswers(){
 	eraseCookie('healthCalc');
 	createCookie('healthCalc', JSON.stringify(User), 2);
 }
-$('input').change(function() {
-	collectAnswers(this);
-});
-$('select').change(function() {
-	collectAnswers($(this).find(":selected"));
-});
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-function rotateRight(){
-	var sections = $("section");
-	var questions = $(".questionContainer");
-	var currentQuestion = questions;
-	for(var i=0 ; i<sections.length ; i++){
-		var thisSection = sections[i];
-		if(thisSection.className.indexOf("deg1") != -1){
-			$(thisSection).removeClass("deg1");
-			$(thisSection).addClass("deg3");
-		} else if(thisSection.className.indexOf("deg2") != -1){
-			$(thisSection).removeClass("deg2");
-			$(thisSection).addClass("deg1");
-		} else if(thisSection.className.indexOf("deg3") != -1){
-			$(thisSection).removeClass("deg3");
-			$(thisSection).addClass("deg2");
-		}		
-	}
-}
-function fadeOutQuestions(){
-	$(".questionContainer").each(function(){
-			$(this).css("opacity", 0);
-			$(this).css("z-index", 0);
-		});
-	}
-function changeQuestion(nextQuestion, nextStep){
-	if (currentQuestion === nextQuestion){}
-		else{
-			fadeOutQuestions();
-			$("#question" + nextQuestion).css("opacity", 1);
-			$("#question" + nextQuestion).css("z-index", 1);
-			changeStep(nextStep);
-			currentQuestion = nextQuestion;			
-		}
-	}
-function changeStep(nextStep){
-	if(nextQuestion === null){var nextQuestion=0;}
-	if(currentStep === nextStep && currentQuestion === nextQuestion){}
-	else{ 
-			$(".breadcrumb").each(function(){
-				$(this).css("transform", "scale(1)");
-				$(this).css("background", "white");
-			});
-		var questionContainer = $("#question" + currentQuestion);
-		if(nextStep === 1){
-			$(questionContainer).css("transform", "translateX(0%)");
-		} else if(nextStep === 2){
-			$(questionContainer).css("transform", "translateX(-33%)");
-		} else if(nextStep === 3){
-			$(questionContainer).css("transform", "translateX(-65%)");
-		}
-		currentStep = nextStep;		
-		}
-	$("#breadcrumb" + currentStep).css("transform", "scale(1.2)");
-	$("#breadcrumb" + currentStep).css("background", "rgb(60, 133, 244)");
-}
-// Input Functions
-$("section").click(function(){
-	var thisSection = this.className;	
-	if(thisSection.indexOf("deg1") != -1){
-	} else if(thisSection != -1){
-		while(thisSection.indexOf("deg1") === -1){
-			rotateRight();
-			thisSection = this.className;
-		}
-		if (thisSection.indexOf("aboutyou") != -1){
-			var nextQuestion = 1;
-				changeQuestion(nextQuestion, 1);
-		}else if (thisSection.indexOf("Fitness") != -1){
-			var	nextQuestion = 2;
-			changeQuestion(nextQuestion, 1);
-		} else if (thisSection.indexOf("Health") != -1){
-			var nextQuestion = 3;
-				changeQuestion(nextQuestion, 1);
-		}
-	}
-});
-$("button").click(function(){
-	if (this.id === "next"){
-		var nextStep = currentStep + 1;
-		if (nextStep === 4 && currentQuestion != 3){
-			var nextQuestion = currentQuestion + 1;
-			rotateRight();
-			changeQuestion(nextQuestion, 1);
-			}
-			else if(nextStep === 4 && currentQuestion === 3){}
-			else{
-				changeStep(nextStep);
-					}
-	} else if (this.id === "previous"){
-		var nextStep = currentStep - 1;
-		if (nextStep < 1){
-			nextStep = 1;
-			} else{
-		changeStep(nextStep)	;
-					}
-	}
-});
-$(".breadcrumb").click(function(){
-	var nextStep = parseInt(this.id.substring(this.id.length - 1, this.id.length));
-	changeStep(nextStep);
-	});
-	
-	// TODO - Make this work:
-$(".questionInput").on('keypress', function(e) {
-	var keyCode = e.keyCode || e.which; 
-	if (keyCode == 9) { 
-    	e.preventDefault(); 
-    	// call custom function here
-  	} 
-});
+
 function getFoodItem(){
 	var foodStuffs = [
 	"a Big Mac",
@@ -674,6 +641,72 @@ function setUpResults(){
     $(".resultsContainer").css("transform","scale(1)");
 	}, 800);	
 }
+// Event Handlers
+$("section").click(function(){
+	var thisSection = this.className;	
+	if(thisSection.indexOf("deg1") != -1){
+	} else if(thisSection != -1){
+		while(thisSection.indexOf("deg1") === -1){
+			rotateRight();
+			thisSection = this.className;
+		}
+		if (thisSection.indexOf("aboutyou") != -1){
+			var nextQuestion = 1;
+				changeQuestion(nextQuestion, 1);
+		}else if (thisSection.indexOf("Fitness") != -1){
+			var	nextQuestion = 2;
+			changeQuestion(nextQuestion, 1);
+		} else if (thisSection.indexOf("Health") != -1){
+			var nextQuestion = 3;
+				changeQuestion(nextQuestion, 1);
+		}
+	}
+});
+$("button").click(function(){
+	if (this.id === "next"){
+		var nextStep = currentStep + 1;
+		if (nextStep === 4 && currentQuestion != 3){
+			var nextQuestion = currentQuestion + 1;
+			rotateRight();
+			changeQuestion(nextQuestion, 1);
+			}
+			else if(nextStep === 4 && currentQuestion === 3){}
+			else{
+				changeStep(nextStep);
+					}
+	} else if (this.id === "previous"){
+		var nextStep = currentStep - 1;
+		if (nextStep < 1){
+			nextStep = 1;
+			} else{
+		changeStep(nextStep)	;
+					}
+	}
+});
+$(".breadcrumb").click(function(){
+	var nextStep = parseInt(this.id.substring(this.id.length - 1, this.id.length));
+	changeStep(nextStep);
+	});
+	
+	// TODO - Make this work:
+$(".questionInput").on('keypress', function(e) {
+	var keyCode = e.keyCode || e.which; 
+	if (keyCode == 9) { 
+    	e.preventDefault(); 
+    	// call custom function here
+  	} 
+});
+$('input[type=text]').focus(function(){
+	if (this.value.indexOf('Enter') != -1 || this.value.indexOf('Whoops') != -1){
+	this.value = "";
+	}
+});
+$('input').change(function() {
+	collectAnswers(this);
+});
+$('select').change(function() {
+	collectAnswers($(this).find(":selected"));
+});
 // Calculation Function
 $('.getResults').click(function(){
 	allAnswers = false;
@@ -744,8 +777,6 @@ $('.getResults').click(function(){
     $(".foodPic img").css("transform", "translateX(0em)");
 	}, 1200);	
 	}
-	
-	
 });
 $('.getAnswers').click(function(){
 	setUpCalc();
