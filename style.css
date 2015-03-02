@@ -66,7 +66,7 @@ section {
     height: 7em;
     border-radius: 50%;
     overflow: hidden;
-    transition: 0.1s ease-out;
+    transition: 0.4s ease-out;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -93,13 +93,13 @@ section:active {
   font-size: 89%;
 }
 .deg1 {
-transform: rotate(-90deg) translate(9.5em) rotate(90deg) scale(1);
+transform: rotate(-450deg) translate(9.5em) rotate(450deg) scale(1);
 }
 .deg2 {
-transform: rotate(32deg) translate(9em) rotate(-32deg) scale(0.7);
+transform: rotate(-328deg) translate(9em) rotate(328deg) scale(0.7);
 }
 .deg3 {
-transform: rotate(150deg) translate(10em) rotate(-150deg) scale(0.7);
+transform: rotate(-210deg) translate(10em) rotate(210deg) scale(0.7);
 }
 .submit {
     z-index: 2;

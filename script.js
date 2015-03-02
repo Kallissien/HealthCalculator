@@ -111,19 +111,19 @@ function rotateRight(){
 	var sections = $("section");
 	var questions = $(".questionContainer");
 	var currentQuestion = questions;
-	for(var i=0 ; i<sections.length ; i++){
-		var thisSection = sections[i];
-		if(thisSection.className.indexOf("deg1") != -1){
-			$(thisSection).removeClass("deg1");
-			$(thisSection).addClass("deg3");
-		} else if(thisSection.className.indexOf("deg2") != -1){
-			$(thisSection).removeClass("deg2");
-			$(thisSection).addClass("deg1");
-		} else if(thisSection.className.indexOf("deg3") != -1){
-			$(thisSection).removeClass("deg3");
-			$(thisSection).addClass("deg2");
-		}		
-	}
+		for(var i=0 ; i<sections.length ; i++){
+			var thisSection = sections[i];
+			if(thisSection.className.indexOf("deg1") != -1){				
+				$(thisSection).addClass("deg3");
+				$(thisSection).removeClass("deg1");
+			} else if(thisSection.className.indexOf("deg2") != -1){				
+				$(thisSection).addClass("deg1");
+				$(thisSection).removeClass("deg2");
+			} else if(thisSection.className.indexOf("deg3") != -1){
+				$(thisSection).addClass("deg2");
+				$(thisSection).removeClass("deg3");				
+			}		
+		}
 }
 function fadeOutQuestions(){
 	$(".questionContainer").each(function(){
@@ -139,6 +139,9 @@ function changeQuestion(nextQuestion, nextStep){
 		$("#question" + nextQuestion).css("z-index", 1);
 		changeStep(nextStep);
 		currentQuestion = nextQuestion;			
+	}
+	while($("section")[nextQuestion - 1].className.indexOf("deg1") === -1){
+		rotateRight();
 	}
 }
 function changeStep(nextStep){
@@ -543,9 +546,7 @@ function checkAnswers(element){
 		getHeight();
 		getHeartRate();
 	}
-	else{
-
-	}
+	else{}//Do nothing
 	var questionsAnswered = 0;
 		 for( var i = 0 ; i< $(".progressDot").length ; i++){
 			 var thisDot = $(".progressDot")[i];
@@ -641,6 +642,7 @@ function setUpResults(){
     $(".resultsContainer").css("transform","scale(1)");
 	}, 800);	
 }
+
 // Event Handlers
 $("section").click(function(){
 	var thisSection = this.className;	
