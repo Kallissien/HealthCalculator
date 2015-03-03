@@ -15,7 +15,7 @@ var User = {
 		cpw: 0,
 		cpd: 0,
 		ppc:0,
-		questionsAnswered: 0		
+		questionsAnswered: [[false,false,false],[false,false,false],[false,false,false]]	
 	};
 var currentQuestion = 1;
 var currentStep = 1;
@@ -61,6 +61,11 @@ function phaseOut(element){
 		opacity: "0"
 	}, 100);
 }
+function shakeForm(form) {
+   var l = 5;  
+   for( var i = 0; i < 6; i++ )   
+     $(form).animate( { 'margin-left': "+=" + ( l = -l ) + 'px' }, 20);  
+ }
 function infoText(text, question, step){
 	if(question != null && step != null){
 		$("#infoText" + question + step).text(text);
@@ -80,9 +85,11 @@ function infoTextColour(colourChoice, question, step){
 function questionComplete(value, question, step){
 	if(value){
 		$("#progressDot" + question + step).css("background-color", "rgb(5, 163, 5)");
+		User.questionsAnswered[question -1][step -1] = true;
 	}
 	else if(!value){
 		$("#progressDot" + question + step).css("background-color", "rgb(226, 226, 226)");
+		User.questionsAnswered[question -1][step -1] = false;		
 	}
 }
 function isNumeric(n) {
@@ -113,7 +120,7 @@ function rotateRight(){
 	var currentQuestion = questions;
 		for(var i=0 ; i<sections.length ; i++){
 			var thisSection = sections[i];
-			if(thisSection.className.indexOf("deg1") != -1){				
+			if(thisSection.className.indexOf("deg1") != -1){			
 				$(thisSection).addClass("deg3");
 				$(thisSection).removeClass("deg1");
 			} else if(thisSection.className.indexOf("deg2") != -1){				
@@ -165,13 +172,13 @@ function changeStep(nextStep){
 	$("#breadcrumb" + currentStep).css("transform", "scale(1.2)");
 	$("#breadcrumb" + currentStep).css("background", "rgb(60, 133, 244)");
 }
-
 // Question Functions
 function getName(){
 	var nameVal = $('input[name="yourName"]').val();
 	if (isNumeric(nameVal)){
 		infoText("There's no way " + "'" + nameVal + "'" + " is your real name!",1,1);
 		infoTextColour("bad",1,1);
+		questionComplete(false,1,1);
 		} else {
 			User.name = nameVal;
 			$('.aboutyou h2').text("About " + User.name);
@@ -367,19 +374,27 @@ function getHeight(element){
 function getWeight(element){
 	var weightBoxVal = parseFloat($('#weightBox').val());
 	if($('#weightUnitBox').val() === "kg"){
+			infoText("Please enter your weight",3,2)
 			User.weight = parseInt(weightBoxVal);
 		}
 	if($('#weightUnitBox').val() === "lb"){
-		var stringWeight = weightBoxVal.toString();		
-		var splitWeight = stringWeight.split('.');
-		var stone = splitWeight[0];
-		var lb = splitWeight[1];
-		var weightInLb = 0;
+		var stringWeight = weightBoxVal.toString();	
+		var stone = 0;
+		var lb = 0;
+		if(stringWeight.indexOf(".") != -1){
+			var splitWeight = stringWeight.split('.');
+			stone = splitWeight[0];
+			lb = splitWeight[1];
+			var weightInLb = 0;
+		} else{
+			stone = stringWeight;
+		}
 		//convert all to lb
-		if(lb !== null){
+		if(lb !== 0){
 			weightInLb = (stone * 14) + parseInt(lb);
-		} else {weightInLb = (stone * 14);}
-		
+		} else {
+			weightInLb = (stone * 14);
+		}		
 		var weightInKg = weightInLb * 0.453592;
 		User.weight = Math.floor(weightInKg);
 	}
@@ -388,10 +403,15 @@ function getWeight(element){
 			infoTextColour("bad", 3, 2);
 			questionComplete(false, 3, 2);
 	}
-	else if(User.weight !== 0){
+	else if(User.weight !== 0 && isNumeric(User.weight)){
 			infoText("Thanks", 3, 2);
 			infoTextColour("good", 3, 2);
 			questionComplete(true, 3, 2);
+	} else if (element === "units") {
+		if($('#weightUnitBox').val() === "lb"){
+		infoText("Use the following format: st.pounds",3,2);
+		infoTextColour("maybe",3,2);	
+		}
 	}
 }
 function getHeartRate(){
@@ -414,6 +434,8 @@ function getHeartRate(){
 }
 // Answer Functions
 function populateAnswers(){
+	$(".loaderContainer").css("transform", "scale(1)");
+	$("#loaderText").text("Cookie found, loading previous answers");
 	var jsoncookie = readCookie("healthCalc");
 	var healthCookie = JSON.parse(readCookie("healthCalc"));
 		User.id = healthCookie.id;	
@@ -432,7 +454,7 @@ function populateAnswers(){
 		User.cpw = healthCookie.cpw;
 		User.cpd = healthCookie.cpd;
 		User.ppc = healthCookie.ppc;
-		User.questionsAnswered = healthCookie.questionsAnswered;		
+		//User.questionsAnswered = healthCookie.questionsAnswered;		
 		var inputBox = [
 		$('input')[0],
 		$('input')[1],
@@ -488,6 +510,9 @@ function populateAnswers(){
 			}
 		}
 		checkAnswers("cookie");
+		setTimeout(function() {
+		$(".loaderContainer").css("transform", "scale(0)");
+		}, 2000);
 }
 function collectAnswers(element){
 	 var inputName = $(element).attr("name");
@@ -561,7 +586,6 @@ function checkAnswers(element){
 	eraseCookie('healthCalc');
 	createCookie('healthCalc', JSON.stringify(User), 2);
 }
-
 function getFoodItem(){
 	var foodStuffs = [
 	"a Big Mac",
@@ -573,7 +597,7 @@ function getFoodItem(){
 	"a plain old chicken breast",
 	"some nice, home made chips. Yum",
 	"a glorious Baked Potato",
-	"a satisfying pint after a hard days work",
+	"a satisfying pint after a hard day's work",
 	"a small glass of Baileys Irish Cream",
 	"a glass of red",
 	"a glass of white",
@@ -600,10 +624,16 @@ function getFoodItem(){
 	return [foodStuffs[number] , foodCalories[number], number + 1];
 }
 	// Set Up function
-function setUpCalc(){
+function setUpCalc(second){
+	var secondTime = second;
+	$(".loaderContainer").css("transform", "scale(1)");
+	$("#loaderText").text("Loading...")
 	changeQuestion(1);
 	changeStep(1);
-	// TODO Check for cookie and populate data
+	// Select kg & cm
+	//if($("#heightUnitBox").val() === "feet"){$("#heightUnitBox").val("cm");}
+	//if($("#weightUnitBox").val() === "st"){$("#weightUnitBox").val("kg");}
+	//if($("#exerciseUnits").val() === "month"){$("#exerciseUnits").val("week");}		
 	$(".resultsContainer").css("transition","0");
 	$(".resultsContainer").css("transform","scale(0)");
 	$(".resultsContainer").css("transition","0.3s");
@@ -619,11 +649,18 @@ function setUpCalc(){
 	}, 750);	
 	// Give User unique Id
 	User.id = generateUid();
+	if(secondTime != true){
+		setTimeout(function() {
+		$(".loaderContainer").css("transform", "scale(0)");		
+		}, 1000);
+	} else {$(".loaderContainer").css("transform", "scale(0)");}
 	setTimeout(function() {
 		if(readCookie("healthCalc") !== null){
-		console.log("You have a cookie!");
-		populateAnswers();
-	}
+			if(secondTime != true){
+		 		populateAnswers();
+		 		$(".selectors").css("transform", "scale(1)");
+			}
+		} else {$(".selectors").css("transform", "scale(1)");}
 	}, 1000);
 	
 }
@@ -642,7 +679,6 @@ function setUpResults(){
     $(".resultsContainer").css("transform","scale(1)");
 	}, 800);	
 }
-
 // Event Handlers
 $("section").click(function(){
 	var thisSection = this.className;	
@@ -666,17 +702,22 @@ $("section").click(function(){
 });
 $("button").click(function(){
 	if (this.id === "next"){
-		var nextStep = currentStep + 1;
-		if (nextStep === 4 && currentQuestion != 3){
-			var nextQuestion = currentQuestion + 1;
-			rotateRight();
-			changeQuestion(nextQuestion, 1);
-			}
+		if (currentQuestion) {
+			if (User.questionsAnswered[currentQuestion - 1][currentStep - 1] === true) {
+				var nextStep = currentStep + 1;
+			if (nextStep === 4 && currentQuestion != 3){
+				var nextQuestion = currentQuestion + 1;
+				rotateRight();
+				changeQuestion(nextQuestion, 1);
+				}
 			else if(nextStep === 4 && currentQuestion === 3){}
 			else{
 				changeStep(nextStep);
 					}
-	} else if (this.id === "previous"){
+			} else{shakeForm($("#infoText" + currentQuestion + currentStep));}		
+		}
+	}
+	else if (this.id === "previous"){
 		var nextStep = currentStep - 1;
 		if (nextStep < 1){
 			nextStep = 1;
@@ -688,8 +729,7 @@ $("button").click(function(){
 $(".breadcrumb").click(function(){
 	var nextStep = parseInt(this.id.substring(this.id.length - 1, this.id.length));
 	changeStep(nextStep);
-	});
-	
+	});	
 	// TODO - Make this work:
 $(".questionInput").on('keypress', function(e) {
 	var keyCode = e.keyCode || e.which; 
@@ -723,65 +763,108 @@ $('.getResults').click(function(){
 		var BMR = Math.round(655 + (4.35 * (User.weight * 2.20462)) + (4.7 * (User.height * 0.393700787)) - (4.7 * User.age));
 	}
 	// Calculate Calories Per week
-	User.cpw = caloriesBurned * User.exerciseLevel;
-	User.cpd = User.cpw / 7;
-	var caloriesPerMonth = User.cpw * 4;
-	// Calculate price per calorie
-	var pricePerCalorieLong = parseFloat(User.gymPrice) / caloriesPerMonth;
-	User.ppc = parseFloat(pricePerCalorieLong);
-	User.bmr = BMR;
-	
-	// Populate Results
-	if(isNumeric(User.ppc)){
+		User.cpw = caloriesBurned * User.exerciseLevel;
+		User.cpd = User.cpw / 7;
+		User.bmr = BMR;	
+		var caloriesPerMonth = User.cpw * 4;
+		var cph = User.cpd / 24;
 		var food = getFoodItem();
-		if (User.gymPrice === 0){
-			if (User.ppc < 0.01) {
-				$("#pricepercalorie").text((User.ppc * 100).toFixed(2) + "p");
-			}
-			$("#pricepercalorie").text("£" + User.ppc.toFixed(2));
-			$("#ifgym").text("");
-			}
-			else{
+	if(User.gymMember){		
+		// Calculate price per calorie
+		var pricePerCalorieLong = parseFloat(User.gymPrice) / caloriesPerMonth;
+		User.ppc = parseFloat(pricePerCalorieLong);
+		$(".costUnits").text("paying");
+		$(".foodCost").css("display","inline")
+		// Populate Results
+		if(isNumeric(User.ppc)){			
+			if (User.gymPrice === 0){
 				if (User.ppc < 0.01) {
-				$("#pricepercalorie").text((User.ppc * 100).toFixed(2) + "p");
+					$("#pricepercalorie").text((User.ppc * 100).toFixed(2) + "p");
+				}
+				$("#pricepercalorie").text("£" + User.ppc.toFixed(2));
+				$("#ifgym").text("");
 				}
 				else{
-				$("#pricepercalorie").text("£" + User.ppc.toFixed(2));
-				}
-				var cph = User.cpd / 24;
-				cph = cph.toFixed(2)
-				var timeTaken = (food[1] / cph);
-					if(timeTaken > 24){
-						var timeInDays = timeTaken / 24;
-						if (timeInDays === 1) {
-							$("#timepercalorie").text(timeInDays.toFixed(2) + " day");
-						}
-						else{
-							$("#timepercalorie").text(timeInDays.toFixed(2) + " days");
-						}						
+					if (User.ppc < 0.1) {
+					$("#pricepercalorie").text((User.ppc * 100).toFixed(2) + "p");
 					}
-					else{						
-						$("#timepercalorie").text(timeTaken.toFixed(2) + " hours");
-					}	
-				var pricePerFood = User.ppc * food[1];
-				pricePerFood = pricePerFood.toFixed(2);
-			}
-		$("#priceperfood").text("£" + pricePerFood);
-		$(".targetFoodCal").text(food[1] + "kcal");
-		$(".targetFood").text(food[0]);
-		$(".foodPic img").attr("src", "images/food/" + food[2] + ".png");		
+					else{
+					$("#pricepercalorie").text("£" + User.ppc.toFixed(2));
+					}						
+					var pricePerFood = User.ppc * food[1];
+					pricePerFood = pricePerFood.toFixed(2);
+				}
+				if(pricePerFood > 0.1){
+					$("#priceperfood").text("£" + pricePerFood);
+				} 
+				else if(pricePerFood < 0.1){
+					$("#priceperfood").text(Math.floor(pricePerFood * 100) + "p");
+				}
+			
+		}
 	}
+	else if(!User.gymMember){		
+		var timepercalorie = 1 / cph;
+		var timeInDays = timepercalorie / 24;
+		var timeInMins = timepercalorie * 60;
+			if(timepercalorie > 24){				
+				if (timeInDays === 1) {
+					$("#pricepercalorie").text(timeInDays.toFixed(2) + " day");
+				}
+				else{
+					$("#pricepercalorie").text(timeInDays.toFixed(2) + " days");
+				}						
+			}
+			else if(timepercalorie < 1){
+			var minutes = Math.floor(timeInMins);
+			var seconds = Math.floor((timeInMins - minutes) * 60);								
+				$("#pricepercalorie").text(minutes + " minutes, " + seconds + " seconds");
+			}
+			else{									
+				$("#pricepercalorie").text(timepercalorie.toFixed(2) + " hours");
+			}
+			$(".costUnits").text("losing");
+			$(".foodCost").css("display","none")
+
+	}
+	var timeForFood = (food[1] / cph);
+	var timeInMins = timeForFood * 60;
+		if(timeForFood > 24){
+			var timeInDays = timeForFood / 24;
+			if (timeInDays === 1) {
+				$("#timepercalorie").text(timeInDays.toFixed(2) + " day");
+			}
+			else{
+				$("#timepercalorie").text(timeInDays.toFixed(2) + " days");
+			}						
+		}
+		else if (timeForFood < 1) {
+			var minutes = Math.floor(timeInMins);
+			var seconds = Math.floor((timeInMins - minutes) * 60);								
+			$("#timepercalorie").text(minutes + " minutes, " + seconds + " seconds");
+		}
+		else{						
+			$("#timepercalorie").text(timeForFood.toFixed(2) + " hours");
+		}
+	$(".targetFoodCal").text(food[1] + "kcal");
+	$(".targetFood").text(food[0]);
+	$(".foodPic img").attr("src", "images/food/" + food[2] + ".png");		
+
 	collectAnswers();
 	$(".foodPic img").css("transform", "translateX(20em)");
 	if(allAnswers){
 		setUpResults();
+		$(".foodPic img").css("transition", "0.1s");
+		$(".foodPic img").css("opacity", "0");
 		setTimeout(function() {
+			$(".foodPic img").css("opacity", "1");
+			$(".foodPic img").css("transition", "0.5s");
     $(".foodPic img").css("transform", "translateX(0em)");
 	}, 1200);	
 	}
 });
 $('.getAnswers').click(function(){
-	setUpCalc();
+	setUpCalc(true);
 });
 setUpCalc();
 });

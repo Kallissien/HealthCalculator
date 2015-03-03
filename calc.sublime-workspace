@@ -4,6 +4,38 @@
 		"selected_items":
 		[
 			[
+				"inf",
+				"infoTextColour"
+			],
+			[
+				"price",
+				"priceperfood"
+			],
+			[
+				"time",
+				"timeForFood"
+			],
+			[
+				"secon",
+				"secondTime"
+			],
+			[
+				"loader",
+				"loaderText"
+			],
+			[
+				"curr",
+				"currentStep"
+			],
+			[
+				"que",
+				"questionsAnswered"
+			],
+			[
+				"cu",
+				"currentQuestion"
+			],
+			[
 				"nex",
 				"nextQuestion"
 			],
@@ -78,10 +110,6 @@
 			[
 				"ques",
 				"questionComplete"
-			],
-			[
-				"curr",
-				"currentStep"
 			],
 			[
 				"curre",
@@ -231,7 +259,7 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 9454,
+				"buffer_size": 10448,
 				"line_ending": "Unix"
 			}
 		},
@@ -239,7 +267,7 @@
 			"file": "script.js",
 			"settings":
 			{
-				"buffer_size": 22094,
+				"buffer_size": 25226,
 				"line_ending": "Unix"
 			}
 		},
@@ -247,7 +275,7 @@
 			"file": "style.css",
 			"settings":
 			{
-				"buffer_size": 11315,
+				"buffer_size": 16172,
 				"line_ending": "Unix"
 			}
 		}
@@ -387,6 +415,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"html",
+			"container",
+			"hidden",
+			"which",
+			"selecto",
+			"selec",
+			"sel",
 			"deg3",
 			"change",
 			"transition",
@@ -498,15 +533,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9454,
+						"buffer_size": 10448,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7462,
-								7462
+								1154,
+								1154
 							]
 						],
 						"settings":
@@ -516,10 +551,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2148.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -528,15 +563,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 22094,
+						"buffer_size": 25226,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3989,
-								3989
+								23993,
+								23993
 							]
 						],
 						"settings":
@@ -545,10 +580,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1841.0,
+						"translation.y": 8427.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -557,25 +592,25 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11315,
+						"buffer_size": 16172,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1908,
-								1908
+								15796,
+								15796
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/CSS/CSS.tmLanguage",
-							"tab_size": 4,
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 934.0,
+						"translation.x": 1.0,
+						"translation.y": 11432.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
