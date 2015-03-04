@@ -67,7 +67,7 @@ function shakeForm(form) {
      $(form).animate( { 'margin-left': "+=" + ( l = -l ) + 'px' }, 20);  
  }
 function infoText(text, question, step){
-	if(question != null && step != null){
+	if(question !== null && step !== null){
 		$("#infoText" + question + step).text(text);
 	} else{
 		$("#infoText" + currentQuestion + currentStep).text(text);
@@ -78,7 +78,7 @@ function infoTextColour(colourChoice, question, step){
 	if (colourChoice === "good"){colour = "rgb(15, 163, 67)";}
 	else if (colourChoice === "bad"){colour = "rgb(249, 68, 68)";}
 	if (colourChoice === "maybe"){colour = "rgb(207, 207, 207)";}
-	if(question != null && step != null){	
+	if(question !== null && step !== null){	
 		$("#infoText" + question + step).css("color", colour);
 	} else{ $("#infoText" + currentQuestion + currentStep).css("color", colour); }
 }
@@ -273,7 +273,7 @@ function getGym(element){
 				User.gymPrice = 0;
 				break;
 			}
-			if(gymVal != 0){
+			if(gymVal !== 0){
 				User.gym = $('#gymName').find(":selected").text();
 			} else{User.gym = 0;}
 		}
@@ -374,7 +374,7 @@ function getHeight(element){
 function getWeight(element){
 	var weightBoxVal = parseFloat($('#weightBox').val());
 	if($('#weightUnitBox').val() === "kg"){
-			infoText("Please enter your weight",3,2)
+			infoText("Please enter your weight",3,2);
 			User.weight = parseInt(weightBoxVal);
 		}
 	if($('#weightUnitBox').val() === "lb"){
@@ -466,13 +466,13 @@ function populateAnswers(){
 		$('input')[7],
 		$('input')[8],
 		$('input')[9]
-		]		
+		];
 		for (var i in User) {
 		    UserValue.push(User[i]);
 		}
 		// 
 		for(var i = 0 ; i < inputBox.length ; i++){
-			if(UserValue[i+1] != 0){
+			if(UserValue[i+1] !== 0){
 				// radio buttons
 				if(i < 5 && i > 1){
 					switch(i){
@@ -623,11 +623,58 @@ function getFoodItem(){
 	var number = getRandomInt(0, foodStuffs.length - 1); 
 	return [foodStuffs[number] , foodCalories[number], number + 1];
 }
-	// Set Up function
+function getSport(){
+	var sports = [
+	"Beach volleyball",	
+	"Football",
+	"Rugby",
+	"Tennis",
+	"Squash",
+	"Table tennis",
+	"Golf",
+	"Cheese Rolling",	
+	"Dressage",	
+	"Bed Racing"		
+	];
+	var sportInfo = [
+	"You're at the peak of physical form, you just need to find an excuse to show it off",
+	"You like being part of a team, but deep down you know you're the best",
+	"You're a big one and you like a bit of rough and tumble",
+	"Nimble and fit, but you've got power where it counts",	
+	"You like doing exercise, and you're pretty fit, but you don't like getting your hair wet",
+	"You know, it is suprisingly tiring once you get into it",	
+	"You like to get outside, but anything more than walking is a bit too much exercise much.",
+	"I feel sorry for the horse",
+	"The best bit is, once you catch it, you can eat it!",
+	"Now that's my kind of racing"
+	];
+	if(User.cpd > 3000){
+		return [sports[0] , sportInfo[0]];
+	} else if(User.cpd > 2500){
+		return [sports[1] , sportInfo[1]];
+	} else if(User.cpd > 2300){
+		return [sports[2] , sportInfo[2]];
+	} else if(User.cpd > 2200){
+		return [sports[3] , sportInfo[3]];
+	} else if(User.cpd > 2100){
+		return [sports[4] , sportInfo[4]];
+	}else if(User.cpd > 1400){
+		return [sports[5] , sportInfo[5]];
+	}else if(User.cpd > 1300){
+		return [sports[6] , sportInfo[6]];
+	}else if(User.cpd > 1200){
+		return [sports[7] , sportInfo[7]];
+	}else if(User.cpd > 1100){
+		return [sports[8] , sportInfo[8]];
+	}else if(User.cpd > 500){
+		return [sports[9] , sportInfo[9]];
+	}
+}
+// Set Up functions
 function setUpCalc(second){
 	var secondTime = second;
 	$(".loaderContainer").css("transform", "scale(1)");
-	$("#loaderText").text("Loading...")
+	$("#loaderText").text("Loading...");
 	changeQuestion(1);
 	changeStep(1);
 	// Select kg & cm
@@ -649,20 +696,19 @@ function setUpCalc(second){
 	}, 750);	
 	// Give User unique Id
 	User.id = generateUid();
-	if(secondTime != true){
+	if(secondTime !== true){
 		setTimeout(function() {
 		$(".loaderContainer").css("transform", "scale(0)");		
 		}, 1000);
 	} else {$(".loaderContainer").css("transform", "scale(0)");}
 	setTimeout(function() {
 		if(readCookie("healthCalc") !== null){
-			if(secondTime != true){
+			if(secondTime !== true){
 		 		populateAnswers();
 		 		$(".selectors").css("transform", "scale(1)");
 			}
 		} else {$(".selectors").css("transform", "scale(1)");}
-	}, 1000);
-	
+	}, 1000);	
 }
 function setUpResults(){
 	setTimeout(function() {
@@ -766,16 +812,17 @@ $('.getResults').click(function(){
 		User.cpw = caloriesBurned * User.exerciseLevel;
 		User.cpd = User.cpw / 7;		
 		User.bmr = BMR;	
-		CaloriesPerDay = User.cpd + User.bmr;
+		User.cpd = User.cpd + User.bmr;
 		var caloriesPerMonth = User.cpw * 4;
-		var cph = CaloriesPerDay / 24;
+		var cph = User.cpd / 24;
 		var food = getFoodItem();
+		var sport = getSport();
 	if(User.gymMember){		
 		// Calculate price per calorie
 		var pricePerCalorieLong = parseFloat(User.gymPrice) / caloriesPerMonth;
 		User.ppc = parseFloat(pricePerCalorieLong);
 		$(".costUnits").text("paying");
-		$(".foodCost").css("display","inline")
+		$(".foodCost").css("display","inline");
 		// Populate Results
 		if(isNumeric(User.ppc)){			
 			if (User.gymPrice === 0){
@@ -825,7 +872,7 @@ $('.getResults').click(function(){
 				$("#pricepercalorie").text(timepercalorie.toFixed(2) + " hours");
 			}
 			$(".costUnits").text("losing");
-			$(".foodCost").css("display","none")
+			$(".foodCost").css("display","none");
 
 	}
 	var timeForFood = (food[1] / cph);
@@ -863,9 +910,22 @@ $('.getResults').click(function(){
     $(".foodPic img").css("transform", "translateX(0em)");
 	}, 1200);	
 	}
+	$("#yourSport").text(sport[0]);
+	$(".sportInfo").text(sport[1]);
+
 });
 $('.getAnswers').click(function(){
 	setUpCalc(true);
+});
+$('.moreResults').click(function(){
+	if($(".resultSlider").css("top") === "0px"){
+		$(".resultSlider").css("top","-140%");
+		$(".resultsContainer h5").text("Your Sport");
+	} 
+	else{
+		$(".resultSlider").css("top","0");
+		$(".resultsContainer h5").text("Your Results");
+	}
 });
 setUpCalc();
 });
