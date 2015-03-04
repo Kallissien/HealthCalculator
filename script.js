@@ -764,10 +764,11 @@ $('.getResults').click(function(){
 	}
 	// Calculate Calories Per week
 		User.cpw = caloriesBurned * User.exerciseLevel;
-		User.cpd = User.cpw / 7;
+		User.cpd = User.cpw / 7;		
 		User.bmr = BMR;	
+		CaloriesPerDay = User.cpd + User.bmr;
 		var caloriesPerMonth = User.cpw * 4;
-		var cph = User.cpd / 24;
+		var cph = CaloriesPerDay / 24;
 		var food = getFoodItem();
 	if(User.gymMember){		
 		// Calculate price per calorie
