@@ -1,5 +1,13 @@
 @charset "UTF-8";
 /* CSS Document */
+html {
+  font-size: 20px;
+}
+body {
+  background-color: #ccc;
+  padding: 50px;
+  text-align: center;
+}
 .healthTitle{
   margin-bottom:5em;
     }
@@ -112,7 +120,6 @@ transform: rotate(-210deg) translate(11em) rotate(210deg) scale(0.7);
   z-index: 2;
   position: relative;
   width: 70%;
-  top: -0.1em;
   margin: auto;
   box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
   transition: 0.1s ease-out;
@@ -145,23 +152,18 @@ transform: rotate(-210deg) translate(11em) rotate(210deg) scale(0.7);
 /* End New Style */
 .line{
     width: 120%;
-position: relative;
-left: -7%;
-height: 1px;
-background: rgb(77, 77, 77);
-margin-top: 5px;
-
+    position: relative;
+    left: -7%;
+    height: 1px;
+    background: rgb(77, 77, 77);
+    margin-top: 5px;
     margin-bottom: 6px;
 }
 .question{
     width: 28%;
     margin-right: 4%;
-    display: inline-block;
-    /* height: auto; */
-    /* min-height: 400px; */
+    display: inline-block;    
     vertical-align: top;
-    /* padding: 1%; */
-    /* background:grey; */
 }
 .question:nth-of-type(4) {
     margin-right: 0;
@@ -213,31 +215,30 @@ select {
   margin-bottom: -20em;
 }
 .blockage {
-height: 99%;
-width: 10%;
-position: relative;
-margin: auto;
-top: 0%;
-background-color: rgb(58, 58, 58);
-/* background-color: red; */
--webkit-animation-name: rotate;     
--webkit-animation-duration: 40s; 
--webkit-animation-iteration-count: infinite;    
--webkit-animation-timing-function: linear;
--moz-animation-name: rotate; 
--moz-animation-duration: 80s; 
--moz-animation-iteration-count: infinite;
--moz-animation-timing-function: linear;
-}
-@-webkit-keyframes rotate {
-    from {-webkit-transform: rotate(0deg);}
-    to {-webkit-transform: rotate(360deg);}
-}
-
-@-moz-keyframes rotate {
-    from {-moz-transform: rotate(0deg);}
-    to {-moz-transform: rotate(360deg);}
-}
+  height: 99%;
+  width: 10%;
+  position: relative;
+  margin: auto;
+  top: 0;
+  background-color: rgb(58, 58, 58);
+  /* background-color: red; */
+  -webkit-animation-name: rotate;     
+  -webkit-animation-duration: 40s; 
+  -webkit-animation-iteration-count: infinite;    
+  -webkit-animation-timing-function: linear;
+  -moz-animation-name: rotate; 
+  -moz-animation-duration: 80s; 
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: linear;
+  }
+  @-webkit-keyframes rotate {
+      from {-webkit-transform: rotate(0deg);}
+      to {-webkit-transform: rotate(360deg);}
+  }
+  @-moz-keyframes rotate {
+      from {-moz-transform: rotate(0deg);}
+      to {-moz-transform: rotate(360deg);}
+  }
 .blockageSmall{
     background-color: rgb(58, 58, 58);
     /* background-color: blue; */
@@ -261,32 +262,31 @@ background-color: rgb(58, 58, 58);
     from {-webkit-transform: rotate(0deg);}
     to {-webkit-transform: rotate(360deg);}
 }
-
 @-moz-keyframes rotateSmall {
     from {-moz-transform: rotate(0deg);}
     to {-moz-transform: rotate(360deg);}
 }
 .circlePulse{
-width: 90%;
-height: 90%;
-position: absolute;
-margin-left: 5%;
-margin-top: 5%;
-border-radius: 50%;
-border: solid rgb(255, 255, 255) 2px;
-transform: scale(0);
-transition: 0.3s ease-out;
+  width: 90%;
+  height: 90%;
+  position: absolute;
+  margin-left: 5%;
+  margin-top: 5%;
+  border-radius: 50%;
+  border: solid rgb(255, 255, 255) 2px;
+  transform: scale(0);
+  transition: 0.3s ease-out;
 }
 .circlePulseSmall{
-width: 95%;
-height: 95%;
-position: absolute;
-margin-left: 2%;
-margin-top: 2%;
-border-radius: 50%;
-border: solid rgb(60, 133, 244) 3px;
-transition: 0.3s ease-out;
-transform: scale(0);
+  width: 95%;
+  height: 95%;
+  position: absolute;
+  margin-left: 2%;
+  margin-top: 2%;
+  border-radius: 50%;
+  border: solid rgb(60, 133, 244) 3px;
+  transition: 0.3s ease-out;
+  transform: scale(0);
 }
 #exerL select{
     width:auto;
@@ -324,32 +324,35 @@ button.getResults, .moreResults button {
     background-color: rgb(245, 89, 100);
     cursor: pointer;
 }
+.moreResults{
+  position: absolute;
+  width: 100%;
+  top: 102%;
+}
 .sportResults .moreResults{
-  top: -5.5em;
-  position: relative;
-  margin-bottom:-2em;
+  top: -6em;
+  position: absolute;
 }
 button.getResults:active .moreResults button:active {
     background-color: rgb(219, 54, 66);
 }
 .infoBox {
-    max-height: 2em;
-    min-height: 4em;
-    width: 100%;
-    margin: auto;
-    position: relative;
-    top: 0.5em;
+  max-height: 2em;
+  min-height: 4em;
+  width: 100%;
+  margin: auto;
+  position: relative;
+  top: 0.5em;
 }
 .infoBox p {    
-    display: inline-block; color: white; font-family: 'Roboto'; 
-    font-weight: 400; 
-    font-size: 0.9em;
-    text-align: left;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    position: relative;
-    /* top: -3em; */
+  display: inline-block; color: white; font-family: 'Roboto'; 
+  font-weight: 400; 
+  font-size: 0.9em;
+  text-align: left;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  position: relative;
 }
 .questionBox {
     width: 80%;
@@ -426,7 +429,7 @@ input[type="radio"] {
 }
 .buttonContainer button:hover {
    box-shadow:1px 1px 1px rgba(0,0,0,0.5);
-   top: 0px;
+   top: 0;
    position: relative;
 }
 .buttonContainer button:active {
@@ -500,13 +503,13 @@ h5 {
 font-size: 2em;  
 font-family: 'Roboto', sans-serif;
 font-weight: 100;
-margin-bottom: 0px;
+margin-bottom: 0;
 margin-top: -0.4em;
 text-align: center;
 }
 .results {
     width: 100%;
-    height: 10em;
+    height: 18em;
     position: relative;
     transition: 0.3s;
 }
@@ -535,7 +538,7 @@ text-align: center;
 }
 .foodPic {
     display: block;
-    margin-top: 0em;
+    margin-top: 0;
 }
 .foodPic img {
     width: 47%;
@@ -556,7 +559,7 @@ text-align: center;
 }
 .resultToQuestions {
     position: relative;
-    left: 0px;
+    left: 0;
     margin-bottom: -2em;
     width: 100%;
     height: 1.5em;
@@ -631,8 +634,8 @@ text-align: center;
   border-radius: 0 10.2em 10.2em 0;
   top: -0.1em;
   left: 5.1em;
-  -webkit-transform-origin: 0px 5.1em;
-  transform-origin: 0px 5.1em;
+  -webkit-transform-origin: 0 5.1em;
+  transform-origin: 0 5.1em;
   -webkit-animation: load2 2s infinite ease;
   animation: load2 2s infinite ease;
 }
@@ -693,15 +696,6 @@ text-align: center;
     right: 17%;
     opacity: 1;
 }
-html {
-  font-size: 20px;
-}
-body {
-  background-color: #ccc;
-  padding: 50px;
-  text-align: center;
-}
-
 /* Wrapper */
 .icon-button {
   background-color: white;
@@ -817,21 +811,21 @@ body {
 }
 .sportResults {
     width: 100%;
-    height: 330px;
+    height: 100%;
     position: relative;
-    top: 18em;
+    top: 10em;
 }
 .resultSlider {
     position: relative;
-    transition: 0.3s;
-    top: 0em;
+    transition: 0.2s;
+    top: 0;
 }
 @media screen and (max-width: 600px){
   html {
   font-size: 15px;
   }
-  .container{
-    left: -11%;
+  .loaderContainer{
+    top:1.5em;
   }
   .resultText {
     font-size: 0.8em;   font-family: 'Roboto', sans-serif;   font-weight: 100;         
@@ -840,7 +834,6 @@ body {
   width: 16em;
   height: 16em;
   margin-top:-22.5em;
-   left: -11%;
 }
 .loaderContainer {
     top: 4.3em;
