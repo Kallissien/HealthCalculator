@@ -189,6 +189,7 @@ $(document).ready(function(){
 					infoTextColour("good",1,1);
 				}
 		}
+		checkAnswers();
 	}
 	function getAge(){
 		var ageVal = $('input[name="age"]').val();
@@ -221,6 +222,7 @@ $(document).ready(function(){
 					questionComplete(false,1,2);
 				}
 			}
+			checkAnswers();
 	}
 	function getGender(){
 		var genderVal = $('input[name="gender"]:checked').val();
@@ -233,6 +235,7 @@ $(document).ready(function(){
 				if(User.gender !== 0){
 					questionComplete(true, 1, 3);
 				}
+				checkAnswers();
 	}
 	function getGym(element){
 		if(element === "gymMember"){
@@ -251,6 +254,7 @@ $(document).ready(function(){
 				switch(gymVal){
 					case "0":
 					User.gymPrice = 0;
+					questionComplete(false,2,1);
 					break;
 					case "1":
 					User.gymPrice = 84;
@@ -271,64 +275,74 @@ $(document).ready(function(){
 					User.gymPrice = 85;
 					break;
 					case "7":
-					User.gymPrice = 0;
+					User.gymPrice = 30;
 					break;
 				}
 				if(gymVal !== 0){
 					User.gym = $('#gymName').find(":selected").text();
-				} else{User.gym = 0;}
+				} else{
+					User.gym = 0;
+				}
 			}
 			if (User.gymMember === false){
 					questionComplete(true,2,1);
 				}
-				else if(User.gymMember === true && User.gym !== 0){	
+				else if(User.gymMember === true && User.gym !== "Please Select"){
 					questionComplete(true,2,1);			
 				}
 				else{	
 					questionComplete(false,2,1);			
-				}	
+				}
+				checkAnswers();
 	}
 	function getExerciseLevel(element){
 		var exerciseLevelVal = parseFloat($('#exerL input').val());
-		if($('#exerciseUnits').val() === "week"){
-					User.exerciseLevel = exerciseLevelVal;
-				}
-				else{
-					User.exerciseLevel = (exerciseLevelVal / 4);
-				}
-				if(User.exerciseLevel !== 0 && isNumeric(User.exerciseLevel)){
-					questionComplete(true,2,2);
-
-					if(User.exerciseLevel < 1 && User.exerciseLevel > 0){
-						infoTextColour("maybe",2,2);
-						infoText("Take it easy. All this clicking must be tiring you out!",2,2);					
-					}
-					if(User.exerciseLevel > 5){
-						infoTextColour("maybe",2,2);
-						infoText("Wow, I'm surprised you could find the time to do this!",2,2);					
-					}
-					else{
-						infoTextColour("good",2,2);
-						infoText("Thanks, now click next to continue, you know the drill!",2,2);		
-					}				
-				}
-				if(element != "units"){
-					if(User.exerciseLevel <= 0 || $('#exerL input').val() === ""){
-							infoTextColour("bad",2,2);
-							infoText("I can tell you now this thing won't work unless you do exercise.",2,2);
-							questionComplete(false,2,2);				
-					}
-				}
+		if(element !== "units"){			
+			if($('#exerciseUnits').val() === "month"){
+				exerciseLevelVal = (exerciseLevelVal / 4);
+			}
+			if (exerciseLevelVal <= 7 && exerciseLevelVal > 0) {
+				User.exerciseLevel = exerciseLevelVal;
+				infoTextColour("good",2,2);
+				infoText("Question Complete",2,2);
+				questionComplete(true,2,2);
+			}
+			else if(exerciseLevelVal < 0){
+				infoTextColour("bad",2,2);
+				infoText("I can tell you now this thing won't work unless you do exercise.", 2, 2);
+				questionComplete(false,2,2);
+			}
+			else if(exerciseLevelVal > 7){
+				infoTextColour("bad",2,2);
+				infoText("I'm surprised you could find the time to do that!", 2, 2);
+				questionComplete(false,2,2);
+			}
+		}
+		else if(element === "units"){			
+			if($('#exerciseUnits').val() === "month"){
+				exerciseLevelVal = (exerciseLevelVal * 4);
+				$('#exerL input').val(exerciseLevelVal);
+				getExerciseLevel();
+			} 
+			else if($('#exerciseUnits').val() === "week"){
+				exerciseLevelVal = (exerciseLevelVal / 4);
+				$('#exerL input').val(exerciseLevelVal);
+				getExerciseLevel();
+			}
+		}
+		checkAnswers();
 	}
 	function getExerciseDuration(){
-		User.exerciseDuration = parseInt($('#exerD select').find(":selected").val());
+		var exerciseDurationVal = parseInt($('#exerD select').find(":selected").val());
 		if(User.exerciseDuration !== 0){
 					questionComplete(true,2,3);
+					User.exerciseDuration = exerciseDurationVal;
 				} else{
 					questionComplete(false,2,3);
 					infoTextColour("bad");
 					infoText("Oops, please select again");
 				}
+				checkAnswers();
 	}
 	function getHeight(element){
 		var heightBoxVal = parseFloat($('#heightBox').val());		
@@ -354,7 +368,7 @@ $(document).ready(function(){
 		if (!isNumeric(User.height) && element !== "units"){
 				infoText("Please enter a valid Number", 3, 1);
 				infoTextColour("bad", 3, 1);
-				questionComplete(false);
+				questionComplete(false,3,1);
 		}
 		else if(User.height !== 0 && isNumeric(User.height)){
 				infoText("Thanks, only two questions left!", 3, 1);
@@ -371,6 +385,7 @@ $(document).ready(function(){
 			infoTextColour("bad");
 			questionComplete(false, 3, 1);
 		}
+		checkAnswers();
 	}
 	function getWeight(element){
 		var weightBoxVal = parseFloat($('#weightBox').val());
@@ -416,6 +431,7 @@ $(document).ready(function(){
 			infoTextColour("maybe",3,2);	
 			}
 		}
+		checkAnswers();
 	}
 	function getHeartRate(){
 		var heartRateVal = parseInt($('input[name="heartRate"]').val());
@@ -426,17 +442,22 @@ $(document).ready(function(){
 				questionComplete(false,3,3);
 				}
 		else{
-			User.heartRate = heartRateVal;
+			User.heartRate = heartRateVal;			
 		}
-		if(User.heartRate !== 0){
+		if(User.heartRate >= 50 && User.heartRate <= 200){
 			questionComplete(true,3,3);
+			infoTextColour("good",3,3);
+			infoText("Question Complete", 3, 3);
 		} 
 		else { 
-			questionComplete(false,3,3); 
+			questionComplete(false,3,3);
+			infoText("Please enter a number between 50 & 200", 3, 3);
+			infoTextColour("bad",3,3);
 		}
+		checkAnswers();
 	}
 	// Answer Functions
-	function populateAnswers(){
+	function cookieAnswers(){
 		$(".loaderContainer").css("transform", "scale(1)");
 		$("#loaderText").text("Cookie found, loading previous answers");
 		var healthCookie = JSON.parse(readCookie("healthCalc"));
@@ -575,18 +596,31 @@ $(document).ready(function(){
 			getHeight();
 			getHeartRate();
 		}
-		else{}//Do nothing
 		var questionsAnswered = 0;
-			 for( var i = 0 ; i< $(".progressDot").length ; i++){
-				 var thisDot = $(".progressDot")[i];
-				 if($(thisDot).css("background-color") === "rgb(5, 163, 5)"){
-					 questionsAnswered ++;
-					 }
-				 }
-				 if (questionsAnswered === 9){
-					 $(".submit").css("transform", "scale(1)");
-					 	allAnswers = true;
-					 }
+		allAnswers = false;
+			for (var i=0; i<User.questionsAnswered.length; i++) { // iterate on the array
+			   var obj = User.questionsAnswered[i];
+			   for (var key in obj) { // iterate on object properties
+			      var value = obj[key];
+			      if (value === true){
+			      	questionsAnswered++
+			      }
+			   }
+			}
+			 if (questionsAnswered === 9){
+			 	allAnswers = true;
+				 	$(".submit").css("transform", "scale(1)");
+				 	allAnswers = true;
+				 	infoTextColour("good", currentQuestion, currentStep);
+				 	infoText("You've answered all the questions! Click 'Get Results' below to find out how much you're really spending!", currentQuestion, currentStep);
+				}
+			else if (questionsAnswered !== 9 && currentQuestion === 3 && currentStep === 3) {
+				$(".submit").css("transform", "scale(0)");
+				infoTextColour("bad", currentQuestion, currentStep);
+				infoText("Whoops, it looks like you've missed some questions. Please answer all questions." , currentQuestion, currentStep);
+			} else if (questionsAnswered !== 9){
+				$(".submit").css("transform", "scale(0)");
+			}
 		eraseCookie('healthCalc');
 		createCookie('healthCalc', JSON.stringify(User), 2);
 	}
@@ -647,31 +681,33 @@ $(document).ready(function(){
 		"Nimble and fit, but you've got power where it counts",	
 		"You like doing exercise, and you're pretty fit, but you don't like getting your hair wet",
 		"You know, it is suprisingly tiring once you get into it",	
-		"You like to get outside, but anything more than walking is a bit too much exercise much.",
+		"You like to get outside, but anything more than walking is a bit too much exercise.",
 		"I feel sorry for the horse",
 		"The best bit is, once you catch it, you can eat it!",
 		"Now that's my kind of racing"
 		];
 		if(User.cpd > 3000){
-			return [sports[0] , sportInfo[0]];
+			return [sports[0] , sportInfo[0], 1];
 		} else if(User.cpd > 2500){
-			return [sports[1] , sportInfo[1]];
+			return [sports[1] , sportInfo[1], 2];
 		} else if(User.cpd > 2300){
-			return [sports[2] , sportInfo[2]];
+			return [sports[2] , sportInfo[2], 3];
 		} else if(User.cpd > 2200){
-			return [sports[3] , sportInfo[3]];
+			return [sports[3] , sportInfo[3], 4];
 		} else if(User.cpd > 2100){
-			return [sports[4] , sportInfo[4]];
+			return [sports[4] , sportInfo[4], 5];
 		}else if(User.cpd > 1400){
-			return [sports[5] , sportInfo[5]];
+			return [sports[5] , sportInfo[5], 6];
 		}else if(User.cpd > 1300){
-			return [sports[6] , sportInfo[6]];
+			return [sports[6] , sportInfo[6], 7];
 		}else if(User.cpd > 1200){
-			return [sports[7] , sportInfo[7]];
+			return [sports[7] , sportInfo[7], 8];
 		}else if(User.cpd > 1100){
-			return [sports[8] , sportInfo[8]];
+			return [sports[8] , sportInfo[8], 9];
 		}else if(User.cpd > 500){
-			return [sports[9] , sportInfo[9]];
+			return [sports[9] , sportInfo[9], 10];
+		} else{
+			return [sports[1] , sportInfo[1], 2];
 		}
 	}
 	// Set Up functions
@@ -708,7 +744,7 @@ $(document).ready(function(){
 		setTimeout(function() {
 			if(readCookie("healthCalc") !== null){
 				if(secondTime !== true){
-			 		populateAnswers();
+			 		cookieAnswers();
 			 		$(".selectors").css("transform", "scale(1)");
 				}
 			} else {$(".selectors").css("transform", "scale(1)");}
@@ -744,8 +780,9 @@ $(document).ready(function(){
 		return BMR;
 	}
 	function gymResults(food){
+		var r = $.Deferred();				
 		// Calculate price per calorie
-			var caloriesPerMonth = User.cpw * 4;
+			var caloriesPerMonth = (User.cpd * 7) * 4;
 			var pricePerCalorieLong = parseFloat(User.gymPrice) / caloriesPerMonth;
 			var pricePerFood = 0;
 			User.ppc = parseFloat(pricePerCalorieLong);
@@ -777,9 +814,13 @@ $(document).ready(function(){
 						$("#priceperfood").text(Math.floor(pricePerFood * 100) + "p");
 					}			
 			}
+			setTimeout(function () {
+					r.resolve();
+				}, 2500);
+			return r;
 	}
 	function noGymResults(){
-		var cph = User.cpd / 24;
+		var cph = (User.cpd) / 24;
 		var timepercalorie = 1 / cph;
 		var timeInDays = timepercalorie / 24;
 		var timeInMins = timepercalorie * 60;
@@ -810,11 +851,11 @@ $(document).ready(function(){
 		else{									
 			$("#pricepercalorie").text(timepercalorie.toFixed(2) + " hours");
 		}
-		$(".costUnits").text("take");
+		$(".costUnits").text("wasting");
 		$(".foodCost").css("display","none");
 	}
 	function foodResults(food){
-		var cph = User.cpd / 24;
+		var cph = (User.cpd) / 24;
 		var timeForFood = (food[1] / cph);
 		var foodtimeInDays = timeForFood / 24;
 		var foodtimeInMins = timeForFood * 60;
@@ -853,6 +894,35 @@ $(document).ready(function(){
 	function sportResults(sport){
 		$("#yourSport").text(sport[0]);
 		$(".sportInfo").text(sport[1]);
+		$(".sportPic img").attr("src", "images/sport/" + sport[2] + ".png");
+		$(".sportPic img").css("transform", "translateX(20em)");
+		$(".sportPic img").css("transition", "0.1s");
+			$(".sportPic img").css("opacity", "0");
+			setTimeout(function() {
+				$(".sportPic img").css("opacity", "1");
+				$(".sportPic img").css("transition", "0.5s");
+	    $(".sportPic img").css("transform", "translateX(0em)");
+		}, 1200);	
+	}
+	function collectResults(){
+		checkAnswers("cookie");		
+		if(allAnswers){
+			User.cpd = User.cpw / 7;
+			User.bmr = getBMR();
+			User.cpd = User.cpd + User.bmr;			
+			var food = getFoodItem();			
+			if(User.gymMember){		
+				gymResults(food, sport);				
+			}
+			else if(!User.gymMember){
+				noGymResults(food, sport);
+			}
+			var sport = getSport();			
+			setUpResults();
+			foodResults(food);
+			sportResults(sport);
+			console.log(User.cpd + "     2");
+		}
 	}
 	// Event Handlers
 	$("section").click(function(){
@@ -925,7 +995,9 @@ $(document).ready(function(){
 		collectAnswers($(this).find(":selected"));
 	});
 	$('.getAnswers').click(function(){
+		console.log(User.cpd + "4");
 		setUpCalc(true);
+		console.log(User.cpd + "3");
 	});
 	$('.moreResults').click(function(){
 		if($(".resultSlider").css("top") === "0px"){
@@ -939,24 +1011,8 @@ $(document).ready(function(){
 	});
 	// Calculation Function
 	$('.getResults').click(function(){
-		allAnswers = false;	
-		collectAnswers();		
-		if(allAnswers){
-			User.cpd = User.cpw / 7;
-			User.bmr = getBMR();
-			User.cpd = User.cpd + User.bmr;	
-			var food = getFoodItem();
-			var sport = getSport();
-			if(User.gymMember){		
-				gymResults(food, sport);
-			}
-			else if(!User.gymMember){
-				noGymResults(food, sport);
-			}
-			foodResults(food);
-			sportResults(sport);
-			setUpResults();
-		}
+		allAnswers = false;
+		collectResults();
 	});
 	setUpCalc();
 });

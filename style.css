@@ -536,11 +536,11 @@ text-align: center;
     font-size: 131%;
     color: rgb(240, 106, 106);
 }
-.foodPic {
+.foodPic, .sportPic {
     display: block;
     margin-top: 0;
 }
-.foodPic img {
+.foodPic img, .sportPic img{
     width: 47%;
     margin: auto;
     display: block;
@@ -814,6 +814,14 @@ text-align: center;
     height: 100%;
     position: relative;
     top: 10em;
+}
+.sportResults .resultIntro{
+  font-size: 1em;
+}
+.sportInfo {
+    font-size: 0.7em;    
+    width: 50%;
+    text-align: center;
 }
 .resultSlider {
     position: relative;
