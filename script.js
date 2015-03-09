@@ -228,9 +228,9 @@ $(document).ready(function(){
 		var genderVal = $('input[name="gender"]:checked').val();
 		User.gender = genderVal;
 				if (User.gender === "girl"){
-					$(".aboutyou img").attr("src", "images/youF.png");
+					$(".aboutyou img").attr("src", "images/sections/youF.png");
 				} else if (User.gender === "boy"){
-					$(".aboutyou img").attr("src", "images/youM.png");
+					$(".aboutyou img").attr("src", "images/sections/youM.png");
 				}
 				if(User.gender !== 0){
 					questionComplete(true, 1, 3);
