@@ -669,10 +669,7 @@ $(document).ready(function(){
 		"Tennis",
 		"Squash",
 		"Table tennis",
-		"Golf",
-		"Cheese Rolling",	
-		"Dressage",	
-		"Bed Racing"		
+		"Golf"	
 		];
 		var sportInfo = [
 		"You're at the peak of physical form, you just need to find an excuse to show it off",
@@ -681,31 +678,20 @@ $(document).ready(function(){
 		"Nimble and fit, but you've got power where it counts",	
 		"You like doing exercise, and you're pretty fit, but you don't like getting your hair wet",
 		"You know, it is suprisingly tiring once you get into it",	
-		"You like to get outside, but anything more than walking is a bit too much exercise.",
-		"I feel sorry for the horse",
-		"The best bit is, once you catch it, you can eat it!",
-		"Now that's my kind of racing"
+		"You like to get outside, but anything more than walking is a bit too much exercise."
 		];
 		if(User.cpd > 3000){
 			return [sports[0] , sportInfo[0], 1];
-		} else if(User.cpd > 2500){
-			return [sports[1] , sportInfo[1], 2];
-		} else if(User.cpd > 2300){
+		} else if(User.height > 150 && User.weight > 70){
 			return [sports[2] , sportInfo[2], 3];
-		} else if(User.cpd > 2200){
+		} else if(User.weight < 70 && User.cpd > 2000){
 			return [sports[3] , sportInfo[3], 4];
-		} else if(User.cpd > 2100){
+		} else if(User.exerciseLevel > 3 && User.cpd > 1500){
 			return [sports[4] , sportInfo[4], 5];
-		}else if(User.cpd > 1400){
+		}else if(User.cpd < 1500 && User.weight < 80){
 			return [sports[5] , sportInfo[5], 6];
-		}else if(User.cpd > 1300){
+		}else if(User.cpd < 1500 && User.weight > 80){
 			return [sports[6] , sportInfo[6], 7];
-		}else if(User.cpd > 1200){
-			return [sports[7] , sportInfo[7], 8];
-		}else if(User.cpd > 1100){
-			return [sports[8] , sportInfo[8], 9];
-		}else if(User.cpd > 500){
-			return [sports[9] , sportInfo[9], 10];
 		} else{
 			return [sports[1] , sportInfo[1], 2];
 		}
