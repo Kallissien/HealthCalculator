@@ -334,7 +334,7 @@ $(document).ready(function(){
 	}
 	function getExerciseDuration(){
 		var exerciseDurationVal = parseInt($('#exerD select').find(":selected").val());
-		if(User.exerciseDuration !== 0){
+		if(exerciseDurationVal !== 0){
 					questionComplete(true,2,3);
 					User.exerciseDuration = exerciseDurationVal;
 				} else{
@@ -748,7 +748,8 @@ $(document).ready(function(){
 			 		$(".selectors").css("transform", "scale(1)");
 				}
 			} else {$(".selectors").css("transform", "scale(1)");}
-		}, 1000);	
+		}, 1000);
+		console.log(User.cpd + " - SetUpCalc");
 	}
 	function setUpResults(){
 		setTimeout(function() {
@@ -763,7 +764,8 @@ $(document).ready(function(){
 		}, 450);	
 		setTimeout(function() {
 	    $(".resultsContainer").css("transform","scale(1)");
-		}, 800);	
+		}, 800);
+		console.log(User.cpd + " - SetUpResults");	
 	}
 	function getBMR(){
 		var caloriesBurned = 0;
@@ -776,13 +778,18 @@ $(document).ready(function(){
 			caloriesBurned = Math.round((((User.age * 0.074) + (User.weight * 0.1263) + (User.heartRate * 0.4472) - 20.4022) * User.exerciseDuration / 4.184));
 			BMR = Math.round(655 + (4.35 * (User.weight * 2.20462)) + (4.7 * (User.height * 0.393700787)) - (4.7 * User.age));
 		}
-		User.cpw = caloriesBurned * User.exerciseLevel;
+		User.cpw = caloriesBurned * User.exerciseLevel;	
 		return BMR;
+	}
+	function setCPW(){
+		var weeklyBMR = User.bmr * 7;
+		User.cpw += weeklyBMR;
+		console.log(User.cpw + " - BMR");
 	}
 	function gymResults(food){
 		var r = $.Deferred();				
 		// Calculate price per calorie
-			var caloriesPerMonth = (User.cpd * 7) * 4;
+			var caloriesPerMonth = (User.cpw) * 4;
 			var pricePerCalorieLong = parseFloat(User.gymPrice) / caloriesPerMonth;
 			var pricePerFood = 0;
 			User.ppc = parseFloat(pricePerCalorieLong);
@@ -820,7 +827,7 @@ $(document).ready(function(){
 			return r;
 	}
 	function noGymResults(){
-		var cph = (User.cpd) / 24;
+		var cph = (User.cpw / 7) / 24;
 		var timepercalorie = 1 / cph;
 		var timeInDays = timepercalorie / 24;
 		var timeInMins = timepercalorie * 60;
@@ -855,7 +862,7 @@ $(document).ready(function(){
 		$(".foodCost").css("display","none");
 	}
 	function foodResults(food){
-		var cph = (User.cpd) / 24;
+		var cph = (User.cpw / 7) / 24;
 		var timeForFood = (food[1] / cph);
 		var foodtimeInDays = timeForFood / 24;
 		var foodtimeInMins = timeForFood * 60;
@@ -906,10 +913,10 @@ $(document).ready(function(){
 	}
 	function collectResults(){
 		checkAnswers("cookie");		
-		if(allAnswers){
-			User.cpd = User.cpw / 7;
+		if(allAnswers){			
 			User.bmr = getBMR();
-			User.cpd = User.cpd + User.bmr;			
+			setCPW();
+			User.cpd = User.cpw / 7;						
 			var food = getFoodItem();			
 			if(User.gymMember){		
 				gymResults(food, sport);				
@@ -921,7 +928,7 @@ $(document).ready(function(){
 			setUpResults();
 			foodResults(food);
 			sportResults(sport);
-			console.log(User.cpd + "     2");
+			console.log(User.cpd + " - Results");
 		}
 	}
 	// Event Handlers
