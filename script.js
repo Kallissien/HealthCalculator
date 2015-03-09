@@ -749,7 +749,6 @@ $(document).ready(function(){
 				}
 			} else {$(".selectors").css("transform", "scale(1)");}
 		}, 1000);
-		console.log(User.cpd + " - SetUpCalc");
 	}
 	function setUpResults(){
 		setTimeout(function() {
@@ -764,8 +763,7 @@ $(document).ready(function(){
 		}, 450);	
 		setTimeout(function() {
 	    $(".resultsContainer").css("transform","scale(1)");
-		}, 800);
-		console.log(User.cpd + " - SetUpResults");	
+		}, 800);	
 	}
 	function getBMR(){
 		var caloriesBurned = 0;
@@ -784,7 +782,6 @@ $(document).ready(function(){
 	function setCPW(){
 		var weeklyBMR = User.bmr * 7;
 		User.cpw += weeklyBMR;
-		console.log(User.cpw + " - BMR");
 	}
 	function gymResults(food){
 		var r = $.Deferred();				
@@ -928,7 +925,6 @@ $(document).ready(function(){
 			setUpResults();
 			foodResults(food);
 			sportResults(sport);
-			console.log(User.cpd + " - Results");
 		}
 	}
 	// Event Handlers
@@ -1002,9 +998,7 @@ $(document).ready(function(){
 		collectAnswers($(this).find(":selected"));
 	});
 	$('.getAnswers').click(function(){
-		console.log(User.cpd + "4");
 		setUpCalc(true);
-		console.log(User.cpd + "3");
 	});
 	$('.moreResults').click(function(){
 		if($(".resultSlider").css("top") === "0px"){
