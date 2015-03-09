@@ -1,86 +1,94 @@
 @charset "UTF-8";
 /* CSS Document */
+html {
+  font-size: 20px;
+}
+body {
+  background-color: #ccc;
+  padding: 50px;
+  text-align: center;
+}
 .healthTitle{
-    margin-bottom:5em;
+  margin-bottom:5em;
     }
 h1{
-    font-size: 70px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-    text-align: center;
-    margin-bottom: 0;
-    margin-top: 16px;
+  font-size: 70px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 0;
+  margin-top: 16px;
 }
 h2{
-    color: rgb(77, 77, 77);
-font-size: 1em;
-font-family: 'Roboto', sans-serif;
-font-weight: 400;
-margin-bottom: -3px;
-    margin-top: 1em;
-text-align: center;
+  color: rgb(77, 77, 77);
+  font-size: 1em;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  margin-bottom: -3px;
+  margin-top: 1em;
+  text-align: center;
 }
 h3{
-    font-size: 28px;
-    font-family:'Rancho';
-    font-weight:100;
-    text-align: center;
-    margin-top: 0;
-    color: rgba(0, 0, 0, 0.54);
+  font-size: 28px;
+  font-family:'Rancho';
+  font-weight:100;
+  text-align: center;
+  margin-top: 0;
+  color: rgb(0,0,0);
+  color: rgba(0, 0, 0, 0.54);
 }
 h4{
-    color:white;
-    font-size: 1.4em;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 100;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    text-align: center;
+  color:white;
+  font-size: 1.4em;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  text-align: center;
 }
 body{
-    background: #D0D0D0;
+  background: #D0D0D0;
 }
 section {
-    padding: 2%;
-    background: white;
-    margin-bottom:2rem;
-    box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+  padding: 2%;
+  background: white;
+  margin-bottom:2rem;
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
 }
 /* New Circle Style */
 .container {
-    position:relative;
-    width: 14em;
-    height: 14em;
-    padding: 2.8em; /*= 2em * 1.4 (2em = half the width of an img, 1.4 = sqrt(2))*/    
-    background-color: rgb(58, 58, 58);
-    border-radius: 50%; 
-    margin: auto;
-    margin-top:4em;    
-    transition: 0.2s ease-out;
-    transform: scale(0);
-    z-index: 1;
+  position:relative;
+  width: 20em;
+  height: 20em; /*= 2em * 1.4 (2em = half the width of an img, 1.4 = sqrt(2))*/    
+  background-color: rgb(58, 58, 58);
+  border-radius: 50%; 
+  margin: auto;
+  margin-top:4em;    
+  transition: 0.2s ease-out;
+  transform: scale(0);
+  z-index: 1;
 }
 section {
-    display:block;
-    width: 7em;
-    height: 7em;
-    border-radius: 50%;
-    overflow: hidden;
-    transition: 0.4s ease-out;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    cursor: pointer;
-    margin: -3.5em; /* 2em = 4em/2 */ /* half the width */
-    z-index: 3;
+  display:block;
+  width: 7em;
+  height: 7em;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: 0.4s ease-out;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  cursor: pointer;
+  margin: -3.5em; /* 2em = 4em/2 */ /* half the width */
+  z-index: 3;
 }
 section:hover {
-    box-shadow: 4px 4px 4px rgba(0,0,0,0.5);    
-    top: 49%;
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.5);    
+  top: 49%;
 }
 section:active {
-    box-shadow: 0px 0px 0px rgba(0,0,0,0.5);
-    top: 50%;
+  box-shadow: 0 0 0 rgba(0,0,0,0.5);
+  top: 50%;
 }
 .questionNumber {
   width: 20%;
@@ -94,42 +102,43 @@ section:active {
 }
 .selectors{
   transition: 0.2s ease-out;
-  top: 7em;
+  top: 8em;
   position: relative;
   transform: scale(0);
+  z-index:2;
 }
 .deg1 {
 transform: rotate(-450deg) translate(9.5em) rotate(450deg) scale(1);
 }
 .deg2 {
-transform: rotate(-328deg) translate(9.5em) rotate(328deg) scale(0.7);
+transform: rotate(-328deg) translate(11em) rotate(328deg) scale(0.7);
 }
 .deg3 {
-transform: rotate(-210deg) translate(9.5em) rotate(210deg) scale(0.7);
+transform: rotate(-210deg) translate(11em) rotate(210deg) scale(0.7);
 }
 .submit {
-    z-index: 2;
-    position: relative;
-    width: 70%;
-    top: -0.1em;
-    margin: auto;
-    box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-    transition: 0.1s ease-out;
-    transform:scale(0);
+  z-index: 2;
+  position: relative;
+  width: 70%;
+  margin: auto;
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+  transition: 0.1s ease-out;
+  transform:scale(0);
+  top: 15%;
 }
 .resultsContainer .submit{
-    transform: scale(1);
-    top: 7em;
-    width: 100%;
-    height: 3.2em;
+  transform: scale(1);
+  top: 7em;
+  width: 100%;
+  height: 3.2em;
 }
 .submit:hover {
-    box-shadow: 4px 4px 4px rgba(0,0,0,0.5);   
-    top: -0.2em;
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.5);   
+  top: 14.5%;
 }
 .submit:active {
-    box-shadow: 0px 0px 0px rgba(0,0,0,0.5);
-    top: -0.1em;
+    box-shadow: 0 0 0 rgba(0,0,0,0.5);
+    top: 15%;
     background-color: rgb(219, 54, 66);
 }
 .icon img {
@@ -143,23 +152,18 @@ transform: rotate(-210deg) translate(9.5em) rotate(210deg) scale(0.7);
 /* End New Style */
 .line{
     width: 120%;
-position: relative;
-left: -7%;
-height: 1px;
-background: rgb(77, 77, 77);
-margin-top: 5px;
-
+    position: relative;
+    left: -7%;
+    height: 1px;
+    background: rgb(77, 77, 77);
+    margin-top: 5px;
     margin-bottom: 6px;
 }
 .question{
     width: 28%;
     margin-right: 4%;
-    display: inline-block;
-    /* height: auto; */
-    /* min-height: 400px; */
+    display: inline-block;    
     vertical-align: top;
-    /* padding: 1%; */
-    /* background:grey; */
 }
 .question:nth-of-type(4) {
     margin-right: 0;
@@ -174,7 +178,6 @@ margin-top: 5px;
 }
 input {
   width: 92%;
-  margin-left: 2%;
   border: none;
   display: block;
   box-shadow: inset 2px 2px 2px rgba(0,0,0,0.5);
@@ -185,15 +188,16 @@ input {
   font-weight: 300;
 }
 select {
-  width: 100%;
   text-align: left;
   font-size: 0.9em;
   height: 31px;
-  display: inline-block;
   font-family: 'Roboto', sans-serif;
-  width: 92%;   
-  margin-left: 2.5%;   border: none;   display: block;      
-  height: 31px;   font-size: 20px;   padding-left: 5%;   font-family: 'Roboto', sans-serif;   font-weight: 300;
+  width: 93%;   
+  margin-left: 2%;  
+  border: none;   
+  display: block;         
+  padding-left: 5%;      
+  font-weight: 300;
 }
 #question3 select, #exerL select{
   font-size: 0.9em;
@@ -211,41 +215,38 @@ select {
   margin-bottom: -20em;
 }
 .blockage {
-height: 136%;
-width: 2em;
-position: relative;
-margin: auto;
-margin-top: -131%;
-background-color: rgb(58, 58, 58);
-
--webkit-animation-name: rotate; 
-    
--webkit-animation-duration: 40s; 
-    -webkit-animation-iteration-count: infinite;
-    
--webkit-animation-timing-function: linear;
-
-    -moz-animation-name: rotate; 
-    -moz-animation-duration: 80s; 
-    -moz-animation-iteration-count: infinite;
-    -moz-animation-timing-function: linear;
-}
-@-webkit-keyframes rotate {
-    from {-webkit-transform: rotate(0deg);}
-    to {-webkit-transform: rotate(360deg);}
-}
-
-@-moz-keyframes rotate {
-    from {-moz-transform: rotate(0deg);}
-    to {-moz-transform: rotate(360deg);}
-}
+  height: 99%;
+  width: 10%;
+  position: relative;
+  margin: auto;
+  top: 0;
+  background-color: rgb(58, 58, 58);
+  /* background-color: red; */
+  -webkit-animation-name: rotate;     
+  -webkit-animation-duration: 40s; 
+  -webkit-animation-iteration-count: infinite;    
+  -webkit-animation-timing-function: linear;
+  -moz-animation-name: rotate; 
+  -moz-animation-duration: 80s; 
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: linear;
+  }
+  @-webkit-keyframes rotate {
+      from {-webkit-transform: rotate(0deg);}
+      to {-webkit-transform: rotate(360deg);}
+  }
+  @-moz-keyframes rotate {
+      from {-moz-transform: rotate(0deg);}
+      to {-moz-transform: rotate(360deg);}
+  }
 .blockageSmall{
     background-color: rgb(58, 58, 58);
-    width: 126%;
-    height: 2em;
-    margin-left: -13%;
-    margin-top: -76%;
+    /* background-color: blue; */
+    width: 10%;
+    height: 92.5%;
+    top: -95%;
     position: relative;
+    margin: auto;
     transform:rotate(25deg);
     -webkit-animation-name: rotate; 
     
@@ -261,35 +262,31 @@ background-color: rgb(58, 58, 58);
     from {-webkit-transform: rotate(0deg);}
     to {-webkit-transform: rotate(360deg);}
 }
-
 @-moz-keyframes rotateSmall {
     from {-moz-transform: rotate(0deg);}
     to {-moz-transform: rotate(360deg);}
 }
 .circlePulse{
-width: 130%;
-height: 130%;
-position: relative;
-margin-left: -16%;
-margin-top: -15%;
-margin-bottom: -101%;
-border-radius: 50%;
-border: solid rgb(255, 255, 255) 2px;
-display: inline-block;
-transform: scale(0);
-transition: 0.3s ease-out;
+  width: 90%;
+  height: 90%;
+  position: absolute;
+  margin-left: 5%;
+  margin-top: 5%;
+  border-radius: 50%;
+  border: solid rgb(255, 255, 255) 2px;
+  transform: scale(0);
+  transition: 0.3s ease-out;
 }
 .circlePulseSmall{
-width: 120%;
-height: 120%;
-position: relative;
-margin-left: -11%;
-margin-top: -27%;
-border-radius: 50%;
-border: solid rgb(60, 133, 244) 3px;
-display: inline-block;
-transition: 0.3s ease-out;
-transform: scale(0);
+  width: 95%;
+  height: 95%;
+  position: absolute;
+  margin-left: 2%;
+  margin-top: 2%;
+  border-radius: 50%;
+  border: solid rgb(60, 133, 244) 3px;
+  transition: 0.3s ease-out;
+  transform: scale(0);
 }
 #exerL select{
     width:auto;
@@ -311,7 +308,7 @@ transform: scale(0);
     left: 0;
     position: relative;
 }
-.getResults p {
+.getResults p, .moreResults button p{
     font-size: 160%;   
     position: relative;
     top: -1px;
@@ -319,7 +316,7 @@ transform: scale(0);
     margin: 0;
     font-family: 'Roboto', sans-serif;   font-weight: 100;
 }
-button.getResults {
+button.getResults, .moreResults button {
     width: 100%;
     height: 45px;
     display: block;
@@ -327,33 +324,41 @@ button.getResults {
     background-color: rgb(245, 89, 100);
     cursor: pointer;
 }
-button.getResults:active {
+.moreResults{
+  position: absolute;
+  width: 100%;
+  top: 102%;
+}
+.sportResults .moreResults{
+  top: -6em;
+  position: absolute;
+}
+button.getResults:active .moreResults button:active {
     background-color: rgb(219, 54, 66);
 }
 .infoBox {
-    max-height: 2em;
-    min-height: 4em;
-    width: 100%;
-    margin: auto;
-    position: relative;
-    top: 0.5em;
+  max-height: 2em;
+  min-height: 4em;
+  width: 100%;
+  margin: auto;
+  position: relative;
+  top: 0.5em;
 }
 .infoBox p {    
-    display: inline-block; color: white; font-family: 'Roboto'; 
-    font-weight: 400; 
-    font-size: 0.9em;
-    text-align: left;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    position: relative;
-    /* top: -3em; */
+  display: inline-block; color: white; font-family: 'Roboto'; 
+  font-weight: 400; 
+  font-size: 0.9em;
+  text-align: left;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  position: relative;
 }
 .questionBox {
-    width: 110%;
-    margin-left: -8%;
+    width: 80%;
+    margin: auto;
     height: 11em;
-    top: 1.2em;
+    top: 3.2em;
     overflow: hidden;
     position: relative;
 }
@@ -424,7 +429,7 @@ input[type="radio"] {
 }
 .buttonContainer button:hover {
    box-shadow:1px 1px 1px rgba(0,0,0,0.5);
-   top: 0px;
+   top: 0;
    position: relative;
 }
 .buttonContainer button:active {
@@ -470,8 +475,11 @@ input[type="radio"] {
 .circlePulseContainer {
     display: block;
     position: absolute;
-    width: 71%;
-    height: 71%;
+    margin: auto;
+    /* left: 15%; */
+    /* top: 14%; */
+    width: 100%;
+    height: 100%;
     transition: 0.2s ease-out;
     transform: scale(1);
 }
@@ -495,13 +503,13 @@ h5 {
 font-size: 2em;  
 font-family: 'Roboto', sans-serif;
 font-weight: 100;
-margin-bottom: 0px;
+margin-bottom: 0;
 margin-top: -0.4em;
 text-align: center;
 }
 .results {
     width: 100%;
-    height: 10em;
+    height: 18em;
     position: relative;
     transition: 0.3s;
 }
@@ -528,11 +536,11 @@ text-align: center;
     font-size: 131%;
     color: rgb(240, 106, 106);
 }
-.foodPic {
+.foodPic, .sportPic {
     display: block;
-    margin-top: 0em;
+    margin-top: 0;
 }
-.foodPic img {
+.foodPic img, .sportPic img{
     width: 47%;
     margin: auto;
     display: block;
@@ -551,7 +559,7 @@ text-align: center;
 }
 .resultToQuestions {
     position: relative;
-    left: 0px;
+    left: 0;
     margin-bottom: -2em;
     width: 100%;
     height: 1.5em;
@@ -565,18 +573,6 @@ text-align: center;
     top: -4px;
     color: white;
 }
-.moreResults {
-    top: 17.8em;
-    position: absolute;
-    height: 3em;
-    width:100%;
-    opacity: 0.6;
-    transition: 0.3s;
-}
-.moreResults .getResults {
-    background-color: rgb(245, 89, 100);
-    height: 100%;
-}
 .resultToQuestions:hover, .moreResults:hover {
     opacity: 1;
 }
@@ -584,21 +580,21 @@ text-align: center;
     background-color: rgb(29, 76, 199);
 }
 .loaderContainer {
-    position: absolute;
-    width: 10.5em;
-    height: 10.5em;
-    top: 8.8em;
-    padding: 2.8em;
-    background-color: #FFF;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
-    margin: auto;
-    overflow: hidden;
-    opacity: 1;
-    transition: all 0.2s ease 0s;
-    transform: scale(0);
-    z-index: 2;
-    left: 27.75em;
+  width: 12em;
+  height: 12em;
+  padding: 2.8em;
+  background-color: #FFF;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  overflow: hidden;
+  opacity: 1;
+  transition: all 0.2s ease 0s;
+  transform: scale(0);
+  position: relative;
+  margin: auto;
+  top: -1.1em;
+  right: -0.1em;
+  z-index: 3;
 }
 .loader,
 .loader:before,
@@ -638,8 +634,8 @@ text-align: center;
   border-radius: 0 10.2em 10.2em 0;
   top: -0.1em;
   left: 5.1em;
-  -webkit-transform-origin: 0px 5.1em;
-  transform-origin: 0px 5.1em;
+  -webkit-transform-origin: 0 5.1em;
+  transform-origin: 0 5.1em;
   -webkit-animation: load2 2s infinite ease;
   animation: load2 2s infinite ease;
 }
@@ -700,15 +696,6 @@ text-align: center;
     right: 17%;
     opacity: 1;
 }
-html {
-  font-size: 20px;
-}
-body {
-  background-color: #ccc;
-  padding: 50px;
-  text-align: center;
-}
-
 /* Wrapper */
 .icon-button {
   background-color: white;
@@ -824,25 +811,29 @@ body {
 }
 .sportResults {
     width: 100%;
-    height: 330px;
+    height: 100%;
     position: relative;
-    top: 18em;
+    top: 10em;
+}
+.sportResults .resultIntro{
+  font-size: 1em;
+}
+.sportInfo {
+    font-size: 0.7em;    
+    width: 50%;
+    text-align: center;
 }
 .resultSlider {
     position: relative;
-    transition: 0.3s;
-    top: 0em;
+    transition: 0.2s;
+    top: 0;
 }
 @media screen and (max-width: 600px){
   html {
   font-size: 15px;
   }
-  .container{
-    left: -11%;
-  }
-  .circlePulseSmall{
-    margin-left: -11.5%;
-    margin-top: -28%;
+  .loaderContainer{
+    top:1.5em;
   }
   .resultText {
     font-size: 0.8em;   font-family: 'Roboto', sans-serif;   font-weight: 100;         
@@ -851,7 +842,6 @@ body {
   width: 16em;
   height: 16em;
   margin-top:-22.5em;
-   left: -11%;
 }
 .loaderContainer {
     top: 4.3em;

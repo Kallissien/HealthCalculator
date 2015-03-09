@@ -4,9 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
 <title>Savoo Health & Fitness Calculator</title>
-<link href='http://fonts.googleapis.com/css?family=Roboto:100,400|Rancho' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto:100,400' rel='stylesheet' type='text/css'>
 <link href="style.css" rel="stylesheet" type="text/css">
-<link href="font-awesome.min.css" rel="stylesheet" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="script.js" language="javascript" type="text/javascript"></script>
 </head>
@@ -121,8 +120,11 @@
                 <option name="exerciseDuration" value="35"><p>30 - 40 mins</p></option>
                 <option name="exerciseDuration" value="45"><p>40 - 50 mins</option>
                 <option name="exerciseDuration" value="55"><p>50 mins - one hour</option>
-                <option name="exerciseDuration" value="90"><p> 1 - 1<sup>1/2</sup> hours</option>
-                <option name="exerciseDuration" value="65"><p>Two hours</option>
+                <option name="exerciseDuration" value="90"><p> 1 - 1.5 hours</option>
+                <option name="exerciseDuration" value="120"><p>2 hours</option>
+                <option name="exerciseDuration" value="150"><p>2.5 hours</option>
+                <option name="exerciseDuration" value="180"><p>3 hours</option>
+                <option name="exerciseDuration" value="210"><p>3.5 hours</option>
              </select>
               <div class="infoBox">
                     <p class="infoText" id="infoText23"></p>
@@ -195,7 +197,7 @@
                 </button>
             </div>
             <span class="gymResults">
-            <p class="resultIntro">You're <span class="costUnits">paying</span> <span id="pricepercalorie" class="result">A lot</span> per Calorie</p>
+            <p class="resultIntro">You're <span class="costUnits">pay</span> <span id="pricepercalorie" class="result">A lot</span> per Calorie</p>
             <p class="resultText">It takes you on average <span id="timepercalorie" class="result">a long time</span> <span class="foodCost"><span id="ifgym">& costs <span id="priceperfood" class="result" >too much</span></span></span>     
             to lose 
             <span class="targetFoodCal result">a lot of calories</span></p>
@@ -204,31 +206,26 @@
             <span class="timeResults"></span>
             <div class="foodPic"><img src=""></div>            
             <div class="moreResults">
-                <button class="getResults">
+                <button>
                     <p>Give Me More</p>
                 </button>
             </div> 
         </div>        
         
         <div class="sportResults">
-        <div class="resultToQuestions">
-            <button class="getResults">
+        <div class="moreResults">
+            <button>
                 <p>Back</p>
             </button>
         </div>
             <p class="resultIntro">Using an advanced scientific algorithm, we have determined that the sport for you is:</p>
-            <p><span class="costUnits" id="yourSport"></span></p>
+            <p><span class="result" id="yourSport"></span></p>
+            <div class="sportPic"><img src=""></div> 
+            <div><i class="sportInfo resultText"></i></div> 
         </div>
     </div>   
 </div>
-<!--
-<div class="shareResults">
-    <h2>Share</h2>
-        <div class="socialIcon"><a href="http://twitter.com/minimalmonkey" class="icon-button twitter"><i class="icon-twitter"></i><span></span></a></div>
-        <div class="socialIcon"><a href="http://facebook.com" class="icon-button facebook"><i class="icon-facebook"></i><span></span></a></div>
-        <div class="socialIcon"><a href="http://plus.google.com" class="icon-button google-plus"><i class="icon-google-plus"></i><span></span></a></div>
-   </div>
-   -->    
+  
 </div>
 <div class="loaderContainer">
     <div class="loader"></div>

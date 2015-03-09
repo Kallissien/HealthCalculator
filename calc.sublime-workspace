@@ -4,20 +4,80 @@
 		"selected_items":
 		[
 			[
+				"coll",
+				"collectResults"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"ques",
+				"questionsAnswered"
+			],
+			[
+				"va",
+				"value"
+			],
+			[
+				"cookie",
+				"cookieAnswers"
+			],
+			[
+				"all",
+				"allAnswers"
+			],
+			[
+				"curr",
+				"currentStep"
+			],
+			[
+				"cu",
+				"currentStep"
+			],
+			[
+				"inf",
+				"infoText"
+			],
+			[
+				"exer",
+				"exerciseDurationVal"
+			],
+			[
+				"exercise",
+				"exerciseDuration"
+			],
+			[
+				"sport",
+				"sportResults"
+			],
+			[
+				"getT",
+				"getTimeForFood"
+			],
+			[
+				"time",
+				"timeInMins"
+			],
+			[
+				"next",
+				"nextStep"
+			],
+			[
+				"get",
+				"getPriceResults"
+			],
+			[
+				"result",
+				"resultsContainer"
+			],
+			[
 				"p",
 				"p	Tag"
 			],
 			[
-				"inf",
-				"infoTextColour"
-			],
-			[
 				"price",
 				"priceperfood"
-			],
-			[
-				"time",
-				"timeForFood"
 			],
 			[
 				"secon",
@@ -28,16 +88,8 @@
 				"loaderText"
 			],
 			[
-				"curr",
-				"currentStep"
-			],
-			[
 				"que",
 				"questionsAnswered"
-			],
-			[
-				"cu",
-				"currentQuestion"
 			],
 			[
 				"nex",
@@ -58,10 +110,6 @@
 			[
 				"getEx",
 				"getExerciseDuration"
-			],
-			[
-				"get",
-				"getFoodItem"
 			],
 			[
 				"ex",
@@ -110,10 +158,6 @@
 			[
 				"questions",
 				"questionsAnswered"
-			],
-			[
-				"ques",
-				"questionComplete"
 			],
 			[
 				"curre",
@@ -263,7 +307,7 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 10965,
+				"buffer_size": 10665,
 				"line_ending": "Unix"
 			}
 		},
@@ -271,7 +315,7 @@
 			"file": "script.js",
 			"settings":
 			{
-				"buffer_size": 25274,
+				"buffer_size": 30751,
 				"line_ending": "Unix"
 			}
 		},
@@ -279,7 +323,7 @@
 			"file": "style.css",
 			"settings":
 			{
-				"buffer_size": 16788,
+				"buffer_size": 16488,
 				"line_ending": "Unix"
 			}
 		}
@@ -419,6 +463,29 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"cpw",
+			"cpw(User.cpd)",
+			"cpw",
+			"popula",
+			"getG",
+			"User.cpd",
+			"User.cpw",
+			"heartra",
+			"questionComplete()",
+			"rotate",
+			"rotat",
+			"timeinMi",
+			"timein",
+			"minutes",
+			"weightin",
+			"moreRes",
+			"for",
+			"0px",
+			"0em",
+			"results",
+			"morere",
+			"submit:ac",
+			"selecto",
 			"morere",
 			"resultI",
 			"resultto",
@@ -543,15 +610,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10965,
+						"buffer_size": 10665,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10271,
-								10271
+								10380,
+								10396
 							]
 						],
 						"settings":
@@ -561,7 +628,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2801.0,
+						"translation.y": 960.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -573,15 +640,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 25274,
+						"buffer_size": 30751,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								22229,
-								22229
+								28248,
+								28248
 							]
 						],
 						"settings":
@@ -589,8 +656,8 @@
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 3.0,
-						"translation.y": 11411.0,
+						"translation.x": 0.0,
+						"translation.y": 1824.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -602,15 +669,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 16788,
+						"buffer_size": 16488,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								11289,
-								11289
+								15991,
+								15991
 							]
 						],
 						"settings":
@@ -620,7 +687,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 8298.0,
+						"translation.y": 10349.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
