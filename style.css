@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /* CSS Document */
 html {
-  font-size: 20px;
+  font-size: 150%;
 }
 body {
   background-color: #ccc;
@@ -202,14 +202,14 @@ select {
 #question3 select, #exerL select{
   font-size: 0.9em;
   font-weight: 100;
-  width: 65px;
-  height: 36px;
+  width: 20%;
+  height: 80%;
   display: block;
   float: right;
   background-color: white;
   position: relative;
-  top: -39px;
-  right: 5px;
+  top: -1.6em;
+  right: 5%;
   border: none;
   box-sizing: inherit;
   margin-bottom: -20em;
@@ -816,7 +816,7 @@ text-align: center;
     top: 10em;
 }
 .sportResults .resultIntro{
-  font-size: 1em;
+  /* font-size: 1em; */
 }
 .sportInfo {
     font-size: 0.7em;    
@@ -830,20 +830,64 @@ text-align: center;
 }
 @media screen and (max-width: 600px){
   html {
-  font-size: 15px;
+  font-size: 80%;
   }
   .loaderContainer{
     top:1.5em;
   }
   .resultText {
-    font-size: 0.8em;   font-family: 'Roboto', sans-serif;   font-weight: 100;         
-  }
+    font-size: 0.8em;   font-family: 'Roboto', sans-serif;   font-weight: 100;  
+    position: relative;
+}
   .resultsContainer {
   width: 16em;
   height: 16em;
   margin-top:-22.5em;
 }
 .loaderContainer {
-    top: 4.3em;
+    top: 3.3em;
   }
+  .resultToQuestions {
+    top: -6em;
+    height: 1em;
+}
+.resultToQuestions p {
+    top: 2px;
+    font-size: 90%;
+}
+.moreResults {
+    top: 96%;
+}
+.results {
+    height: 100%;
+}
+button.getResults, .moreResults button {
+    height: 27px;
+}
+.getResults p, .moreResults button p {
+    font-size: 100%;
+}
+.sportResults {
+    top: 7.5em;
+}
+.sportPic {
+    top: -2em;
+    position: relative;
+}
+.sportResults .resultIntro {
+    font-size: 87%;
+     top: -3em;
+}
+.sportResults .resultText{
+
+     top: -3em;
+}
+#question3 select {
+    width: 26%;
+    top: -2.5em;
+}
+#exerL select {
+    width: 55%;
+    top: -2.5em;
+}
 }
