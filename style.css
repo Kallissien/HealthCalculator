@@ -1,12 +1,10 @@
 @charset "UTF-8";
 /* CSS Document */
-html {
-  font-size: 150%;
-}
-body {
-  background-color: #ccc;
-  padding: 50px;
-  text-align: center;
+.healthCalculator {
+    width: 30em;
+    height: 30em;
+    margin: auto;
+    margin-top: 6rem;
 }
 .healthTitle{
   margin-bottom:5em;
@@ -28,16 +26,10 @@ h2{
   margin-top: 1em;
   text-align: center;
 }
-h3{
-  font-size: 28px;
-  font-family:'Rancho';
-  font-weight:100;
-  text-align: center;
-  margin-top: 0;
-  color: rgb(0,0,0);
-  color: rgba(0, 0, 0, 0.54);
-}
-h4{
+.question > span{
+  display:inline-block;
+  margin: auto;
+  width: 100%;
   color:white;
   font-size: 1.4em;
   font-family: 'Roboto', sans-serif;
@@ -58,12 +50,11 @@ section {
 /* New Circle Style */
 .container {
   position:relative;
-  width: 20em;
-  height: 20em; /*= 2em * 1.4 (2em = half the width of an img, 1.4 = sqrt(2))*/    
+  width: 100%;
+  height: 100%; /*= 2em * 1.4 (2em = half the width of an img, 1.4 = sqrt(2))*/    
   background-color: rgb(58, 58, 58);
   border-radius: 50%; 
-  margin: auto;
-  margin-top:4em;    
+  margin: auto;    
   transition: 0.2s ease-out;
   transform: scale(0);
   z-index: 1;
@@ -84,11 +75,9 @@ section {
 }
 section:hover {
   box-shadow: 4px 4px 4px rgba(0,0,0,0.5);    
-  top: 49%;
 }
 section:active {
   box-shadow: 0 0 0 rgba(0,0,0,0.5);
-  top: 50%;
 }
 .questionNumber {
   width: 20%;
@@ -102,19 +91,25 @@ section:active {
 }
 .selectors{
   transition: 0.2s ease-out;
-  top: 8em;
-  position: relative;
+  position: absolute;
   transform: scale(0);
-  z-index:2;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
 }
 .deg1 {
-transform: rotate(-450deg) translate(9.5em) rotate(450deg) scale(1);
+transform: rotate(-450deg) rotate(450deg) scale(1);
+top: -5%;
 }
 .deg2 {
-transform: rotate(-328deg) translate(11em) rotate(328deg) scale(0.7);
+transform: rotate(-328deg) rotate(328deg) scale(0.7);
+top: 70%;
+left: 95%;
 }
 .deg3 {
-transform: rotate(-210deg) translate(11em) rotate(210deg) scale(0.7);
+transform: rotate(-210deg) rotate(210deg) scale(0.7);
+left: 5%;
+top: 70%;
 }
 .submit {
   z-index: 2;
@@ -124,7 +119,7 @@ transform: rotate(-210deg) translate(11em) rotate(210deg) scale(0.7);
   box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
   transition: 0.1s ease-out;
   transform:scale(0);
-  top: 15%;
+  top: 1%;
 }
 .resultsContainer .submit{
   transform: scale(1);
@@ -134,11 +129,10 @@ transform: rotate(-210deg) translate(11em) rotate(210deg) scale(0.7);
 }
 .submit:hover {
   box-shadow: 4px 4px 4px rgba(0,0,0,0.5);   
-  top: 14.5%;
+  top: 1.5%;
 }
 .submit:active {
     box-shadow: 0 0 0 rgba(0,0,0,0.5);
-    top: 15%;
     background-color: rgb(219, 54, 66);
 }
 .icon img {
@@ -147,7 +141,7 @@ transform: rotate(-210deg) translate(11em) rotate(210deg) scale(0.7);
 .icon {
     width: 40%;
     margin: auto;
-    margin-bottom: 50px;
+    position: relative;
 }
 /* End New Style */
 .line{
@@ -156,14 +150,17 @@ transform: rotate(-210deg) translate(11em) rotate(210deg) scale(0.7);
     left: -7%;
     height: 1px;
     background: rgb(77, 77, 77);
-    margin-top: 5px;
-    margin-bottom: 6px;
+    margin-bottom: 2%;
 }
 .question{
-    width: 28%;
-    margin-right: 4%;
+    width: 24%;
+    height: 100%;
+    padding: 1%;
     display: inline-block;    
     vertical-align: top;
+    flex: 1;
+    /* margin-right: 3%; */
+    /* margin-left: 1%; */
 }
 .question:nth-of-type(4) {
     margin-right: 0;
@@ -202,24 +199,24 @@ select {
 #question3 select, #exerL select{
   font-size: 0.9em;
   font-weight: 100;
-  width: 20%;
-  height: 80%;
+  width: auto;
+  height: 30px;
   display: block;
   float: right;
   background-color: white;
   position: relative;
-  top: -1.6em;
+  top: -35px;
   right: 5%;
   border: none;
   box-sizing: inherit;
-  margin-bottom: -20em;
+  margin-bottom: -20px;
 }
 .blockage {
-  height: 99%;
+  height: 98%;
   width: 10%;
   position: relative;
   margin: auto;
-  top: 0;
+  top: 1%;
   background-color: rgb(58, 58, 58);
   /* background-color: red; */
   -webkit-animation-name: rotate;     
@@ -242,12 +239,11 @@ select {
 .blockageSmall{
     background-color: rgb(58, 58, 58);
     /* background-color: blue; */
-    width: 10%;
-    height: 92.5%;
-    top: -95%;
+    width: 6%;
+    height: 90%;
+    top: -93%;
     position: relative;
     margin: auto;
-    transform:rotate(25deg);
     -webkit-animation-name: rotate; 
     
     -webkit-animation-duration: 80s; 
@@ -267,26 +263,39 @@ select {
     to {-moz-transform: rotate(360deg);}
 }
 .circlePulse{
+  width: 95%;
+  height: 95%;
+  position: absolute;
+  margin-left: 2.5%;
+  margin-top: 2.5%;
+  border-radius: 50%;
+  background-color: rgb(255, 255, 255);
+  transform: scale(0);
+  transition: 0.3s ease-out;
+}
+.circlePulseSmall{
   width: 90%;
   height: 90%;
   position: absolute;
   margin-left: 5%;
   margin-top: 5%;
   border-radius: 50%;
-  border: solid rgb(255, 255, 255) 2px;
-  transform: scale(0);
+  /* border: solid rgb(60, 133, 244) 3px; */
   transition: 0.3s ease-out;
+  transform: scale(0);
+  background-color: rgb(60, 133, 244);
 }
-.circlePulseSmall{
-  width: 95%;
-  height: 95%;
+.questionBackground{
+  width: 88%;
+  height: 88%;
   position: absolute;
-  margin-left: 2%;
-  margin-top: 2%;
+  margin-left: 6%;
+  margin-top: 6%;
   border-radius: 50%;
-  border: solid rgb(60, 133, 244) 3px;
+  /* border: solid rgb(60, 133, 244) 3px; */
   transition: 0.3s ease-out;
   transform: scale(0);
+  background-color: rgb(58, 58, 58);
 }
 #exerL select{
     width:auto;
@@ -327,7 +336,7 @@ button.getResults, .moreResults button {
 .moreResults{
   position: absolute;
   width: 100%;
-  top: 102%;
+  top: 86%;
 }
 .sportResults .moreResults{
   top: -6em;
@@ -337,39 +346,40 @@ button.getResults:active .moreResults button:active {
     background-color: rgb(219, 54, 66);
 }
 .infoBox {
-  max-height: 2em;
+  /* max-height: 2em; */
   min-height: 4em;
-  width: 100%;
+  width: 90%;
   margin: auto;
   position: relative;
-  top: 0.5em;
+  top: 2%;
 }
-.infoBox p {    
-  display: inline-block; color: white; font-family: 'Roboto'; 
+.infoBox p {     color: white; font-family: 'Roboto'; 
   font-weight: 400; 
-  font-size: 0.9em;
-  text-align: left;
+       font-size: 0.9em;
+       text-align: left;
   width: 100%;
   padding: 0;
-  margin: 0;
-  position: relative;
+       margin: 0;
 }
 .questionBox {
-    width: 80%;
+    width: 65%;
+    height: 56%;
     margin: auto;
-    height: 11em;
-    top: 3.2em;
     overflow: hidden;
     position: relative;
+    top: 13%;
 }
 .questionContainer {
-    width: 53em;
-    height: 9em;
+    width: 330%;
+    height: 100%;
+    left: -6%;
     /*transform: translateX(-65%);*/
     transition: 0.2s ease-out;
     position: absolute;
     opacity: 0;
     z-index:0;
+    display: flex;
+    flex-direction: row;
 }
 #question1{
     opacity:1;
@@ -393,7 +403,6 @@ input[type="radio"] {
 .radio {
     display: inline-block;
     margin: auto;
-    margin-left: 6%;
 }
 #question2 .radio {
     position: relative;
@@ -407,10 +416,9 @@ input[type="radio"] {
 }
 .buttonContainer {
     width: 59%;
-    position: absolute;
-    top: 73%;
-    left: 21.5%;
+    position: relative;
     margin: auto;
+    margin-top: 20%;
     z-index: 1;
 }
 .buttonContainer button {
@@ -440,10 +448,9 @@ input[type="radio"] {
 .breadcrumbContainer {
     width: 20%;
     height: 1em;
-    position: absolute;
-    top: 83%;
-    left: 41%;
+    position: relative;
     margin: auto;
+    z-index: 2;
 }
 .breadcrumb {
     background: white;
@@ -476,41 +483,32 @@ input[type="radio"] {
     display: block;
     position: absolute;
     margin: auto;
-    /* left: 15%; */
-    /* top: 14%; */
     width: 100%;
     height: 100%;
     transition: 0.2s ease-out;
     transform: scale(1);
 }
-.resultsContainer {
-    position: relative;   
-    width: 20em;   
-    height: 20em;   
-    /* top: -25em; */
-    padding: 2.8em;   
+.resultsContainer {     
     background-color: rgb(244, 244, 244);   
-    box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
-    border-radius: 50%;   margin: auto;   
-    margin-top: -22em;   
-    margin-bottom: -21.2em;
-    transition: 0.3s ease-out;   
-    transform: scale(1);
     overflow: hidden;
-    z-index: 2;
+    position: relative;   width: 100%;   height: 100%;      
+    top: -100%;
+    border-radius: 50%;   margin: auto;   transition: 0.2s ease-out;   transform: scale(0);   z-index: 1;
 }
-h5 {
-font-size: 2em;  
+.resultTitle {
+font-size: 1.5em;  
 font-family: 'Roboto', sans-serif;
 font-weight: 100;
-margin-bottom: 0;
-margin-top: -0.4em;
 text-align: center;
+margin: 0;
+display: block;
+margin-top: 2%;
 }
 .results {
     width: 100%;
-    height: 18em;
+    height: 50%;
     position: relative;
+    margin: auto;
     transition: 0.3s;
 }
 .resultIntro {
@@ -518,30 +516,37 @@ text-align: center;
     font-size: 1.2em;
     font-family: "Roboto",sans-serif;
     font-weight: 100;
-    margin-bottom: 0.5em;
-    margin-top: 0.5em;
+    width: 80%;
+    margin: auto;
 }
 .resultText {
-    text-align: left;
+    text-align: center;
     font-size: 1em;   font-family: 'Roboto', sans-serif;   font-weight: 100;         
     margin: 0;
-    margin-left: -1em;
-    display: inline-block;
-    width: 112%;
-}
-.resultText:nth-of-type(3){
-    margin-top: 7px;
+    display: block;
+    width: 80%;
+    margin:auto;
+    margin-top: 1%;
 }
 .result {
     font-size: 131%;
     color: rgb(240, 106, 106);
 }
+.radioContainer {
+    width: 100%;
+    display: flex;
+}
 .foodPic, .sportPic {
     display: block;
-    margin-top: 0;
+    position: absolute;
+    top: 45%;
+    height: 40%;
+    width: 100%;
+    margin: auto;
 }
 .foodPic img, .sportPic img{
-    width: 47%;
+    height: 100%;
+    width: auto;
     margin: auto;
     display: block;
     transition: 0.4s ease-out;
@@ -551,27 +556,24 @@ text-align: center;
     height: 100%;
     background-color: rgb(89, 132, 245);
     width: 100%;   
-    height: 32px;   display: block;   border: none;
+    height: 100%;   display: block;   border: none;
     cursor: pointer;
 }
 .resultsContainer .submit:hover {
     top: 6.9em;
 }
 .resultToQuestions {
-    position: relative;
+    /* position: absolute; */
     left: 0;
-    margin-bottom: -2em;
     width: 100%;
-    height: 1.5em;
+    height: 7%;
     opacity: 0.3;
     transition: all 0.2s ease 0s;
-    top: -5em;
 }
 .resultToQuestions p {
     font-size: 100%;
-    position: relative;
-    top: -4px;
     color: white;
+    margin: 0;
 }
 .resultToQuestions:hover, .moreResults:hover {
     opacity: 1;
@@ -580,21 +582,21 @@ text-align: center;
     background-color: rgb(29, 76, 199);
 }
 .loaderContainer {
-  width: 12em;
-  height: 12em;
-  padding: 2.8em;
+  /* width: 100%; */
+  /* height: 100%; */
   background-color: #FFF;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-  border-radius: 50%;
-  overflow: hidden;
-  opacity: 1;
-  transition: all 0.2s ease 0s;
+  /* box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); */
+  /* border-radius: 50%; */
+  /* overflow: hidden; */
+  /* opacity: 1; */
+  /* transition: all 0.2s ease 0s; */
   transform: scale(0);
-  position: relative;
-  margin: auto;
-  top: -1.1em;
-  right: -0.1em;
+  /* position: relative; */
+  /* margin: auto; */
+  /* z-index: 3; */
+  position: relative;   width: 100%;   height: 100%;      border-radius: 50%;   margin: auto;   transition: 0.2s ease-out;      
   z-index: 3;
+  top: -200%;
 }
 .loader,
 .loader:before,
@@ -621,11 +623,12 @@ text-align: center;
 .loader {
   font-size: 11px;
   text-indent: -99999em;
-  margin: -2em auto;
+  margin: auto;
   position: relative;
   width: 10em;
   height: 10em;
   box-shadow: inset 0 0 0 1em #DE3D3D;
+  top: 20%;
 }
 .loader:after {
   width: 5.2em;
@@ -666,7 +669,7 @@ font-family: 'Roboto', sans-serif;
 font-weight: 400;
 margin-bottom: -3px;
     
-        margin-top: 3em;
+        margin-top: 31%;
 text-align: center;
 }
 .shareResults {
@@ -812,8 +815,8 @@ text-align: center;
 .sportResults {
     width: 100%;
     height: 100%;
-    position: relative;
-    top: 10em;
+    position: absolute;
+    top: 217%;
 }
 .sportResults .resultIntro{
   /* font-size: 1em; */
@@ -824,9 +827,9 @@ text-align: center;
     text-align: center;
 }
 .resultSlider {
-    position: relative;
+    position: absolute;
     transition: 0.2s;
-    top: 0;
+    height: 200%;
 }
 @media screen and (max-width: 600px){
   html {
@@ -879,7 +882,6 @@ button.getResults, .moreResults button {
      top: -3em;
 }
 .sportResults .resultText{
-
      top: -3em;
 }
 #question3 select {

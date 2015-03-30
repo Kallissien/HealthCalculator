@@ -24,31 +24,31 @@ var currentStep = 1;
 var nextStep = 0;
 var allAnswers = false;
 var UserValue = [];
-// Cookie Functions
-function createCookie(name,value,days) {
-  var expires = 0;
-	if (days) {
-		var date = new Date();
-		date.setTime(date.getTime()+(days*24*60*60*1000));
-		expires = "; expires="+date.toGMTString();
-	}
-	else expires = "";
-	document.cookie = name+"="+value+expires+"; path=/";
-}
-function readCookie(name) {
-	var nameEQ = name + "=";
-	var ca = document.cookie.split(';');
-	for(var i=0;i < ca.length;i++) {
-		var c = ca[i];
-		while (c.charAt(0)==' ') c = c.substring(1,c.length);
-		if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length,c.length);
-	}
-	return null;
-}
-function eraseCookie(name) {
-	createCookie(name,"",-1);
-}
 $(document).ready(function(){
+	// Cookie Functions
+	function createCookie(name,value,days) {
+	  var expires = 0;
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime()+(days*24*60*60*1000));
+			expires = "; expires="+date.toGMTString();
+		}
+		else expires = "";
+		document.cookie = name+"="+value+expires+"; path=/";
+	}
+	function readCookie(name) {
+		var nameEQ = name + "=";
+		var ca = document.cookie.split(';');
+		for(var i=0;i < ca.length;i++) {
+			var c = ca[i];
+			while (c.charAt(0)==' ') c = c.substring(1,c.length);
+			if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length,c.length);
+		}
+		return null;
+	}
+	function eraseCookie(name) {
+		createCookie(name,"",-1);
+	}
 	// Stand alone Functions
 	function phaseIn(element){ 
 		$(element).animate({
@@ -150,7 +150,7 @@ $(document).ready(function(){
 			rotateRight();
 		}
 	}
-	function changeStep(nextStep){
+	function changeStep(nextStep){ // Paint
 		if(nextQuestion === null){
 			nextQuestion=0;
 		}
@@ -166,7 +166,7 @@ $(document).ready(function(){
 			} else if(nextStep === 2){
 				$(questionContainer).css("transform", "translateX(-33%)");
 			} else if(nextStep === 3){
-				$(questionContainer).css("transform", "translateX(-65%)");
+				$(questionContainer).css("transform", "translateX(-66%)");
 			}
 			currentStep = nextStep;		
 			}
@@ -584,7 +584,7 @@ $(document).ready(function(){
 			 }
 			 checkAnswers(element);	 
 	}
-	function checkAnswers(element){
+	function checkAnswers(element){ // Paints
 		if(element === "cookie"){
 			getName();
 			getAge();
@@ -603,12 +603,12 @@ $(document).ready(function(){
 			   for (var key in obj) { // iterate on object properties
 			      var value = obj[key];
 			      if (value === true){
-			      	questionsAnswered++
+			      	questionsAnswered++;
 			      }
 			   }
 			}
 			 if (questionsAnswered === 9){
-			 	allAnswers = true;
+			 	allAnswers = true;			 	
 				 	$(".submit").css("transform", "scale(1)");
 				 	allAnswers = true;
 				 	infoTextColour("good", currentQuestion, currentStep);
@@ -642,7 +642,7 @@ $(document).ready(function(){
 		"a refreshing dose of Irn Bru",
 		"a revitalizing spray of powerade",
 		"a boring glass of almond milk",
-		"a bannannnnanaa",
+		"a large banana",
 		"a bagel, just the bagel...",
 		"a slice of cheddar cheese (the best cheese)",
 		"a delicious apple",
@@ -756,121 +756,167 @@ $(document).ready(function(){
 		var BMR = 0;
 		if(User.gender === "boy"){
 			caloriesBurned = Math.round((((User.age * 0.2017) + (User.weight * 0.1988) + (User.heartRate * 0.6309) - 55.0969) * User.exerciseDuration / 4.184));	
-			BMR =  Math.round(66 + (6.23 * (User.weight * 2.20462)) + (12.7 * (User.height * 0.393700787)) - (6.8 * User.age));
+			BMR =  Math.round(66 + (13.7 * User.weight) + (5 * User.height) - (6.8 * User.age));
 		}
 		else if(User.gender === "girl"){
 			caloriesBurned = Math.round((((User.age * 0.074) + (User.weight * 0.1263) + (User.heartRate * 0.4472) - 20.4022) * User.exerciseDuration / 4.184));
-			BMR = Math.round(655 + (4.35 * (User.weight * 2.20462)) + (4.7 * (User.height * 0.393700787)) - (4.7 * User.age));
+			BMR = Math.round(655 + (9.6 * User.weight) + (5 * User.height * 0.393700787) - (4.7 * User.age));
 		}
 		User.cpw = caloriesBurned * User.exerciseLevel;	
 		return BMR;
 	}
-	function setCPW(){
-		var weeklyBMR = User.bmr * 7;
-		User.cpw += weeklyBMR;
-	}
-	function gymResults(food){
-		var r = $.Deferred();				
-		// Calculate price per calorie
-			var caloriesPerMonth = (User.cpw) * 4;
-			var pricePerCalorieLong = parseFloat(User.gymPrice) / caloriesPerMonth;
-			var pricePerFood = 0;
-			User.ppc = parseFloat(pricePerCalorieLong);
+	function getPricePerCalorie(){
+		var pricePerCalorie;
+		var caloriesPerMinuteOfExercise = Math.round((((User.age * 0.2017) + (User.weight * 0.1988) + (User.heartRate * 0.6309) - 55.0969) * 1 / 4.184));
+		 // get price per calorie
+			User.ppc = parseFloat(parseFloat(User.gymPrice) / (User.cpw) * 4); // set price per calorie based on gym cost
 			$(".costUnits").text("paying");
 			$(".foodCost").css("display","inline");
-			// Populate Results
-			if(isNumeric(User.ppc)){			
-				if (User.gymPrice === 0){
-					if (User.ppc < 0.01) {
-						$("#pricepercalorie").text((User.ppc * 100).toFixed(2) + "p");
-					}
-					$("#pricepercalorie").text("£" + User.ppc.toFixed(2));
-					$("#ifgym").text("");
-					}
-					else{
-						if (User.ppc < 0.1) {
-						$("#pricepercalorie").text((User.ppc * 100).toFixed(2) + "p");
-						}
-						else{
-						$("#pricepercalorie").text("£" + User.ppc.toFixed(2));
-						}						
-						pricePerFood = User.ppc * food[1];
-						pricePerFood = pricePerFood.toFixed(2);
-					}
-					if(pricePerFood > 0.1){
-						$("#priceperfood").text("£" + pricePerFood);
-					} 
-					else if(pricePerFood < 0.1){
-						$("#priceperfood").text(Math.floor(pricePerFood * 100) + "p");
-					}			
-			}
-			setTimeout(function () {
-					r.resolve();
-				}, 2500);
-			return r;
+			if(isNumeric(User.ppc))
+			{ // If ppc is a number
+				if (User.ppc < 0.1)
+				{ // If small ppc, change to pence
+				pricePerCalorie = (User.ppc * 100).toFixed(2) + "p";
+				}
+				else
+				{ // Use pounds
+				pricePerCalorie = "£" + User.ppc.toFixed(2);
+				}
+			}	
+			return pricePerCalorie;
 	}
-	function noGymResults(){
-		var cph = (User.cpw / 7) / 24;
-		var timepercalorie = 1 / cph;
-		var timeInDays = timepercalorie / 24;
-		var timeInMins = timepercalorie * 60;
-		var minutes = Math.floor(timeInMins);
-		var seconds = Math.floor((timeInMins - minutes) * 60);
-		if(timepercalorie > 24){				
-			if (timeInDays === 1) {
-				$("#pricepercalorie").text(timeInDays.toFixed(2) + " day");
+	function getTimePerCalorie(){
+		var timePerCalorie;
+		var caloriesPerMinuteOfExercise = Math.round((((User.age * 0.2017) + (User.weight * 0.1988) + (User.heartRate * 0.6309) - 55.0969) * 1 / 4.184));
+		// get time per calorie
+			
+			var timepercalorie = 1 / caloriesPerMinuteOfExercise;
+			if(timepercalorie > 1440){	// If over a day
+			var caloriesInDay = (timepercalorie / 60) / 24;			
+				if (caloriesInDay === 1) { // If a day
+					timePerCalorie = caloriesInDay.toFixed(2) + " day";
+				}
+				else{ // If over a day
+					timePerCalorie = caloriesInDay.toFixed(2) + " days";
+				}
 			}
-			else{
-				$("#pricepercalorie").text(timeInDays.toFixed(2) + " days");
-			}						
+			else if (timepercalorie > 60) { // If over an hour
+			caloriesInHours = (timepercalorie / 60);
+			var caloriehours = Math.floor(caloriesInHours);
+			var calorieminutes = Math.floor((caloriesInHours - caloriehours) * 100);	
+				timePerCalorie = caloriehours + " hours, " + calorieminutes + " minutes";
+			}
+			else if (timepercalorie >= 1) { // If over a minute
+			var calorieminutes = Math.floor(timepercalorie);
+			var calorieseconds = Math.floor((timepercalorie - calorieminutes) * 100);	
+				timePerCalorie = calorieminutes + " minutes, " + calorieseconds + " seconds";
+			} else{ // time in seconds
+			var calorieseconds = Math.floor(timepercalorie * 100);	
+				timePerCalorie = calorieseconds + " seconds";
+			}
+			return timePerCalorie;
+	}
+	function getTimeForFood(food){
+		var timeForFood = 0;
+		var caloriesPerMinuteOfExercise = (((User.age * 0.2017) + (User.weight * 0.1988) + (User.heartRate * 0.6309) - 55.0969) * 1 / 4.184);
+		var timepercalorie = 1 / caloriesPerMinuteOfExercise;
+		var timeForFood = (food[1] / caloriesPerMinuteOfExercise);	
+		if(timeForFood > 1440){	// If over a day
+		var foodtimeInDays = (timeForFood / 60) / 24;			
+			if (foodtimeInDays === 1) { // If a day
+				timeForFood = foodtimeInDays.toFixed(2) + " day";
+			}
+			else{ // If over a day
+				timeForFood = foodtimeInDays.toFixed(2) + " days";
+			}
 		}
-		else if(timepercalorie < 1 && timepercalorie >= 0.01){
-			if(seconds !== 0){					
-				$("#pricepercalorie").text(minutes + " minutes, " + seconds + " seconds");
+		else if (timeForFood > 60) { // If over an hour
+		foodtimeInHours = (timeForFood / 60);
+		var foodhours = Math.floor(foodtimeInHours);
+		var foodminutes = Math.floor((foodtimeInHours - foodhours) * 60);
+		var unithours	= 0;
+		var unitminutes	= 0;
+			if(foodhours === 1){
+				unithours = " hour, ";			
+			} else{
+				unithours = " hours, ";
+			}
+			if(foodminutes === 1){
+				unitminutes = " minute ";			
+			} else{
+				unitminutes = " minutes ";
+			}
+			timeForFood = foodhours + unithours + foodminutes + unitminutes;
+		}
+		else if (timeForFood >= 1) { // If over a minute
+		var foodminutes = Math.floor(timeForFood);
+		var foodseconds = Math.floor((timeForFood - foodminutes) * 60);
+		var unitseconds	= 0;
+		var unitminutes	= 0;
+			if(foodminutes === 1){
+				unitminutes = " minute, ";		
+			} else{
+				unitminutes = " minutes, ";
+			}
+			if(foodseconds === 1){
+				unitseconds = " second ";		
+			} else{
+				unitseconds = " seconds ";
+			}
+			timeForFood = foodminutes + unitminutes + foodseconds + unitseconds;
+		} else{ // time in seconds
+		var foodseconds = Math.floor(timeForFood * 60);
+		var unitseconds	= 0;
+		if (foodseconds == 1) {
+			unitseconds = " second ";		
+		} else{
+			unitseconds = " seconds ";		
+		}
+			timeForFood = foodseconds + unitseconds;
+		}
+		return timeForFood;
+	}
+	function getPriceForFood(food){
+		var priceForFoodBase = (User.ppc * food[1]);  // price in pounds
+			priceForFoodBase = priceForFoodBase.toFixed(2);
+			if(priceForFoodBase > 0.1){
+				priceForFood = "£" + priceForFoodBase;
 			} 
-			else if(minutes === 1){
-				$("#pricepercalorie").text(minutes + " minute");
+			else if(priceForFoodBase < 0.1){
+				priceForFood = Math.floor(priceForFoodBase * 100) + "p";
 			}
-			else {
-				$("#pricepercalorie").text(minutes + " minutes");
-			}
-		}
-		else if (timepercalorie < 0.01) {
-				$("#pricepercalorie").text(seconds + " seconds");
-			}
-		else{									
-			$("#pricepercalorie").text(timepercalorie.toFixed(2) + " hours");
-		}
-		$(".costUnits").text("wasting");
-		$(".foodCost").css("display","none");
+		return priceForFood;
 	}
-	function foodResults(food){
-		var cph = (User.cpw / 7) / 24;
-		var timeForFood = (food[1] / cph);
-		var foodtimeInDays = timeForFood / 24;
-		var foodtimeInMins = timeForFood * 60;
-		var foodminutes = Math.floor(foodtimeInMins);
-		var foodseconds = Math.floor((foodtimeInMins - foodminutes) * 60);	
-			if(timeForFood > 24){
-				foodtimeInDays = timeForFood / 24;
-				if (foodtimeInDays === 1) {
-					$("#timepercalorie").text(foodtimeInDays.toFixed(2) + " day");
-				}
-				else{
-					$("#timepercalorie").text(foodtimeInDays.toFixed(2) + " days");
-				}
-			}
-			else if (timeForFood < 1) {	
-				$("#timepercalorie").text(foodminutes + " minutes, " + foodseconds + " seconds");
-			}
-			else if (foodtimeInMins < 1) {
-				$("#timepercalorie").text(foodseconds + " seconds");
-			}
-			else{						
-				$("#timepercalorie").text(timeForFood.toFixed(2) + " hours");
-			}
-		$(".targetFoodCal").text(food[1] + "kcal");
+	function getResults(food){
+		var caloriesPerMinuteOfExercise = Math.round((((User.age * 0.2017) + (User.weight * 0.1988) + (User.heartRate * 0.6309) - 55.0969) * 1 / 4.184));
+		var ppc = getPricePerCalorie();	
+		var tpc = getTimePerCalorie();
+		var pff = getPriceForFood(food);
+		var tff = getTimeForFood(food);
+		if (User.gymMember)
+		{						
+			$("#pricepercalorie").text(ppc);
+			$(".costUnits").text("paying");
+			$(".foodCost").css("display","inline-block");
+			displayResults(true, ppc, pff,tff,food);
+		}
+		else
+		{ 			
+			$("#pricepercalorie").text(tpc);
+			$(".costUnits").text("losing");
+			$(".foodCost").css("display","none");
+			requestAnimationFrame(function(){
+				displayResults(false, tpc, pff,tff,food);
+			}			
+			);
+		}
+	}
+	function displayResults(gym, price, foodPrice, foodTime, food){
+		$("#pricepercalorie").text(price);
+		$("#timepercalorie").text(foodTime);
+		$("#priceperfood").text(foodPrice);
 		$(".targetFood").text(food[0]);
+		$(".targetFoodCal").text(food[1] + "kcal");
 		$(".foodPic img").attr("src", "images/food/" + food[2] + ".png");
 		$(".foodPic img").css("transform", "translateX(20em)");
 		$(".foodPic img").css("transition", "0.1s");
@@ -881,36 +927,15 @@ $(document).ready(function(){
 	    $(".foodPic img").css("transform", "translateX(0em)");
 		}, 1200);	
 	}
-	function sportResults(sport){
-		$("#yourSport").text(sport[0]);
-		$(".sportInfo").text(sport[1]);
-		$(".sportPic img").attr("src", "images/sport/" + sport[2] + ".png");
-		$(".sportPic img").css("transform", "translateX(20em)");
-		$(".sportPic img").css("transition", "0.1s");
-			$(".sportPic img").css("opacity", "0");
-			setTimeout(function() {
-				$(".sportPic img").css("opacity", "1");
-				$(".sportPic img").css("transition", "0.5s");
-	    $(".sportPic img").css("transform", "translateX(0em)");
-		}, 1200);	
-	}
 	function collectResults(){
-		checkAnswers("cookie");		
-		if(allAnswers){			
-			User.bmr = getBMR();
-			setCPW();
-			User.cpd = User.cpw / 7;						
-			var food = getFoodItem();			
-			if(User.gymMember){		
-				gymResults(food, sport);				
-			}
-			else if(!User.gymMember){
-				noGymResults(food, sport);
-			}
-			var sport = getSport();			
+		checkAnswers("cookie");
+		if(allAnswers){		
+			//User.bmr = getBMR();			
+			User.cpd = User.cpw / 7;					
+			var food = getFoodItem();		
+			getResults(food);
+			var sport = getSport();		
 			setUpResults();
-			foodResults(food);
-			sportResults(sport);
 		}
 	}
 	// Event Handlers
@@ -987,19 +1012,13 @@ $(document).ready(function(){
 		setUpCalc(true);
 	});
 	$('.moreResults').click(function(){
-		if($(".resultSlider").css("top") === "0px"){
-			$(".resultSlider").css("top","-140%");
-			$(".resultsContainer h5").text("Your Sport");
-		} 
-		else{
-			$(".resultSlider").css("top","0");
-			$(".resultsContainer h5").text("Your Results");
-		}
+		allAnswers = false;
+		collectResults();
 	});
 	// Calculation Function
 	$('.getResults').click(function(){
 		allAnswers = false;
 		collectResults();
 	});
-	setUpCalc();
+	window.requestAnimationFrame(setUpCalc);
 });
