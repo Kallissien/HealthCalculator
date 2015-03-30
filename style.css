@@ -334,13 +334,11 @@ button.getResults, .moreResults button {
     cursor: pointer;
 }
 .moreResults{
-  position: absolute;
+  /* position: absolute; */
   width: 100%;
   top: 86%;
 }
 .sportResults .moreResults{
-  top: -6em;
-  position: absolute;
 }
 button.getResults:active .moreResults button:active {
     background-color: rgb(219, 54, 66);
@@ -510,6 +508,9 @@ margin-top: 2%;
     position: relative;
     margin: auto;
     transition: 0.3s;
+    display: block;
+    display: flex;
+    flex-direction: column;
 }
 .resultIntro {
     text-align: center;
@@ -529,24 +530,20 @@ margin-top: 2%;
     margin-top: 1%;
 }
 .result {
-    font-size: 131%;
+    font-size: 133%;
     color: rgb(240, 106, 106);
 }
 .radioContainer {
     width: 100%;
     display: flex;
 }
-.foodPic, .sportPic {
-    display: block;
-    position: absolute;
-    top: 45%;
-    height: 40%;
-    width: 100%;
+.foodPic, .sportPic{
+    width: 50%;
     margin: auto;
 }
 .foodPic img, .sportPic img{
-    height: 100%;
-    width: auto;
+    width: 100%;
+    height: auto;
     margin: auto;
     display: block;
     transition: 0.4s ease-out;
@@ -814,22 +811,44 @@ text-align: center;
 }
 .sportResults {
     width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 217%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
 }
 .sportResults .resultIntro{
   /* font-size: 1em; */
+  position: relative;
+  top: 2%;
+  width: 70%;
 }
 .sportInfo {
-    font-size: 0.7em;    
+    font-size: 1em;    
     width: 50%;
     text-align: center;
 }
 .resultSlider {
-    position: absolute;
     transition: 0.2s;
     height: 200%;
+    position: relative;
+    top: 0;
+}
+.sportResults p {
+    text-align: center;
+    margin: auto;
+}
+
+.sportPic img {
+    transform: none;
+}
+
+.sportInfoContainer {
+    top: -6%;
+    position: relative;
+}
+
+.sportPic {
+    position: relative;
+    top: -3%;
 }
 @media screen and (max-width: 600px){
   html {
@@ -839,30 +858,29 @@ text-align: center;
     top:1.5em;
   }
   .resultText {
-    font-size: 0.8em;   font-family: 'Roboto', sans-serif;   font-weight: 100;  
+    font-size: 1em;   font-family: 'Roboto', sans-serif;   font-weight: 100;  
     position: relative;
 }
   .resultsContainer {
-  width: 16em;
-  height: 16em;
-  margin-top:-22.5em;
+  width: 100%;
+  /* height: 16em; */
 }
 .loaderContainer {
     top: 3.3em;
   }
   .resultToQuestions {
     top: -6em;
-    height: 1em;
+    height: 2.5em;
 }
 .resultToQuestions p {
     top: 2px;
-    font-size: 90%;
+    /* font-size: 90%; */
 }
 .moreResults {
-    top: 96%;
+    /* top: 96%; */
 }
 .results {
-    height: 100%;
+    /* height: 100%; */
 }
 button.getResults, .moreResults button {
     height: 27px;
@@ -871,7 +889,6 @@ button.getResults, .moreResults button {
     font-size: 100%;
 }
 .sportResults {
-    top: 7.5em;
 }
 .sportPic {
     top: -2em;
@@ -879,11 +896,9 @@ button.getResults, .moreResults button {
 }
 .sportResults .resultIntro {
     font-size: 87%;
-     top: -3em;
+     
 }
-.sportResults .resultText{
-     top: -3em;
-}
+
 #question3 select {
     width: 26%;
     top: -2.5em;

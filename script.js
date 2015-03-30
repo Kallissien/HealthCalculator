@@ -24,7 +24,7 @@ var currentStep = 1;
 var nextStep = 0;
 var allAnswers = false;
 var UserValue = [];
-$(document).ready(function(){
+$(document).ready(function(){	
 	// Cookie Functions
 	function createCookie(name,value,days) {
 	  var expires = 0;
@@ -746,6 +746,23 @@ $(document).ready(function(){
 	    $(".resultsContainer").css("transform","scale(1)");
 		}, 800);	
 	}
+	function getResultPosition(){
+		var sliderPosition;
+		if($(".resultSlider").css("top") !== "0px"){
+			sliderPosition = 1;
+			requestAnimationFrame(function(){
+				shiftResults("0");
+			});			
+		}else{
+			sliderPosition = 0;
+			requestAnimationFrame(function(){
+				shiftResults("-100%");
+			});
+		};
+	}
+	function shiftResults(sliderPosition){
+			$(".resultSlider").css("top", sliderPosition);
+	}
 	function getCaloriesBurned(){
 		var caloriesBurned = 0;
 		var BMR = 0;
@@ -892,13 +909,13 @@ $(document).ready(function(){
 		var tpc = getTimePerCalorie();
 		var tff = getTimeForFood(food);
 		var pff = getPriceForFood(food);		
-
+		var sport = getSport();
 		if (User.gymMember)
 		{						
 			$("#pricepercalorie").text(ppc);
 			$(".costUnits").text("paying");
 			$(".foodCost").css("display","inline-block");
-			displayResults(true, ppc, pff,tff,food);
+			displayResults(true, ppc, pff,tff,food, sport);
 		}
 		else
 		{ 			
@@ -906,12 +923,12 @@ $(document).ready(function(){
 			$(".costUnits").text("losing");
 			$(".foodCost").css("display","none");
 			requestAnimationFrame(function(){
-				displayResults(false, tpc, pff,tff,food);
+				displayResults(false, tpc, pff,tff,food, sport);
 			}			
 			);
-		}
+		}		
 	}
-	function displayResults(gym, price, foodPrice, foodTime, food){
+	function displayResults(gym, price, foodPrice, foodTime, food, sport){
 		$("#pricepercalorie").text(price);
 		$("#timepercalorie").text(foodTime);
 		$("#priceperfood").text(foodPrice);
@@ -919,6 +936,9 @@ $(document).ready(function(){
 		$(".targetFoodCal").text(food[1] + "kcal");
 		$(".foodPic img").attr("src", "images/food/" + food[2] + ".png");
 		$(".foodPic img").css("transform", "translateX(20em)");
+		$("#yourSport").text(sport[0]);
+		$(".sportPic img").attr("src", "images/sport/" + sport[2] + ".png");
+		$(".sportInfo").text(sport[1]);
 		$(".foodPic img").css("transition", "0.1s");
 			$(".foodPic img").css("opacity", "0");
 			setTimeout(function() {
@@ -1011,14 +1031,19 @@ $(document).ready(function(){
 	$('.getAnswers').click(function(){
 		setUpCalc(true);
 	});
-	$('.moreResults').click(function(){
-		allAnswers = false;
-		collectResults();
+	$('.moreResults').click(function(){		
+		getResultPosition();
 	});
 	// Calculation Function
 	$('.getResults').click(function(){
 		allAnswers = false;
 		collectResults();
+	});
+	// Prevent Tab
+	$('input').keydown(function(event){
+    if (event.keyCode === 9) {
+        event.preventDefault();
+    }
 	});
 	window.requestAnimationFrame(setUpCalc);
 });
