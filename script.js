@@ -13,7 +13,7 @@ var User = {
 		heartRate: 0,
 		gymPrice: 0,
 		bmr: 0,
-		cpw: 0,
+		tff: 0,
 		cpd: 0,
 		ppc:0,
 		questionsAnswered: [[false,false,false],[false,false,false],[false,false,false]]	
@@ -97,12 +97,7 @@ $(document).ready(function(){
 	  return !isNaN(parseFloat(n)) && isFinite(n);
 	}
 	function generateUid(separator) {
-	    /// <summary>
-	    ///    Creates a unique id for identification purposes.
-	    /// </summary>
-	    /// <param name="separator" type="String" optional="true">
-	    /// The optional separator for grouping the generated segmants: default "-".    
-	    /// </param>
+	    /// Not Actually used yet
 
 	    var delim = separator || "-";
 
@@ -751,7 +746,7 @@ $(document).ready(function(){
 	    $(".resultsContainer").css("transform","scale(1)");
 		}, 800);	
 	}
-	function getBMR(){
+	function getCaloriesBurned(){
 		var caloriesBurned = 0;
 		var BMR = 0;
 		if(User.gender === "boy"){
@@ -761,9 +756,8 @@ $(document).ready(function(){
 		else if(User.gender === "girl"){
 			caloriesBurned = Math.round((((User.age * 0.074) + (User.weight * 0.1263) + (User.heartRate * 0.4472) - 20.4022) * User.exerciseDuration / 4.184));
 			BMR = Math.round(655 + (9.6 * User.weight) + (5 * User.height * 0.393700787) - (4.7 * User.age));
-		}
-		User.cpw = caloriesBurned * User.exerciseLevel;	
-		return BMR;
+		}		
+		return caloriesBurned;
 	}
 	function getPricePerCalorie(){
 		var pricePerCalorie;
@@ -820,7 +814,8 @@ $(document).ready(function(){
 		var timeForFood = 0;
 		var caloriesPerMinuteOfExercise = (((User.age * 0.2017) + (User.weight * 0.1988) + (User.heartRate * 0.6309) - 55.0969) * 1 / 4.184);
 		var timepercalorie = 1 / caloriesPerMinuteOfExercise;
-		var timeForFood = (food[1] / caloriesPerMinuteOfExercise);	
+		var timeForFood = (food[1] / caloriesPerMinuteOfExercise);
+		User.tff = timeForFood; 
 		if(timeForFood > 1440){	// If over a day
 		var foodtimeInDays = (timeForFood / 60) / 24;			
 			if (foodtimeInDays === 1) { // If a day
@@ -876,8 +871,11 @@ $(document).ready(function(){
 		}
 		return timeForFood;
 	}
-	function getPriceForFood(food){
-		var priceForFoodBase = (User.ppc * food[1]);  // price in pounds
+	function getPriceForFood(food, timeforfood){
+		var gymPricePerVisit = User.gymPrice / (User.exerciseLevel * 4);
+		var foodprice = User.exerciseDuration / User.tff;
+
+		var priceForFoodBase = gymPricePerVisit /foodprice; // price in pounds		
 			priceForFoodBase = priceForFoodBase.toFixed(2);
 			if(priceForFoodBase > 0.1){
 				priceForFood = "£" + priceForFoodBase;
@@ -888,11 +886,13 @@ $(document).ready(function(){
 		return priceForFood;
 	}
 	function getResults(food){
+		User.cpw = getCaloriesBurned();
 		var caloriesPerMinuteOfExercise = Math.round((((User.age * 0.2017) + (User.weight * 0.1988) + (User.heartRate * 0.6309) - 55.0969) * 1 / 4.184));
 		var ppc = getPricePerCalorie();	
 		var tpc = getTimePerCalorie();
-		var pff = getPriceForFood(food);
 		var tff = getTimeForFood(food);
+		var pff = getPriceForFood(food);		
+
 		if (User.gymMember)
 		{						
 			$("#pricepercalorie").text(ppc);
