@@ -112,7 +112,7 @@ $(document).ready(function(){
 	    return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
 	function rotateRight(){
-		var sections = $("section");
+		var sections = $(".healthCalculator section");
 			for(var i=0 ; i<sections.length ; i++){
 				var thisSection = sections[i];
 				if(thisSection.className.indexOf("deg1") != -1){			
