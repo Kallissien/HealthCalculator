@@ -1,4 +1,5 @@
 //Global Variables :s
+(function ($) {
 var User = {
 		id: 0,
 		name: 0,
@@ -959,7 +960,8 @@ $(document).ready(function(){
 		}
 	}
 	// Event Handlers
-	$("section").click(function(){
+
+	$(".healthCalculator section").click(function(){
 		var thisSection = this.className;	
 		if(thisSection.indexOf("deg1") != -1){
 		} else if(thisSection != -1){
@@ -979,7 +981,8 @@ $(document).ready(function(){
 			}
 		}
 	});
-	$("button").click(function(){
+
+	$(".healthCalculator button").click(function(){
 		if (this.id === "next"){
 			if (currentQuestion) {
 				if (User.questionsAnswered[currentQuestion - 1][currentStep - 1] === true) {
@@ -1005,45 +1008,46 @@ $(document).ready(function(){
 						}
 		}
 	});
-	$(".breadcrumb").click(function(){
+	$(".healthCalculator .breadcrumb").click(function(){
 		nextStep = parseInt(this.id.substring(this.id.length - 1, this.id.length));
 		changeStep(nextStep);
 		});	
 		// TODO - Make this work:
-	$(".questionInput").on('keypress', function(e) {
+	$(".healthCalculator .questionInput").on('keypress', function(e) {
 		var keyCode = e.keyCode || e.which; 
 		if (keyCode == 9) { 
 	    	e.preventDefault(); 
 	    	// call custom function here
 	  	} 
 	});
-	$('input[type=text]').focus(function(){
+	$('.healthCalculator input[type=text]').focus(function(){
 		if (this.value.indexOf('Enter') != -1 || this.value.indexOf('Whoops') != -1){
 		this.value = "";
 		}
 	});
-	$('input').change(function() {
+	$('.healthCalculator input').change(function() {
 		collectAnswers(this);
 	});
-	$('select').change(function() {
+	$('.healthCalculator select').change(function() {
 		collectAnswers($(this).find(":selected"));
 	});
-	$('.getAnswers').click(function(){
+	$('.healthCalculator .getAnswers').click(function(){
 		setUpCalc(true);
 	});
-	$('.moreResults').click(function(){		
+	$('.healthCalculator .moreResults').click(function(){		
 		getResultPosition();
 	});
 	// Calculation Function
-	$('.getResults').click(function(){
+	$('.healthCalculator .getResults').click(function(){
 		allAnswers = false;
 		collectResults();
 	});
 	// Prevent Tab
-	$('input').keydown(function(event){
+	$('.healthCalculator input').keydown(function(event){
     if (event.keyCode === 9) {
         event.preventDefault();
     }
 	});
 	window.requestAnimationFrame(setUpCalc);
 });
+}(jQuery));

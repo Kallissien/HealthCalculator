@@ -9,7 +9,7 @@
 .healthTitle{
   margin-bottom:5em;
     }
-h1{
+.healthCalculator h1{
   font-size: 70px;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
@@ -17,7 +17,7 @@ h1{
   margin-bottom: 0;
   margin-top: 16px;
 }
-h2{
+.healthCalculator h2{
   color: rgb(77, 77, 77);
   font-size: 1em;
   font-family: 'Roboto', sans-serif;
@@ -26,7 +26,7 @@ h2{
   margin-top: 1em;
   text-align: center;
 }
-.question > span{
+.healthCalculator .question > span{
   display:inline-block;
   margin: auto;
   width: 100%;
@@ -38,17 +38,15 @@ h2{
   margin-top: 10px;
   text-align: center;
 }
-body{
-  background: #D0D0D0;
-}
-section {
+.healthCalculator section {
   padding: 2%;
   background: white;
   margin-bottom:2rem;
   box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
 }
+
 /* New Circle Style */
-.container {
+.healthCalculator .container {
   position:relative;
   width: 100%;
   height: 100%; /*= 2em * 1.4 (2em = half the width of an img, 1.4 = sqrt(2))*/    
@@ -59,7 +57,7 @@ section {
   transform: scale(0);
   z-index: 1;
 }
-section {
+.healthCalculator section {
   display:block;
   width: 7em;
   height: 7em;
@@ -73,10 +71,10 @@ section {
   margin: -3.5em; /* 2em = 4em/2 */ /* half the width */
   z-index: 3;
 }
-section:hover {
+.healthCalculator section:hover {
   box-shadow: 4px 4px 4px rgba(0,0,0,0.5);    
 }
-section:active {
+.healthCalculator section:active {
   box-shadow: 0 0 0 rgba(0,0,0,0.5);
 }
 .questionNumber {
@@ -98,20 +96,58 @@ section:active {
   height: 100%;
 }
 .deg1 {
-transform: rotate(-450deg) rotate(450deg) scale(1);
-top: -5%;
+transform: rotate(270deg) translate(180%) rotate(-270deg) scale(1);
+/* animation: rotDeg1 0.3s infinite linear; */
 }
 .deg2 {
-transform: rotate(-328deg) rotate(328deg) scale(0.7);
+transform: rotate(390deg) translate(180%) rotate(-390deg)  scale(0.7);
+/* animation: rotDeg2 0.3s infinite linear; */
 top: 70%;
 left: 95%;
 }
 .deg3 {
-transform: rotate(-210deg) rotate(210deg) scale(0.7);
+transform: rotate(510deg) translate(180%) rotate(-510deg) scale(0.7);
+/* animation: rotDeg3 0.3s infinite linear; */
 left: 5%;
 top: 70%;
 }
-.submit {
+@keyframes rotDeg1 {
+  from {
+    transform: rotate(-270deg)
+               translate(-180%)
+               rotate(270deg);
+  }
+  to {
+    transform: rotate(-390deg)
+               translate(-180%) 
+               rotate(390deg);
+  }
+}
+@keyframes rotDeg2 {
+  from {
+    transform: rotate(-390deg)
+               translate(-180%)
+               rotate(390deg);
+  }
+  to {
+    transform: rotate(-510deg)
+               translate(-180%) 
+               rotate(510deg);
+  }
+}
+@keyframes rotDeg3 {
+  from {
+    transform: rotate(-510deg)
+               translate(-180%)
+               rotate(510deg);
+  }
+  to {
+    transform: rotate(-628deg)
+               translate(-180%) 
+               rotate(628deg);
+  }
+}
+.healthCalculator .submit {
   z-index: 2;
   position: relative;
   width: 70%;
@@ -127,24 +163,23 @@ top: 70%;
   width: 100%;
   height: 3.2em;
 }
-.submit:hover {
+.healthCalculator .submit:hover {
   box-shadow: 4px 4px 4px rgba(0,0,0,0.5);   
   top: 1.5%;
 }
-.submit:active {
+.healthCalculator .submit:active {
     box-shadow: 0 0 0 rgba(0,0,0,0.5);
     background-color: rgb(219, 54, 66);
 }
-.icon img {
+.healthCalculator .icon img {
     width: 100%;
 }
-.icon {
+.healthCalculator .icon {
     width: 40%;
     margin: auto;
     position: relative;
 }
-/* End New Style */
-.line{
+.healthCalculator .line{
     width: 120%;
     position: relative;
     left: -7%;
@@ -152,8 +187,8 @@ top: 70%;
     background: rgb(77, 77, 77);
     margin-bottom: 2%;
 }
-.question{
-    width: 24%;
+.questionContainer .question{
+    width: 100%;
     height: 100%;
     padding: 1%;
     display: inline-block;    
@@ -162,10 +197,10 @@ top: 70%;
     /* margin-right: 3%; */
     /* margin-left: 1%; */
 }
-.question:nth-of-type(4) {
+.healthCalculator.question:nth-of-type(4) {
     margin-right: 0;
 }
-.question p {
+.healthCalculator .question p {
   display: inline-block;
   text-align: center;
   color: white;
@@ -173,7 +208,7 @@ top: 70%;
   font-weight: 100;
   font-size: 15px;
 }
-input {
+.healthCalculator input {
   width: 92%;
   border: none;
   display: block;
@@ -184,7 +219,7 @@ input {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
 }
-select {
+.healthCalculator select {
   text-align: left;
   font-size: 0.9em;
   height: 31px;
@@ -211,7 +246,7 @@ select {
   box-sizing: inherit;
   margin-bottom: -20px;
 }
-.blockage {
+.healthCalculator .blockage {
   height: 98%;
   width: 10%;
   position: relative;
@@ -280,7 +315,6 @@ select {
   margin-left: 5%;
   margin-top: 5%;
   border-radius: 50%;
-  /* border: solid rgb(60, 133, 244) 3px; */
   transition: 0.3s ease-out;
   transform: scale(0);
   background-color: rgb(60, 133, 244);
@@ -292,7 +326,6 @@ select {
   margin-left: 6%;
   margin-top: 6%;
   border-radius: 50%;
-  /* border: solid rgb(60, 133, 244) 3px; */
   transition: 0.3s ease-out;
   transform: scale(0);
   background-color: rgb(58, 58, 58);
@@ -334,7 +367,6 @@ button.getResults, .moreResults button {
     cursor: pointer;
 }
 .moreResults{
-  /* position: absolute; */
   width: 100%;
   top: 86%;
 }
@@ -344,7 +376,6 @@ button.getResults:active .moreResults button:active {
     background-color: rgb(219, 54, 66);
 }
 .infoBox {
-  /* max-height: 2em; */
   min-height: 4em;
   width: 90%;
   margin: auto;
@@ -560,7 +591,6 @@ margin-top: 2%;
     top: 6.9em;
 }
 .resultToQuestions {
-    /* position: absolute; */
     left: 0;
     width: 100%;
     height: 7%;
@@ -579,18 +609,8 @@ margin-top: 2%;
     background-color: rgb(29, 76, 199);
 }
 .loaderContainer {
-  /* width: 100%; */
-  /* height: 100%; */
   background-color: #FFF;
-  /* box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); */
-  /* border-radius: 50%; */
-  /* overflow: hidden; */
-  /* opacity: 1; */
-  /* transition: all 0.2s ease 0s; */
   transform: scale(0);
-  /* position: relative; */
-  /* margin: auto; */
-  /* z-index: 3; */
   position: relative;   width: 100%;   height: 100%;      border-radius: 50%;   margin: auto;   transition: 0.2s ease-out;      
   z-index: 3;
   top: -200%;
@@ -874,13 +894,6 @@ text-align: center;
 }
 .resultToQuestions p {
     top: 2px;
-    /* font-size: 90%; */
-}
-.moreResults {
-    /* top: 96%; */
-}
-.results {
-    /* height: 100%; */
 }
 button.getResults, .moreResults button {
     height: 27px;
