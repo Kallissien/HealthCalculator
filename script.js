@@ -183,6 +183,10 @@ $(document).ready(function(){
 					questionComplete(true,1,1);
 					infoText("Hi " + nameVal + ", click 'Next' to move on:",1,1);
 					infoTextColour("good",1,1);
+				} else{
+					questionComplete(false,1,1);
+					infoText("Don't worry, we won't use it to stalk you!",1,1);
+					infoTextColour("bad",1,1);
 				}
 		}
 		checkAnswers();
@@ -283,8 +287,10 @@ $(document).ready(function(){
 			if (User.gymMember === false){
 					questionComplete(true,2,1);
 				}
-				else if(User.gymMember === true && User.gym !== "Please Select"){
-					questionComplete(true,2,1);			
+				else if(User.gymMember && User.gym !== 0){
+					if(User.gym.indexOf("Please Select") === -1){
+						questionComplete(true,2,1);			
+					}
 				}
 				else{	
 					questionComplete(false,2,1);			
@@ -303,7 +309,7 @@ $(document).ready(function(){
 				infoText("Question Complete",2,2);
 				questionComplete(true,2,2);
 			}
-			else if(exerciseLevelVal < 0){
+			else if(exerciseLevelVal <= 0){
 				infoTextColour("bad",2,2);
 				infoText("I can tell you now this thing won't work unless you do exercise.", 2, 2);
 				questionComplete(false,2,2);
@@ -519,7 +525,7 @@ $(document).ready(function(){
 							case 4:						
 								for(var n = 0 ; n < $('option[name="gym"]').length ; n++){
 									if (UserValue[i + 1] === $($('option[name="gym"]')[n]).text()){
-										$('option[name="gym"]')[n].selected = true;
+										$('select[id="gymName"] option')[n].selected = true;
 									}
 								}
 							break;
@@ -536,7 +542,12 @@ $(document).ready(function(){
 			}, 2000);
 	}
 	function collectAnswers(element){
-		 var inputName = $(element).attr("name");
+		var inputName;
+		if($(element).attr("name") !== undefined){
+			 inputName = $(element).attr("name");
+		} else if(element.id !== ""){
+			 inputName = element.id;
+		} 
 		 switch(inputName){
 			case "yourName":
 				getName();
@@ -550,7 +561,7 @@ $(document).ready(function(){
 			case "gymMember":
 				getGym("gymMember");
 			 break;
-			case "gym":
+			case "gymName":
 				getGym("gym");
 			break;
 			case "exerciseLevel":			
@@ -560,6 +571,7 @@ $(document).ready(function(){
 				getExerciseLevel("units");
 			break;
 			case "exerciseDuration":
+				var selected = $(element).find(":selected");
 			 	getExerciseDuration();			
 			 break;
 			case "height":
@@ -759,7 +771,7 @@ $(document).ready(function(){
 			requestAnimationFrame(function(){
 				shiftResults("-100%");
 			});
-		};
+		}
 	}
 	function shiftResults(sliderPosition){
 			$(".resultSlider").css("top", sliderPosition);
@@ -1029,7 +1041,7 @@ $(document).ready(function(){
 		collectAnswers(this);
 	});
 	$('.healthCalculator select').change(function() {
-		collectAnswers($(this).find(":selected"));
+		collectAnswers(this);
 	});
 	$('.healthCalculator .getAnswers').click(function(){
 		setUpCalc(true);

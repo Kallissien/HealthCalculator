@@ -1,13 +1,13 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+    <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
 <title>Savoo Health & Fitness Calculator</title>
 <link href='http://fonts.googleapis.com/css?family=Roboto:100,400' rel='stylesheet' type='text/css'>
 <link href="style.css" rel="stylesheet" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="script.js" language="javascript" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
 </head>
 <body>
 <div class="healthCalculator">
@@ -24,7 +24,7 @@
         <div class="questionNumber">- 1 -</div>
         <h2>About You</h2>
         <div class="line"></div>
-        <div class="icon"><img alt="question 1" src="images/sections/youM.png"></div>
+        <div class="icon"><img alt="question 1" src="images/sections/youM.png"/></div>
             <div class="progressContainer">
                 <div class="progressDot" id="progressDot11"></div>
                 <div class="progressDot" id="progressDot12"></div> 
@@ -35,7 +35,7 @@
     <div class="questionNumber">- 2 -</div>
         <h2>Your Fitness</h2>
         <div class="line"></div>
-        <div class="icon"><img alt="question 2" src="images/sections/fitness.png"></div>
+        <div class="icon"><img alt="question 2" src="images/sections/fitness.png"/></div>
         <div class="progressContainer">
                 <div class="progressDot" id="progressDot21"></div>
                 <div class="progressDot" id="progressDot22"></div> 
@@ -46,7 +46,7 @@
     <div class="questionNumber">- 3 -</div>
         <h2>Your Health</h2>
         <div class="line"></div>
-        <div class="icon"><img alt="question 3" src="images/sections/health.png"></div>
+        <div class="icon"><img alt="question 3" src="images/sections/health.png"/></div>
         <div class="progressContainer">
                 <div class="progressDot" id="progressDot31"></div>
                 <div class="progressDot" id="progressDot32"></div> 
@@ -65,7 +65,7 @@
             </div>
             <div class="question">
                 <span>How about your age?</span>   
-                 <input tabindex="-1" type="number" name="age" value="Enter Age">
+                 <input tabindex="-1" type="number" name="age">
                  <div class="infoBox">
                     <p class="infoText" id="infoText12"></p>
                 </div>
@@ -88,17 +88,17 @@
                  <div class="radio"><p>Yes</p><input tabindex="-1" id="gymY" name="gymMember" type="radio" value="1"></div>
                 <div class="radio"><p>No</p><input tabindex="-1" id="gymN" name="gymMember" type="radio" value="0" ></div>
             </div>
-                <div class="question hidden" id="whichGym" name="gym">
+                <div class="question hidden" id="whichGym">
                     <span>Which Gym?</span>
                     <select id="gymName">
-                        <option name="gym" value="0"><p>Please Select</p></option>
-                        <option name="gym" value="1"><p>Virgin Active</p></option>
-                        <option name="gym" value="2"><p>Gymbox</p></option>
-                        <option name="gym" value="3"><p>LA Fitness</p></option>
-                        <option name="gym" value="4"><p>PureGym</p></option>
-                        <option name="gym" value="5"><p>Fitness First</p></option>
-                        <option name="gym" value="6"><p>David Lloyd</p></option>
-                        <option name="gym" value="7"><p>Other</p></option>
+                        <option id="gym" value="0">Please Select
+                        <option value="1">Virgin Active
+                        <option value="2">Gymbox
+                        <option value="3">LA Fitness
+                        <option value="4">PureGym
+                        <option value="5">Fitness First
+                        <option value="6">David Lloyd
+                        <option value="7">Other</option>
                     </select>
                 </div>
                  <div class="infoBox">
@@ -107,10 +107,10 @@
         </div>
         <div class="question" id="exerL">
             <span>How often do you exercise?</span>
-            <input tabindex="-1" name="exerciseLevel" type="number" value="">
+            <input tabindex="-1" name="exerciseLevel" type="number">
             <select id="exerciseUnits">
-                <option name="exerciseUnits" value="week"><p>times per week</p></option>
-                <option name="exerciseUnits" value="month"><p>times per month</p></option>            
+                <option value="week">times per week
+                <option value="month">times per month</option>            
             </select>
              <div class="infoBox">
                     <p class="infoText" id="infoText22"></p>
@@ -118,18 +118,18 @@
         </div>
         <div class="question" id="exerD">
             <span>How long for?</span>
-            <select>
-                <option name="exerciseDuration" value="0"><p>Please Select</p></option>
-                <option name="exerciseDuration" value="15"><p>10 - 20 mins</p></option>
-                <option name="exerciseDuration" value="25"><p>20 - 30 mins</p></option>
-                <option name="exerciseDuration" value="35"><p>30 - 40 mins</p></option>
-                <option name="exerciseDuration" value="45"><p>40 - 50 mins</option>
-                <option name="exerciseDuration" value="55"><p>50 mins - one hour</option>
-                <option name="exerciseDuration" value="90"><p> 1 - 1.5 hours</option>
-                <option name="exerciseDuration" value="120"><p>2 hours</option>
-                <option name="exerciseDuration" value="150"><p>2.5 hours</option>
-                <option name="exerciseDuration" value="180"><p>3 hours</option>
-                <option name="exerciseDuration" value="210"><p>3.5 hours</option>
+            <select id="exerciseDuration">
+                <option value="0">Please Select
+                <option value="15">10 - 20 mins
+                <option value="25">20 - 30 mins
+                <option value="35">30 - 40 mins
+                <option value="45">40 - 50 mins
+                <option value="55">50 mins - one hour
+                <option value="90">1 - 1.5 hours
+                <option value="120">2 hours
+                <option value="150">2.5 hours
+                <option value="180">3 hours
+                <option value="210">3.5 hours</option>
              </select>
               <div class="infoBox">
                     <p class="infoText" id="infoText23"></p>
@@ -139,10 +139,10 @@
     <div class="questionContainer" id="question3">
             <div class="question">
                 <span>What's your height?</span>
-                <input tabindex="-1" id="heightBox" name="height" type="number" value="Enter Height">
+                <input tabindex="-1" id="heightBox" name="height" type="number">
                 <select id="heightUnitBox">
-                    <option name="heightUnits" value="cm"><p>cm</p></option>
-                    <option name="heightUnits" value="feet"><p>feet</p></option>            
+                    <option value="cm">cm</option>
+                    <option value="feet">feet</option>            
                 </select>
                  <div class="infoBox">
                     <p class="infoText" id="infoText31"></p>
@@ -150,10 +150,10 @@
             </div>
             <div class="question">
                 <span>And Weight?</span>
-                <input tabindex="-1" id="weightBox" name="weight" type="number" value="Enter Weight">
+                <input tabindex="-1" id="weightBox" name="weight" type="number">
                 <select id="weightUnitBox">
-                    <option name="weightUnits" value="kg"><p>kg</p></option>
-                    <option name="weightUnits"value="lb"><p>st</p></option>            
+                    <option value="kg">kg</option>
+                    <option value="lb">st</option>            
                 </select>
                  <div class="infoBox">
                     <p class="infoText" id="infoText32"></p>
@@ -161,9 +161,9 @@
             </div>
             <div class="question">
                 <span>Average heart rate?</span>
-                <input tabindex="-1" name="heartRate" type="number" value="Enter Heart Rate">
+                <input tabindex="-1" name="heartRate" type="number">
                 <select>
-                    <option value="bpm"><p>bpm</p></option>                     
+                    <option value="bpm">bpm</option>                     
                 </select>
                 <div class="infoBox">
                     <p class="infoText" id="infoText33">Heart rate during exercise. If you don't know yours, put a value between <span id="heartRate">110 - 140</span>bpm</p>
@@ -183,7 +183,7 @@
     
     <div class="submit">
     <button class="getResults">
-    <p>Get Results</p>
+   		Get Results
     </button>
     </div>
     </div>
@@ -192,23 +192,23 @@
               <div class="results">              
                 <div class="resultToQuestions">
                     <button class="getAnswers">
-                    <p>Back to Questions</p>
+                    Back to Questions
                     </button>
                 </div>
                  <span class="resultTitle">Your Results</span>
                 <div class="line"></div>
-                <span class="gymResults">
+                <div class="gymResults">
                 <p class="resultIntro">You're <span class="costUnits">pay</span> <span id="pricepercalorie" class="result">A lot</span> per Calorie</p>
-                <p class="resultText">It takes you on average <span id="timepercalorie" class="result">a long time</span> <span class="foodCost"><span id="ifgym">& costs <span id="priceperfood" class="result" >too much</span></span></span>     
+                <p class="resultText">It takes you on average <span id="timepercalorie" class="result">a long time</span> of exercise, <span class="foodCost"><span id="ifgym">& costs <span id="priceperfood" class="result" >too much</span></span></span>     
                 to lose 
                 <span class="targetFoodCal result">a lot of calories</span></p>
                 <p class="resultText">The equivalent of <span class="targetFood">cthulu's GDA</span></p>
-                </span>
+                </div>
                 <span class="timeResults"></span>
-                <div class="foodPic"><img alt="Food Picture" src=""></div>            
+                <div class="foodPic"><img alt="Food Picture" src="#"></div>            
                 <div class="moreResults">
                     <button>
-                        <p>Give Me More</p>
+                        Give Me More
                     </button>
                 </div> 
             </div>        
@@ -216,12 +216,12 @@
             <div class="sportResults">
             <div class="moreResults">
                 <button>
-                    <p>Back</p>
+                    Back
                 </button>
             </div>
                 <p class="resultIntro">Using an advanced scientific algorithm, we have determined that the sport for you is:</p>
                 <p><span class="result" id="yourSport"></span></p>
-                <div class="sportPic"><img alt="Sport Picture" src=""></div> 
+                <div class="sportPic"><img alt="Sport Picture" src="#"></div> 
                 <div class="sportInfoContainer"><i class="sportInfo resultText"></i></div> 
             </div>
         </div>   
@@ -231,9 +231,4 @@
         <p id="loaderText">Loading</p>
     </div>
 </div>
-
-</body>
-<footer>
-
-</footer>
 </html>
