@@ -1,10 +1,11 @@
 @charset "UTF-8";
 /* CSS Document */
 .healthCalculator {
-    width: 30em;
-    height: 30em;
+    width: 35em;
+    height: 35em;
     margin: auto;
-    margin-top: 6rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
 }
 .healthTitle{
   margin-bottom:5em;
@@ -78,7 +79,7 @@
   box-shadow: 0 0 0 rgba(0,0,0,0.5);
 }
 .questionNumber {
-  width: 20%;
+  width: 30%;
   margin: auto;
   color: rgb(253, 70, 70);
   top: 1px;
@@ -96,17 +97,17 @@
   height: 100%;
 }
 .deg1 {
-transform: rotate(270deg) translate(180%) rotate(-270deg) scale(1);
+transform: rotate(270deg) translate(200%) rotate(-270deg) scale(1);
 /* animation: rotDeg1 0.3s infinite linear; */
 }
 .deg2 {
-transform: rotate(390deg) translate(180%) rotate(-390deg)  scale(0.7);
+transform: rotate(390deg) translate(200%) rotate(-390deg)  scale(0.7);
 /* animation: rotDeg2 0.3s infinite linear; */
 top: 70%;
 left: 95%;
 }
 .deg3 {
-transform: rotate(510deg) translate(180%) rotate(-510deg) scale(0.7);
+transform: rotate(510deg) translate(200%) rotate(-510deg) scale(0.7);
 /* animation: rotDeg3 0.3s infinite linear; */
 left: 5%;
 top: 70%;
@@ -152,7 +153,7 @@ top: 70%;
   position: relative;
   width: 70%;
   margin: auto;
-  box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+  /* box-shadow: 1px 1px 1px rgba(0,0,0,0.5); */
   transition: 0.1s ease-out;
   transform:scale(0);
   top: 1%;
@@ -186,6 +187,7 @@ top: 70%;
     height: 1px;
     background: rgb(77, 77, 77);
     margin-bottom: 2%;
+    margin-top: 2%;
 }
 .questionContainer .question{
     width: 100%;
@@ -196,6 +198,7 @@ top: 70%;
     flex: 1;
     /* margin-right: 3%; */
     /* margin-left: 1%; */
+    z-index: 2;
 }
 .healthCalculator.question:nth-of-type(4) {
     margin-right: 0;
@@ -210,14 +213,17 @@ top: 70%;
 }
 .healthCalculator input {
   width: 92%;
-  border: none;
+  margin-left: 3% !Important;
+  border: none !Important;
   display: block;
-  box-shadow: inset 2px 2px 2px rgba(0,0,0,0.5);
+  box-shadow: inset 2px 2px 2px rgba(0,0,0,0.5) !Important;
   height: 40px;
-  font-size: 20px;
-  padding-left: 5%;
-  font-family: 'Roboto', sans-serif;
+  font-size: 20px !Important;
+  padding: 0 !Important;
+  padding-left: 2% !Important;
+  font-family: 'Roboto', sans-serif !Important;
   font-weight: 300;
+
 }
 .healthCalculator select {
   text-align: left;
@@ -333,7 +339,7 @@ top: 70%;
 #exerL select{
     width:auto;
 }
-.hidden{
+.invisible{
     position: relative;
     opacity:1;
     width: 88%;
@@ -412,11 +418,11 @@ button.getResults:active .moreResults button:active {
     opacity:1;
     z-index:1;
 }
-#question2 h4, .hidden h4 {
+#question2 h4, .invisible h4 {
 font-size: 95%;
 margin-bottom: 5px;
 }
-.hidden h4 {
+.invisible h4 {
 margin-top:0;
 }
 input[type="radio"] {
@@ -424,7 +430,7 @@ input[type="radio"] {
     display: block;
     left: 30%;
     position: relative;
-    box-shadow: none;
+    box-shadow: none !Important;
 }
 
 .radio {
@@ -493,7 +499,7 @@ input[type="radio"] {
 }
 .progressContainer {
     position: absolute;
-    top: 6em;
+    top: 7em;
     left: 40%;
     height: 1em;
     width: 2em;
@@ -517,19 +523,20 @@ input[type="radio"] {
 }
 .resultsContainer {     
     background-color: rgb(244, 244, 244);   
+    border: solid rgb(245, 89, 100) 1px;
     overflow: hidden;
     position: relative;   width: 100%;   height: 100%;      
     top: -100%;
     border-radius: 50%;   margin: auto;   transition: 0.2s ease-out;   transform: scale(0);   z-index: 1;
 }
 .resultTitle {
-font-size: 1.5em;  
+font-size: 2.2em;  
 font-family: 'Roboto', sans-serif;
 font-weight: 100;
 text-align: center;
 margin: 0;
 display: block;
-margin-top: 2%;
+margin-top: 4%;
 }
 .results {
     width: 100%;
@@ -543,20 +550,22 @@ margin-top: 2%;
 }
 .resultIntro {
     text-align: center;
-    font-size: 1.2em;
+    margin: auto !Important;
+    font-size: 1.5em;
     font-family: "Roboto",sans-serif;
     font-weight: 100;
     width: 80%;
     margin: auto;
+    margin-bottom: 18px !Important;
 }
 .resultText {
     text-align: center;
     font-size: 1em;   font-family: 'Roboto', sans-serif;   font-weight: 100;         
-    margin: 0;
+    margin: auto !Important;
     display: block;
-    width: 80%;
-    margin:auto;
-    margin-top: 1%;
+    width: 85%;
+    margin: auto !Important;
+    margin-top: 1% !Important;
 }
 .result {
     font-size: 133%;

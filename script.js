@@ -481,16 +481,16 @@ $(document).ready(function(){
 			User.ppc = healthCookie.ppc;
 			//User.questionsAnswered = healthCookie.questionsAnswered;		
 			var inputBox = [
-			$('input')[0],
-			$('input')[1],
-			$('input[name="gender"]'),
-			$('input[name="gymMember"]'),
-			$('#gymName'),
-			$('input')[6],
-			$('#exerD select'), 
-			$('input')[7],
-			$('input')[8],
-			$('input')[9]
+			$('.healthCalculator input')[0],
+			$('.healthCalculator input')[1],
+			$('.healthCalculator input[name="gender"]'),
+			$('.healthCalculator input[name="gymMember"]'),
+			$('.healthCalculator #gymName'),
+			$('.healthCalculator input')[6],
+			$('.healthCalculator #exerD select'), 
+			$('.healthCalculator input')[7],
+			$('.healthCalculator input')[8],
+			$('.healthCalculator input')[9]
 			];
 			for (var e in User) {
 				if (User.hasOwnProperty(e)) {
