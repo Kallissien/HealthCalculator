@@ -22,9 +22,9 @@
   color: rgb(77, 77, 77);
   font-size: 1em;
   font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-  margin-bottom: -3px;
-  margin-top: 1em;
+  font-weight: 400 !Important;
+  margin-bottom: -3px !Important;
+  margin-top: 0.6em;
   text-align: center;
 }
 .healthCalculator .question > span{
@@ -71,6 +71,8 @@
   cursor: pointer;
   margin: -3.5em; /* 2em = 4em/2 */ /* half the width */
   z-index: 3;
+  display: flex;
+  flex-direction: column;
 }
 .healthCalculator section:hover {
   box-shadow: 4px 4px 4px rgba(0,0,0,0.5);    
@@ -173,12 +175,14 @@ top: 70%;
     background-color: rgb(219, 54, 66);
 }
 .healthCalculator .icon img {
-    width: 100%;
+    height: 100%;
+    margin: auto;
+    display: block;
 }
 .healthCalculator .icon {
-    width: 40%;
+    height: 33%;
     margin: auto;
-    position: relative;
+    height: 40%;
 }
 .healthCalculator .line{
     width: 120%;
@@ -693,9 +697,10 @@ margin-top: 4%;
 font-size: 1em;
 font-family: 'Roboto', sans-serif;
 font-weight: 400;
-margin-bottom: -3px;
+
+        margin: auto !Important;
     
-        margin-top: 31%;
+        margin-top: 31% !Important;
 text-align: center;
 }
 .shareResults {

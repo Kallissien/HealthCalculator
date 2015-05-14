@@ -178,7 +178,11 @@ $(document).ready(function(){
 			questionComplete(false,1,1);
 			} else {
 				User.name = nameVal;
-				$('.aboutyou h2').text("About " + User.name);
+				var displayName;
+				if(User.name.length >= 10){
+				displayName = User.name.substring(0, 10) + "...";
+				} else {displayName = User.name;}
+				$('.aboutyou h2').text("About " + displayName);
 				if(User.name !== 0){
 					questionComplete(true,1,1);
 					infoText("Hi " + nameVal + ", click 'Next' to move on:",1,1);
@@ -461,7 +465,7 @@ $(document).ready(function(){
 	// Answer Functions
 	function cookieAnswers(){
 		$(".loaderContainer").css("transform", "scale(1)");
-		$("#loaderText").text("Cookie found, loading previous answers");
+		$("#loaderText").text("Loading Previous Answers");
 		var healthCookie = JSON.parse(readCookie("healthCalc"));
 			User.id = healthCookie.id;	
 			User.name = healthCookie.name;
@@ -926,14 +930,14 @@ $(document).ready(function(){
 		if (User.gymMember)
 		{						
 			$("#pricepercalorie").text(ppc);
-			$(".costUnits").text("paying");
+			$(".costUnits").text("pay");
 			$(".foodCost").css("display","inline-block");
 			displayResults(true, ppc, pff,tff,food, sport);
 		}
 		else
 		{ 			
 			$("#pricepercalorie").text(tpc);
-			$(".costUnits").text("losing");
+			$(".costUnits").text("take");
 			$(".foodCost").css("display","none");
 			requestAnimationFrame(function(){
 				displayResults(false, tpc, pff,tff,food, sport);
